@@ -31,7 +31,14 @@ default_lang: 'ja'
 exclude_from_localization: ['javascript', 'images', 'css']
 parallel_localization: false
 
+defaults:
+  - scope:
+      path: "assets/img/lang"
+    values:
+      lang_img: true
+
 # Build settings
+exclude: ['_site', 'deploy.ps1']
 theme: minima
 plugins:
   - jekyll-feed

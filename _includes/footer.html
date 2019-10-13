@@ -20,16 +20,45 @@
           {%- endif -%}
         </ul>
 
-        {%- for lang in site.languages -%}
-        {%- if lang == site.default_lang -%}
-        <a href="{{ site.url | prepend: ' ' }}">
-          {{ lang | upcase }}
-        </a>
-        {%- elsif lang != site.default_lang -%}
-        <a href="{{ site.url | prepend: ' ' | append: '/' | append: lang }}">
-          {{ lang | upcase }}
-        </a>
+        {%- assign lang_images = site.static_files | where: "lang_img", true -%}
+        {%- if site.active_lang == site.default_lang -%}
+        <a href="{{ page.url | prepend: ' ' }}">
+            {%- for image in lang_images -%}
+            {%- if image.basename == site.active_lang -%}
+            <img src="{{ image.path }}">
+            {%- endif -%}
+            {%- endfor -%}
+          </a>&nbsp
+        {%- else -%}
+        <a href="{{ page.url | prepend: site.active_lang | prepend: '/' }}">
+          {%- for image in lang_images -%}
+          {%- if image.basename == site.active_lang -%}
+          <img src="{{ image.path }}">
+          {%- endif -%}
+          {%- endfor -%}
+        </a>&nbsp
         {%- endif -%}
+        
+        {%- for lang in site.languages -%}
+          {%- if lang != site.active_lang -%}
+            {%- if lang == site.default_lang -%}
+            <a href="{{ page.url | prepend: ' '}}">
+                {%- for image in lang_images -%}
+                {%- if image.basename == lang -%}
+                <img src="{{ image.path }}">
+                {%- endif -%}
+                {%- endfor -%}
+              </a>&nbsp
+            {%- else -%}
+            <a href="{{ page.url | prepend: lang | prepend: '/' }}">
+              {%- for image in lang_images -%}
+              {%- if image.basename == lang -%}
+              <img src="{{ image.path }}">
+              {%- endif -%}
+              {%- endfor -%}
+            </a>&nbsp
+            {%- endif -%}
+          {%- endif -%}
         {%- endfor -%}
       </div>
 
