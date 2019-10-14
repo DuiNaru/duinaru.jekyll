@@ -4,14 +4,14 @@
     <title>DuiNaru's Blog</title>
     <description>A simple and awesome blog theme powered by jekyll.</description>
     <link>/</link>
-    <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
+    <atom:link href="/ja/feed.xml" rel="self" type="application/rss+xml"/>
     <pubDate>2019-10-14</pubDate>
-    <lastBuildDate>Mon, 14 Oct 2019 22:50:43 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2019 22:50:45 +0900</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
-        <title>이 블로그는 현재 공사중 입니다.</title>
-        <description>&lt;p&gt;곧 새로운 글로 찾아뵙겠습니다.&lt;/p&gt;
+        <title>このサイトは現在、工事中です。</title>
+        <description>&lt;p&gt;新しい内容でお伺いします。&lt;/p&gt;
 </description>
         <pubDate>2019-10-14</pubDate>
         <link>/2019/10/13/blog-intro</link>
