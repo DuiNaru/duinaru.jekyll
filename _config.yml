@@ -38,7 +38,7 @@ defaults:
       lang_img: true
 
 # Build settings
-exclude: ['_site', 'deploy.ps1']
+exclude: ['_site', 'deploy.ps1', 'Gemfile']
 theme: minima
 plugins:
   - jekyll-feed
