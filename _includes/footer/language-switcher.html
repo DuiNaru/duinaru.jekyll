@@ -1,0 +1,55 @@
+<ul class="social-icons">
+  {%- assign lang_images = site.static_files | where: "lang_img", true -%}
+
+  {%- if site.active_lang == site.default_lang -%}
+    <li>
+      <a href="{{ page.url | prepend: ' ' }}">
+        {%- for image in lang_images -%}
+          {%- if image.basename == site.active_lang -%}
+            <img src="{{ image.path }}">
+          {%- endif -%}
+        {%- endfor -%}
+        {{ site.active_lang }}
+      </a>
+    </li>
+  {%- else -%}
+    <li>
+      <a href="{{ page.url | prepend: site.active_lang | prepend: '/' }}">
+        {%- for image in lang_images -%}
+          {%- if image.basename == site.active_lang -%}
+            <img src="{{ image.path }}">
+          {%- endif -%}
+        {%- endfor -%}
+        {{ site.active_lang }}
+      </a>
+    </li>
+  {%- endif -%}
+
+  {%- for lang in site.languages -%}
+    {%- if lang != site.active_lang -%}
+      {%- if lang == site.default_lang -%}
+        <li>
+          <a href="{{ page.url | prepend: ' '}}">
+            {%- for image in lang_images -%}
+              {%- if image.basename == lang -%}
+                <img src="{{ image.path }}">
+              {%- endif -%}
+            {%- endfor -%}
+            {{ lang }}
+          </a>
+        </li>
+      {%- else -%}
+        <li>
+          <a href="{{ page.url | prepend: lang | prepend: '/' }}">
+            {%- for image in lang_images -%}
+              {%- if image.basename == lang -%}
+                <img src="{{ image.path }}">
+              {%- endif -%}
+            {%- endfor -%}
+            {{ lang }}
+          </a>
+        </li>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endfor -%}
+</ul>
