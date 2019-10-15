@@ -10,23 +10,7 @@
             
             
                 <url>
-                    <loc>/archive/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>/</loc>
+                    <loc>http://duinaru.github.io/404.html</loc>
                 </url>
             
         
@@ -36,17 +20,7 @@
             
             
                 <url>
-                    <loc>/categories/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>/resume/</loc>
+                    <loc>http://duinaru.github.io/</loc>
                 </url>
             
         
@@ -61,9 +35,29 @@
         
             
             
-                <url>
-                    <loc>/tags/</loc>
-                </url>
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
             
         
     
@@ -78,7 +72,7 @@
     
         
             <url>
-                <loc>/2019/10/13/blog-intro</loc>
+                <loc>http://duinaru.github.io/2019/10/13/blog-intro</loc>
             </url>
         
     
@@ -92,23 +86,7 @@
             
             
                 <url>
-                    <loc>/ja/archive/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>/ja/</loc>
+                    <loc>http://duinaru.github.io/ja/404.html</loc>
                 </url>
             
         
@@ -118,17 +96,7 @@
             
             
                 <url>
-                    <loc>/ja/categories/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>/ja/resume/</loc>
+                    <loc>http://duinaru.github.io/ja/</loc>
                 </url>
             
         
@@ -143,9 +111,29 @@
         
             
             
-                <url>
-                    <loc>/ja/tags/</loc>
-                </url>
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
             
         
     
@@ -160,7 +148,7 @@
     
         
             <url>
-                <loc>/ja/2019/10/13/blog-intro</loc>
+                <loc>http://duinaru.github.io/ja/2019/10/13/blog-intro</loc>
             </url>
         
     
@@ -174,23 +162,7 @@
             
             
                 <url>
-                    <loc>/en/archive/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>/en/</loc>
+                    <loc>http://duinaru.github.io/en/404.html</loc>
                 </url>
             
         
@@ -200,17 +172,7 @@
             
             
                 <url>
-                    <loc>/en/categories/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>/en/resume/</loc>
+                    <loc>http://duinaru.github.io/en/</loc>
                 </url>
             
         
@@ -225,9 +187,29 @@
         
             
             
-                <url>
-                    <loc>/en/tags/</loc>
-                </url>
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
+            
+        
+    
+        
+        
+            
             
         
     
@@ -242,7 +224,7 @@
     
         
             <url>
-                <loc>/en/2019/10/13/blog-intro</loc>
+                <loc>http://duinaru.github.io/en/2019/10/13/blog-intro</loc>
             </url>
         
     
