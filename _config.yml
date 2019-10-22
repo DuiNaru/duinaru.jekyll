@@ -233,7 +233,7 @@ timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Polyglot setting
-languages: ['ko', 'ja', 'en']
+languages: ['ko', 'ja'] #['ko', 'ja', 'en']
 default_lang: 'ko'
 exclude_from_localization: ['images']
 parallel_localization: false
@@ -302,7 +302,7 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
+      layout: posts
       author_profile: true
       read_time: true
       comments: true
