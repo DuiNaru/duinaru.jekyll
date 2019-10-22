@@ -1,0 +1,506 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.17.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>Github Pages로 블로그 만들기 - DuiNaru’s Blog</title>
+<meta name="description" content="자신만의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것이다.">
+
+
+  <meta name="author" content="DuiNaru">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DuiNaru's Blog">
+<meta property="og:title" content="Github Pages로 블로그 만들기">
+<meta property="og:url" content="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">
+
+
+  <meta property="og:description" content="자신만의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것이다.">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-10-23T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "DuiNaru",
+      "url": "https://duinaru.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DuiNaru's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/">
+          DuiNaru's Blog
+          
+        </a>
+        <ul class="visible-links"></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">DuiNaru</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>IT Engineer</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/DuiNaru/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:kangkimu@gmail.com">
+            <meta itemprop="email" content="kangkimu@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="Github Pages로 블로그 만들기">
+    <meta itemprop="description" content="자신만의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것이다.">
+    <meta itemprop="datePublished" content="October 23, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">Github Pages로 블로그 만들기
+</h1>
+          
+            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+
+
+
+
+  1 minute read
+
+</p>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>자신만의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것이다.</p>
+
+<p>블로그 서비스를 이용하여 블로그를 운영해 볼 수 도 있고, 웹 호스팅이나 직접 구축한 서버를 이용하여 웹 서비스를 만들어서 운영해 볼 수도 있을 것이다.</p>
+
+<p>필자도 이러한 생각을 하던 중에 Github Pages라는 것을 알게 되어서 만들어 보게 되었다.</p>
+
+<h1 id="github-pages">Github Pages</h1>
+
+<p>Github Pages라는 단어를 처음 들었을때는 반만 익숙한 느낌이였다.</p>
+
+<p><em>Github는 들어봤는데, Pages는 뭐지?</em></p>
+
+<p><a href="https://pages.github.com/">Github Pages</a>는 Github에서 제공하는 웹 페이지 서비스이다.</p>
+
+<p>Git repogitory를 웹 페이지 서비스로 이용한다고 한다.</p>
+
+<p><em>git repogitory를 웹 서비스로?</em></p>
+
+<p>Github Pages는 repogitory에 저장되어 있는 html파일을 url에 연결시켜주어, 브라우저에서 누구나 접속 가능하도록 해준다.</p>
+
+<p>URL은 주로 다음과 같이 생겼다.</p>
+<blockquote>
+  <p>https://[username].github.io/</p>
+
+</blockquote>
+
+<p>Github Pages로 설정된 repogitory의 index.html 파일을 해당 URL로 바로 볼 수 있게 된다.</p>
+
+<p>즉, repogitory에 html를 만들어 두는 것만으로도 누구나 웹 페이지를 볼 수 있게 된다는 것이다.</p>
+
+<h1 id="indexhtml-만들어보기">index.html 만들어보기</h1>
+
+<p>URL을 입력했을때 바로 보이는 index.html를 한번 만들어서 잘 작동하는지 확인해 보자.</p>
+
+<p><strong>Github Page용 repogitory 생성</strong></p>
+
+<p>가장 먼저 웹 페이지로 만들 repogitory가 필요하다.</p>
+
+<p>Github에 로그인하여 repogitory를 만들어주자.
+(GIthub ID가 없으면, 가입하고 만들면 된다.)</p>
+
+<blockquote>
+  <p><img src="/assets/images/2019-10-23-make-blog-with-github-pages/create-repogitory.png" alt="repogitory 만들기" /></p>
+
+</blockquote>
+
+<p>username에는 자신의 Github ID 를 넣어주자.
+그리고, Create repogitory를 클릭하면 완성.</p>
+
+<p><strong>repogitory 확인하기</strong></p>
+
+<p>만들어진 repogitory는 다른 repogitory와 다르지 않게 확인할 수 있다.</p>
+
+<p>github.com 으로 접속하면 왼쪽에 repogitory에 방금 만든 repogitory가 있을 것이다.</p>
+
+<p><strong>index.html 을 repogitory 에 추가하기</strong></p>
+
+<p>이미 git에 익숙한 분들이라면, 익숙한 방법으로 repogitory에 index.html이라는 파일명으로 html을 하나 만들어서 넣어주면 된다.</p>
+
+<p>이번에는 간단하게 github.com에서 만들어 보자.</p>
+
+<p>방금 만든 repogitory에서 create new file 버튼을 누르면 된다.</p>
+
+<blockquote>
+  <p><a href="https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files">Creating new files</a></p>
+
+</blockquote>
+
+<p>Github가 익숙하지 않은 분들이라면 상단의 <a href="https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files">Creating new files</a>를 따라하면 문제없이 만들 수 있다.</p>
+
+<p>파일 내용은 다음과 같이 입력해보자.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="nt">&lt;h1&gt;</span>Hello World<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;p&gt;</span>I'm hosted with GitHub Pages.<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>만들고 나면 repogitory에 index.html이 있는 것을 확인 할 수 있을 것이다.</p>
+
+<p>브라우저의 URL에 repogitory이름을 넣어보자.</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-10-23-make-blog-with-github-pages\index.png" alt="index.html" /></p>
+</blockquote>
+
+<p>위와 같은 화면을 확인 할 수 있다.</p>
+
+<p>그럼 이제 index.html을 직접 수정하여 웹 서비스를 운영해야하는 건가 의문이 들 것이다.</p>
+
+<p>다음에는 이를 간단히 해주는 방법을 알아볼 것이다.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-23T00:00:00+09:00">October 23, 2019</time></p>
+        
+      </footer>
+
+      
+
+      
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+            
+      </div>
+    </div>
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets --><div class="page__footer-follow">
+<ul class="social-icons"><li>
+      <a href=" /2019/10/23/make-blog-with-github-pages"><img src="/assets/images/lang/ko.png">ko
+      </a>
+    </li><li>
+          <a href="/ja/2019/10/23/make-blog-with-github-pages"><img src="/assets/images/lang/ja.png">ja
+          </a>
+        </li></ul>
+</div>
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 DuiNaru. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://duinaru.github.io/2019/10/23/make-blog-with-github-pages";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/10/23/make-blog-with-github-pages"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://duinaru.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>

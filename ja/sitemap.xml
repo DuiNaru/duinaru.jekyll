@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
@@ -72,7 +71,7 @@
     
         
             <url>
-                <loc>https://duinaru.github.io/2019/10/13/blog-intro</loc>
+                <loc>https://duinaru.github.io/2019/10/23/make-blog-with-github-pages</loc>
             </url>
         
     
@@ -148,83 +147,7 @@
     
         
             <url>
-                <loc>https://duinaru.github.io/ja/2019/10/13/blog-intro</loc>
-            </url>
-        
-    
-
-
-
-    
-    
-        
-        
-            
-            
-                <url>
-                    <loc>https://duinaru.github.io/en/404/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-                <url>
-                    <loc>https://duinaru.github.io/en/</loc>
-                </url>
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-        
-    
-        
-        
-            
-            
-        
-    
-
-    
-    
-        
-            <url>
-                <loc>https://duinaru.github.io/en/2019/10/13/blog-intro</loc>
+                <loc>https://duinaru.github.io/ja/2019/10/23/make-blog-with-github-pages</loc>
             </url>
         
     
