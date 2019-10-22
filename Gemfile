@@ -17,10 +17,15 @@ gem "jekyll", "~> 3.8.5"
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
 # gem "github-pages", group: :jekyll_plugins
 gem "minimal-mistakes-jekyll"
+gem 'jekyll-admin', group: :jekyll_plugins
 
 # If you have any plugins, put them here!
 group :jekyll_plugins do
+  gem "jekyll-paginate"
+# gem "jekyll-sitemap"
+  gem "jekyll-gist"
   gem "jekyll-feed"
+  gem "jekyll-include-cache"
   gem "jekyll-polyglot"
  #gem "jekyll-multiple-languages-plugin", "~>1.6.0"
 end

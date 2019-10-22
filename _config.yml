@@ -107,11 +107,11 @@ analytics:
 
 # Site Author
 author:
-  name             : #"Your Name"
+  name             : "DuiNaru" #"Your Name"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : #"I am an **amazing** person."
+  bio              : "IT Engineer" #"I am an **amazing** person."
   location         : #"Somewhere"
-  email            :
+  email            : kangkimu@gmail.com
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -127,7 +127,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/DuiNaru/"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -233,7 +233,7 @@ timezone: # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
 # Polyglot setting
-languages: ['ko', 'ja', 'en']
+languages: ['ko', 'ja'] #['ko', 'ja', 'en']
 default_lang: 'ko'
 exclude_from_localization: ['images']
 parallel_localization: false
@@ -242,7 +242,7 @@ parallel_localization: false
 # Plugins (previously gems:)
 plugins:
   - jekyll-paginate
-  - jekyll-sitemap
+# - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
@@ -302,8 +302,8 @@ defaults:
       path: ""
       type: posts
     values:
-      layout: single
-      author_profile: false
+      layout: posts
+      author_profile: true
       read_time: true
       comments: true
       share: false
