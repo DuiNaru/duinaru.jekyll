@@ -46,7 +46,7 @@ URL을 입력했을때 바로 보이는 index.html를 한번 만들어서 잘 �
 가장 먼저 웹 페이지로 만들 repogitory가 필요하다.
 
 Github에 로그인하여 repogitory를 만들어주자.
-(Github ID가 없으면, ![가입](https://help.github.com/en/github/getting-started-with-github/signing-up-for-a-new-github-account)하고 만들면 된다.)
+(Github ID가 없으면, [가입](http://help.github.com/en/github/getting-started-with-github/signing-up-for-a-new-github-account)하고 만들면 된다.)
 
 > ![repogitory 만들기](/assets/images/2019-10-23-make-blog-with-github-pages/create-repogitory.png)
 > 
