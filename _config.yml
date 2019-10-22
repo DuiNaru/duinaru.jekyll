@@ -111,7 +111,7 @@ author:
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : "IT Engineer" #"I am an **amazing** person."
   location         : #"Somewhere"
-  email            : kangkimu@gmail.com
+  email            : duinaru@gmail.com
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
