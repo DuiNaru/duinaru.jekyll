@@ -1,7 +1,7 @@
 ---
 title: 開発と経験があるブログ
 lang: ja
-permalink: "/:categories/:year/:month/:day/make-blog-with-github-pages"
+permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
 ---
 
 普段、考えていた色々なものを書こうとブログを作ることにしました。
