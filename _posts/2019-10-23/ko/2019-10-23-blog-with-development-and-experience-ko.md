@@ -1,7 +1,7 @@
 ---
 title: 개발과 경험이 함께 하는 블로그
 lang: ko
-permalink: "/:categories/:year/:month/:day/make-blog-with-github-pages"
+permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
 ---
 
 평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.
