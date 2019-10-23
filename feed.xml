@@ -1,74 +1,66 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/" rel="alternate" type="text/html" /><updated>2019-10-23T02:37:56+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ko"><title type="html">Github Pages로 블로그 만들기</title><link href="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages" rel="alternate" type="text/html" title="Github Pages로 블로그 만들기" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/make-blog-with-github-pages-ko</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">&lt;p&gt;자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것이다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/" rel="alternate" type="text/html" /><updated>2019-10-23T21:30:03+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ko"><title type="html">Github Pages로 블로그 만들기</title><link href="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages" rel="alternate" type="text/html" title="Github Pages로 블로그 만들기" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/make-blog-with-github-pages-ko</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">&lt;p&gt;자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.&lt;/p&gt;
 
-&lt;p&gt;블로그 서비스를 이용하여 블로그를 운영해 볼 수 도 있고, 웹 호스팅이나 직접 구축한 서버를 이용하여 웹 서비스를 만들어서 운영해 볼 수도 있을 것이다.&lt;/p&gt;
+&lt;p&gt;블로그 서비스를 이용하여 블로그를 운영해 볼 수 도 있고, 웹 호스팅이나 직접 구축한 서버를 이용하여 웹 서비스를 만들어서 운영해 볼 수도 있을 것입니다.&lt;/p&gt;
 
-&lt;p&gt;필자도 이러한 생각을 하던 중에 Github Pages라는 것을 알게 되어서 만들어 보게 되었다.&lt;/p&gt;
+&lt;p&gt;필자도 이러한 생각을 하던 중에 Github Pages라는 것을 알게 되어서 만들어 보게 되었습니다.&lt;/p&gt;
 
 &lt;h1 id=&quot;github-pages&quot;&gt;Github Pages&lt;/h1&gt;
 
-&lt;p&gt;Github Pages라는 단어를 처음 들었을때는 반만 익숙한 느낌이였다.&lt;/p&gt;
+&lt;p&gt;Github Pages라는 단어를 처음 들었을때는 반만 익숙한 느낌이였습니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;Github는 들어봤는데, Pages는 뭐지?&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt;는 Github에서 제공하는 웹 페이지 서비스이다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt;는 Github에서 제공하는 웹 페이지 서비스입니다.&lt;/p&gt;
 
-&lt;p&gt;Git repogitory를 웹 페이지 서비스로 이용한다고 한다.&lt;/p&gt;
+&lt;p&gt;Git repogitory를 웹 페이지 서비스로 이용한다고 합니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;git repogitory를 웹 서비스로?&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;Github Pages는 repogitory에 저장되어 있는 html파일을 url에 연결시켜주어, 브라우저에서 누구나 접속 가능하도록 해준다.&lt;/p&gt;
+&lt;p&gt;Github Pages는 repogitory에 저장되어 있는 html파일을 url에 연결시켜주어, 브라우저에서 누구나 접속 가능하도록 해줍니다.&lt;/p&gt;
 
-&lt;p&gt;URL은 주로 다음과 같이 생겼다.&lt;/p&gt;
+&lt;p&gt;URL은 주로 다음과 같이 생겼습니다.&lt;/p&gt;
 &lt;blockquote&gt;
   &lt;p&gt;https://[username].github.io/&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;Github Pages로 설정된 repogitory의 index.html 파일을 해당 URL로 바로 볼 수 있게 된다.&lt;/p&gt;
+&lt;p&gt;Github Pages로 설정된 repogitory의 index.html 파일을 해당 URL로 바로 볼 수 있게 됩니다.&lt;/p&gt;
 
-&lt;p&gt;즉, repogitory에 html를 만들어 두는 것만으로도 누구나 웹 페이지를 볼 수 있게 된다는 것이다.&lt;/p&gt;
+&lt;p&gt;즉, repogitory에 html를 만들어 두는 것만으로도 누구나 웹 페이지를 볼 수 있게 됩니다.&lt;/p&gt;
 
 &lt;h1 id=&quot;indexhtml-만들어보기&quot;&gt;index.html 만들어보기&lt;/h1&gt;
 
-&lt;p&gt;URL을 입력했을때 바로 보이는 index.html를 한번 만들어서 잘 작동하는지 확인해 보자.&lt;/p&gt;
+&lt;p&gt;URL을 입력했을때 바로 보이는 웹 페이지를 한번 만들어서 잘 작동하는지 확인해 봅시다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Github Page용 repogitory 생성&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;가장 먼저 웹 페이지로 만들 repogitory가 필요하다.&lt;/p&gt;
+&lt;p&gt;가장 먼저 웹 페이지로 만들 repogitory가 필요합니다.&lt;/p&gt;
 
-&lt;p&gt;Github에 로그인하여 repogitory를 만들어주자.
-(Github ID가 없으면, &lt;a href=&quot;http://help.github.com/en/github/getting-started-with-github/signing-up-for-a-new-github-account&quot;&gt;가입&lt;/a&gt;하고 만들면 된다.)&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt;에 로그인하여 repogitory를 만들어줍니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;img src=&quot;/assets/images/2019-10-23-make-blog-with-github-pages/create-repogitory.png&quot; alt=&quot;repogitory 만들기&quot; /&gt;&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;username에는 자신의 Github ID 를 넣어주자.
-그리고, Create repogitory를 클릭하면 완성.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;repogitory 확인하기&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;만들어진 repogitory는 다른 repogitory와 다르지 않게 확인할 수 있다.&lt;/p&gt;
-
-&lt;p&gt;github.com 으로 접속하면 왼쪽에 repogitory에 방금 만든 repogitory가 있을 것이다.&lt;/p&gt;
+&lt;p&gt;username에는 자신의 Github ID 를 넣고, Create repogitory를 클릭하면 완성됩니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;index.html 을 repogitory 에 추가하기&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;이미 git에 익숙한 분들이라면, 익숙한 방법으로 repogitory에 index.html이라는 파일명으로 html을 하나 만들어서 넣어주면 된다.&lt;/p&gt;
+&lt;p&gt;이미 git에 익숙한 분들이라면, 익숙한 방법으로 repogitory에 index.html이라는 파일명으로 html을 하나 만들어서 넣어주면 됩니다.&lt;/p&gt;
 
-&lt;p&gt;이번에는 간단하게 github.com에서 만들어 보자.&lt;/p&gt;
+&lt;p&gt;이번에는 간단하게 github.com에서 만들어 봅시다.&lt;/p&gt;
 
-&lt;p&gt;방금 만든 repogitory에서 create new file 버튼을 누르면 된다.&lt;/p&gt;
+&lt;p&gt;방금 만든 repogitory에서 create new file 버튼을 누르면 됩니다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;a href=&quot;https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files&quot;&gt;Creating new files&lt;/a&gt;&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;Github가 익숙하지 않은 분들이라면 상단의 &lt;a href=&quot;https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files&quot;&gt;Creating new files&lt;/a&gt;를 따라하면 문제없이 만들 수 있다.&lt;/p&gt;
+&lt;p&gt;Github가 익숙하지 않은 분들이라면 상단의 &lt;a href=&quot;https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files&quot;&gt;Creating new files&lt;/a&gt;를 따라하면 문제없이 만들 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;파일 내용은 다음과 같이 입력해보자.&lt;/p&gt;
+&lt;p&gt;파일 이름은 index.html, 파일 내용은 다음과 같이 입력해봅시다.&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
@@ -79,16 +71,14 @@
 &lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;만들고 나면 repogitory에 index.html이 있는 것을 확인 할 수 있을 것이다.&lt;/p&gt;
-
-&lt;p&gt;브라우저의 URL에 repogitory이름을 넣어보자.&lt;/p&gt;
+&lt;p&gt;파일을 만들 고 난 뒤에 repogitory에 index.html이 있는 것을 확인 한 후, 브라우저의 URL에 repogitory이름을 넣어봅시다.&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;&lt;img src=&quot;\assets\images\2019-10-23-make-blog-with-github-pages\index.png&quot; alt=&quot;index.html&quot; /&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;위와 같은 화면을 확인 할 수 있다.&lt;/p&gt;
+&lt;p&gt;위와 같은 화면을 확인 할 수 있습니다.&lt;/p&gt;
 
-&lt;p&gt;그럼 이제 index.html을 직접 수정하여 웹 서비스를 운영해야하는 건가 의문이 들 것이다.&lt;/p&gt;
+&lt;p&gt;그럼 이제 index.html을 직접 수정하여 웹 서비스를 운영해야하는 건가 의문이 들 것입니다.&lt;/p&gt;
 
-&lt;p&gt;다음에는 이를 간단히 해주는 방법을 알아볼 것이다.&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것이다.</summary></entry></feed>
+&lt;p&gt;다음에는 이를 간단히 해주는 방법을 알아보도록 하겠습니다.&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.</summary></entry></feed>
