@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>開発と経験があるブログ - DuiNaru’s Blog</title>
-<meta name="description" content="普段、考えていた色々なものを書こうとブログを作ることにしました。">
+<!-- begin _includes/seo.html --><title>개발과 경험이 함께 하는 블로그 - DuiNaru’s Blog</title>
+<meta name="description" content="평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="開発と経験があるブログ">
-<meta property="og:url" content="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">
+<meta property="og:title" content="개발과 경험이 함께 하는 블로그">
+<meta property="og:url" content="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">
 
 
-  <meta property="og:description" content="普段、考えていた色々なものを書こうとブログを作ることにしました。">
+  <meta property="og:description" content="평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.">
 
 
 
@@ -42,7 +42,7 @@
   
 
 
-<link rel="canonical" href="https://duinaru.github.io/ja/2019/10/23/make-blog-with-github-pages">
+<link rel="canonical" href="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">
 
 
 
@@ -66,7 +66,7 @@
 <!-- end _includes/seo.html -->
 
 
-<link href="/ja/feed.xml" type="application/atom+xml" rel="alternate" title="DuiNaru's Blog Feed">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="DuiNaru's Blog Feed">
 
 <!-- https://t.co/dKP3o1e -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -76,7 +76,7 @@
 </script>
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="/ja/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/main.css">
 
 <!--[if IE]>
   <style>
@@ -124,7 +124,7 @@
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
         
-        <a class="site-title" href="/ja/">
+        <a class="site-title" href="/">
           DuiNaru's Blog
           
         </a>
@@ -263,116 +263,116 @@
 
   <div class="archive">
     
-      <h1 id="page-title" class="page__title">開発と経験があるブログ</h1>
+      <h1 id="page-title" class="page__title">개발과 경험이 함께 하는 블로그</h1>
     
-    <p>普段、考えていた色々なものを書こうとブログを作ることにしました。</p>
+    <p>평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.</p>
 
-<p>ブログを運営しようとしたらブログサービスを利用する方が簡単で便利そうでしたが、github.ioというドメインが目立ちました。</p>
+<p>블로그를 운영한다면 블로그 서비스를 이용하는 편이 간단하고 편할 듯 했지만, github.io 라는 도메인이 눈에 들어오더군요.</p>
 
-<p>それで、github pagesで作ることにしました。</p>
+<p>그래서 github pages로 만들게 되었습니다.</p>
 
-<h1 id="必要な物">必要な物</h1>
+<h1 id="준비물">준비물</h1>
 
 <p><strong>github</strong></p>
 
-<p>github pagesをサービスするrepogitoryを作りました。</p>
+<p>github pages를 서비스할 repogitory를 만들었습니다.</p>
 
 <p><strong>jekyll</strong></p>
 
-<p>github pagesはjekyllをサポートします。</p>
+<p>github pages는 jekyll을 지원합니다.</p>
 
-<p>jekyllのソースをrepogitoryに置いておくだけでビルド-デプロイをしてくれます。</p>
-
-<p><strong>ruby</strong></p>
-
-<p>jekyllで作るにはrubyが必要です。</p>
-
-<p>buildをしたり、pluginをインストールして機能を追加することができます。</p>
-
-<h1 id="作る">作る</h1>
+<p>jekyll로 된 소스를 repogitory에 올려 두는 것 만으로도 빌드-배포를 해주죠.</p>
 
 <p><strong>ruby</strong></p>
 
-<p>jekyllのbuildと色々なpluginを利用するためにインストールしました。</p>
+<p>jekyll로 만드려면 ruby가 필요합니다.</p>
 
-<p>jekyllの公式ホームページに手順があり、便利でした。</p>
+<p>build를 하거나, plugin을 설치해서 기능을 추가해볼 수 있습니다.</p>
 
-<p><strong>マルチランゲージ</strong></p>
+<h1 id="만들기">만들기</h1>
 
-<p>二つ以上の言語で運営することを目指してしていまして、マルチランゲージのサポートのため<a href="https://polyglot.untra.io/">polygot plugin</a>を使用しました。</p>
+<p><strong>ruby</strong></p>
 
-<p>このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepogitoryにソースを置いておくことだけでビルドはできません。</p>
+<p>jekyll의 build와 여러 plugin을 설치하기 위해 설치해주었습니다.</p>
 
-<p>しかし、方法はありました。</p>
+<p>jekyll 공식 홈페이지에 사용 방법이 친절히 적혀있어서 별 어려움이 없었습니다.</p>
 
-<p><strong>テーマ</strong></p>
+<p><strong>다국어 지원</strong></p>
 
-<p>テーマを選ぶことに時間がかなりかかりました。</p>
+<p>적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 <a href="https://polyglot.untra.io/">polygot plugin</a>을 설치해 주었습니다.</p>
 
-<p>これにしようかあれにしようかとしたら時間があっという間に過ぎました。</p>
+<p>이 플러그인이 github pages에서 공식적으로 지원하는 플러그인이 아니기에, 단순히 repogitory에 소스를 올려두는 것으로 빌드가 되지 않습니다.</p>
 
-<p>結局は<a href="https://mmistakes.github.io/minimal-mistakes/">Minimal Mistakes</a>にすることにしました。</p>
+<p>하지만, 다 방법이 있죠.</p>
 
-<p>しかし、ここで問題が出ました。</p>
+<p><strong>테마 선택하기</strong></p>
+
+<p>이 과정에서 시간이 상당히 걸렸습니다.</p>
+
+<p>이걸로 해볼까 저걸로 해볼까 하면서 고르다가 시간이 순식간에 지나가네요.</p>
+
+<p>결국에는 <a href="https://mmistakes.github.io/minimal-mistakes/">Minimal Mistakes</a>로 하기로 했습니다.</p>
+
+<p>하지만, 여기서 문제가 발생하였습니다.</p>
 
 <blockquote>
-  <p>buildの時、エラーが出ます。</p>
+  <p>build할 때, 에러가 발생해요.</p>
 
-  <p>polygot pluginが動かないです。</p>
+  <p>polygot plugin이 작동하질 않아요.</p>
 
 </blockquote>
 
-<h1 id="問題解決">問題解決</h1>
+<h1 id="문제-해결">문제 해결</h1>
 
-<p><strong>windows環境でbuildの時、文字関連のエラー解決</strong></p>
+<p><strong>windows환경에서 build할 때, 문자 관련 에러 해결</strong></p>
 
-<p>rubyをwindowsの環境で使おうとしたら出るエラーでした。</p>
+<p>ruby를 windows환경에서 쓰려다 보니 발생하는 에러 였습니다.</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-10-23-blog-with-development-and-experience\build-error.png" alt="ビルドエラー" /></p>
+  <p><img src="\assets\images\2019-10-23-blog-with-development-and-experience\build-error.png" alt="빌드 에러" /></p>
 
 </blockquote>
 
-<p>vscodeからcmdでビルドしていたので、chcp 65001 でUTF-8に変えて解決しました。</p>
+<p>vscode에서 cmd로 빌드 하고 있었기에, chcp 65001 을 이용해서 UTF-8로 바꿔서 해결했습니다.</p>
 
-<p>また、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限しました。</p>
+<p>또는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.</p>
 
-<p><strong>Minimal Mistakesとpolygot pluginを共に使用</strong></p>
+<p><strong>Minimal Mistakes과 polygot plugin을 함께 사용하기</strong></p>
 
-<p>ウェブページを正常に作れない問題が出ました。</p>
+<p>웹 페이지가 제대로 만들어 지지 않는 문제가 발생하였습니다.</p>
 
-<p>繰り返して試し、次のように解決できました。</p>
+<p>시행착오 끝에, 다음과 같이 해결이 되었습니다.</p>
 
-<p><em>jekyllバージョン制限</em></p>
+<p><strong>jekyll버전</strong></p>
 
-<p>jekyllのバージョンを3.8.5としたら、polygot pluginと共に動きました。</p>
+<p>jekyll를 3.8.5으로 사용하니, polygot plugin과 함께 작동합니다.</p>
 
-<p><em>polyglot pluginの_config.xml設定</em></p>
+<p><strong>polyglot plugin의 _config.xml설정</strong></p>
 
 <blockquote>
   <p><img src="\assets\images\2019-10-23-blog-with-development-and-experience\polyglot-setting.png" alt="polyglot setting" /></p>
 
 </blockquote>
 
-<p>languagesの言語の順番をdefault_langで設定した言語を先にするとpolygot pluginがうまく動きました。</p>
+<p>languages의 언어 설정 순서를 default_lang에서 설정한 언어를 먼저 오게 설정하니 polygot plugin이 잘 작동합니다.</p>
 
-<h1 id="機能追加">機能追加</h1>
+<h1 id="기능-추가">기능 추가</h1>
 
-<p><strong>言語セレクタ</strong></p>
+<p><strong>언어 선택</strong></p>
 
-<p>マルチランゲージのサポートのため、言語を変更する機能を追加しました。</p>
+<p>다국어 지원을 위해 언어를 바꾸는 기능을 추가해 주었습니다.</p>
 
-<p>ページの下に見えるJAやKOなどのものです。</p>
+<p>페이지 하단에 보이는 KO나 JA같은 것이죠.</p>
 
-<p><strong>コメント</strong></p>
+<p><strong>댓글</strong></p>
 
-<p>Minimal Mistakesでサポートする<a href="https://disqus.com/">disqus</a>を利用し、追加しました。</p>
+<p>Minimal Mistakes에서도 지원하는 <a href="https://disqus.com/">disqus</a>를 이용해서 추가했습니다.</p>
 
-<h1 id="感想">感想</h1>
+<h1 id="후기">후기</h1>
 
-<p>作るうちにかなり時間が過ぎました。</p>
+<p>만들다 보니 시간이 꽤나 흘렀습니다.</p>
 
-<p>これからは色々書くかアップデートしようと思います。</p>
+<p>앞으로는 글도 쓰면서, 이것저것 업데이트 해 볼까 합니다.</p>
 
 
 <ul class="taxonomy__index">
@@ -401,12 +401,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/ja/2019/10/23/make-blog-with-github-pages" rel="permalink">開発と経験があるブログ
+        <a href="/2019/10/23/blog-with-development-and-experience" rel="permalink">개발과 경험이 함께 하는 블로그
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">普段、考えていた色々なものを書こうとブログを作ることにしました。
+    <p class="archive__item-excerpt" itemprop="description">평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.
 
 </p>
   </article>
@@ -428,10 +428,10 @@
       <footer>
         <!-- start custom footer snippets --><div class="page__footer-follow">
 <ul class="social-icons"><li>
-      <a href="/ja/2019/10/23/make-blog-with-github-pages"><img src="/assets/images/lang/ja.png">ja
+      <a href=" /2019/10/23/blog-with-development-and-experience"><img src="/assets/images/lang/ko.png">ko
       </a>
     </li><li>
-          <a href=" /2019/10/23/make-blog-with-github-pages"><img src="/assets/images/lang/ko.png">ko
+          <a href="/ja/2019/10/23/blog-with-development-and-experience"><img src="/assets/images/lang/ja.png">ja
           </a>
         </li></ul>
 </div>
@@ -456,7 +456,7 @@
       
     
 
-    <li><a href="/ja/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+    <li><a href="/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
   </ul>
 </div>
 
@@ -478,8 +478,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://duinaru.github.io/2019/10/23/make-blog-with-github-pages";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2019/10/23/make-blog-with-github-pages"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "https://duinaru.github.io/2019/10/23/blog-with-development-and-experience";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/10/23/blog-with-development-and-experience"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
