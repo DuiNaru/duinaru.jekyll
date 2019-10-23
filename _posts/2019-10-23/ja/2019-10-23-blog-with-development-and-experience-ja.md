@@ -56,7 +56,7 @@ jekyllの公式ホームページに手順があり、便利でした。
 
 > buildの時、エラーが出ます。
 > 
-> polygot pluginが動かないです。
+> polyglot pluginが動かないです。
 > 
 
 # 問題解決

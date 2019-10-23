@@ -56,7 +56,7 @@ jekyll 공식 홈페이지에 사용 방법이 친절히 적혀있어서 별 어
 
 > build할 때, 에러가 발생해요.
 > 
-> polygot plugin이 작동하질 않아요.
+> polyglot plugin이 작동하질 않아요.
 > 
 
 # 문제 해결
