@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/ja/" rel="alternate" type="text/html" /><updated>2019-10-24T00:20:24+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ja"><title type="html">開発と経験があるブログ</title><link href="https://duinaru.github.io/ja/2019/10/23/blog-with-development-and-experience" rel="alternate" type="text/html" title="開発と経験があるブログ" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ja</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">&lt;p&gt;普段、考えていた色々なものを書こうとブログを作ることにしました。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/ja/" rel="alternate" type="text/html" /><updated>2019-10-24T00:31:19+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ja"><title type="html">開発と経験があるブログ</title><link href="https://duinaru.github.io/ja/2019/10/23/blog-with-development-and-experience" rel="alternate" type="text/html" title="開発と経験があるブログ" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ja</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">&lt;p&gt;普段、考えていた色々なものを書こうとブログを作ることにしました。&lt;/p&gt;
 
 &lt;p&gt;ブログを運営しようとしたらブログサービスを利用する方が簡単で便利そうでしたが、github.ioというドメインが目立ちました。&lt;/p&gt;
 
@@ -51,7 +51,7 @@
 &lt;blockquote&gt;
   &lt;p&gt;buildの時、エラーが出ます。&lt;/p&gt;
 
-  &lt;p&gt;polygot pluginが動かないです。&lt;/p&gt;
+  &lt;p&gt;polyglot pluginが動かないです。&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
