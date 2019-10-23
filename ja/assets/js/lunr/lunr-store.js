@@ -1,6 +1,6 @@
 var store = [{
-        "title": "Github Pages로 블로그 만들기",
-        "excerpt":"자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다. 블로그 서비스를 이용하여 블로그를 운영해 볼 수 도 있고, 웹 호스팅이나 직접 구축한 서버를 이용하여 웹 서비스를 만들어서 운영해 볼 수도 있을 것입니다. 필자도 이러한 생각을 하던 중에 Github Pages라는 것을 알게 되어서 만들어 보게 되었습니다. Github Pages Github...","categories": [],
+        "title": "開発と経験があるブログ",
+        "excerpt":"普段、考えていた色々なものを書こうとブログを作ることにしました。 ブログを運営しようとしたらブログサービスを利用する方が簡単で便利そうでしたが、github.ioというドメインが目立ちました。 それで、github pagesで作ることにしました。 必要な物 github github pagesをサービスするrepogitoryを作りました。 jekyll github pagesはjekyllをサポートします。 jekyllのソースをrepogitoryに置いておくだけでビルド-デプロイをしてくれます。 ruby jekyllで作るにはrubyが必要です。 buildをしたり、pluginをインストールして機能を追加することができます。 作る ruby jekyllのbuildと色々なpluginを利用するためにインストールしました。 jekyllの公式ホームページに手順があり、便利でした。 マルチランゲージ 二つ以上の言語で運営することを目指してしていまして、マルチランゲージのサポートのためpolygot pluginを使用しました。 このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepogitoryにソースを置いておくことだけでビルドはできません。 しかし、方法はありました。 テーマ テーマを選ぶことに時間がかなりかかりました。 これにしようかあれにしようかとしたら時間があっという間に過ぎました。 結局はMinimal Mistakesにすることにしました。 しかし、ここで問題が出ました。 buildの時、エラーが出ます。 polygot pluginが動かないです。 問題解決 windows環境でbuildの時、文字関連のエラー解決 rubyをwindowsの環境で使おうとしたら出るエラーでした。 vscodeからcmdでビルドしていたので、chcp 65001 でUTF-8に変えて解決しました。 また、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限しました。 Minimal Mistakesとpolygot pluginを共に使用 ウェブページを正常に作れない問題が出ました。 繰り返して試し、次のように解決できました。 jekyllバージョン制限 jekyllのバージョンを3.8.5としたら、polygot pluginと共に動きました。 polyglot...","categories": [],
         "tags": [],
         "url": "https://duinaru.github.io/2019/10/23/make-blog-with-github-pages",
         "teaser":null}]

@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Github Pages로 블로그 만들기 - DuiNaru’s Blog</title>
-<meta name="description" content="자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.">
+<!-- begin _includes/seo.html --><title>개발과 경험이 함께 하는 블로그 - DuiNaru’s Blog</title>
+<meta name="description" content="평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,11 +19,11 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="Github Pages로 블로그 만들기">
+<meta property="og:title" content="개발과 경험이 함께 하는 블로그">
 <meta property="og:url" content="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">
 
 
-  <meta property="og:description" content="자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.">
+  <meta property="og:description" content="평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.">
 
 
 
@@ -103,7 +103,7 @@
 
   </head>
 
-  <body class="layout--single">
+  <body class="layout--posts">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -261,160 +261,165 @@
   </div>
 
 
-  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Github Pages로 블로그 만들기">
-    <meta itemprop="description" content="자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.">
-    <meta itemprop="datePublished" content="October 23, 2019">
+  <div class="archive">
     
+      <h1 id="page-title" class="page__title">개발과 경험이 함께 하는 블로그</h1>
+    
+    <p>평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.</p>
 
-    <div class="page__inner-wrap">
+<p>블로그를 운영한다면 블로그 서비스를 이용하는 편이 간단하고 편할 듯 했지만, github.io 라는 도메인이 눈에 들어오더군요.</p>
+
+<p>그래서 github pages로 만들게 되었습니다.</p>
+
+<h1 id="준비물">준비물</h1>
+
+<p><strong>github</strong></p>
+
+<p>github pages를 서비스할 repogitory를 만들었습니다.</p>
+
+<p><strong>jekyll</strong></p>
+
+<p>github pages는 jekyll을 지원합니다.</p>
+
+<p>jekyll로 된 소스를 repogitory에 올려 두는 것 만으로도 빌드-배포를 해주죠.</p>
+
+<p><strong>ruby</strong></p>
+
+<p>jekyll로 만드려면 ruby가 필요합니다.</p>
+
+<p>build를 하거나, plugin을 설치해서 기능을 추가해볼 수 있습니다.</p>
+
+<h1 id="만들기">만들기</h1>
+
+<p><strong>ruby</strong></p>
+
+<p>jekyll의 build와 여러 plugin을 설치하기 위해 설치해주었습니다.</p>
+
+<p>jekyll 공식 홈페이지에 사용 방법이 친절히 적혀있어서 별 어려움이 없었습니다.</p>
+
+<p><strong>다국어 지원</strong></p>
+
+<p>적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 <a href="https://polyglot.untra.io/">polygot plugin</a>을 설치해 주었습니다.</p>
+
+<p>이 플러그인이 github pages에서 공식적으로 지원하는 플러그인이 아니기에, 단순히 repogitory에 소스를 올려두는 것으로 빌드가 되지 않습니다.</p>
+
+<p>하지만, 다 방법이 있죠.</p>
+
+<p><strong>테마 선택하기</strong></p>
+
+<p>이 과정에서 시간이 상당히 걸렸습니다.</p>
+
+<p>이걸로 해볼까 저걸로 해볼까 하면서 고르다가 시간이 순식간에 지나가네요.</p>
+
+<p>결국에는 <a href="https://mmistakes.github.io/minimal-mistakes/">Minimal Mistakes</a>로 하기로 했습니다.</p>
+
+<p>하지만, 여기서 문제가 발생하였습니다.</p>
+
+<blockquote>
+  <p>build할 때, 에러가 발생해요.</p>
+
+  <p>polygot plugin이 작동하질 않아요.</p>
+
+</blockquote>
+
+<h1 id="문제-해결">문제 해결</h1>
+
+<p><strong>windows환경에서 build할 때, 문자 관련 에러 해결</strong></p>
+
+<p>ruby를 windows환경에서 쓰려다 보니 발생하는 에러 였습니다.</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-10-23-blog-with-development-and-experience\build-error.png" alt="빌드 에러" /></p>
+
+</blockquote>
+
+<p>vscode에서 cmd로 빌드 하고 있었기에, chcp 65001 을 이용해서 UTF-8로 바꿔서 해결했습니다.</p>
+
+<p>또는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.</p>
+
+<p><strong>Minimal Mistakes과 polygot plugin을 함께 사용하기</strong></p>
+
+<p>웹 페이지가 제대로 만들어 지지 않는 문제가 발생하였습니다.</p>
+
+<p>시행착오 끝에, 다음과 같이 해결이 되었습니다.</p>
+
+<p><strong>jekyll버전</strong></p>
+
+<p>jekyll를 3.8.5으로 사용하니, polygot plugin과 함께 작동합니다.</p>
+
+<p><strong>polyglot plugin의 _config.xml설정</strong></p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-10-23-blog-with-development-and-experience\polyglot-setting.png" alt="polyglot setting" /></p>
+
+</blockquote>
+
+<p>languages의 언어 설정 순서를 default_lang에서 설정한 언어를 먼저 오게 설정하니 polygot plugin이 잘 작동합니다.</p>
+
+<h1 id="기능-추가">기능 추가</h1>
+
+<p><strong>언어 선택</strong></p>
+
+<p>다국어 지원을 위해 언어를 바꾸는 기능을 추가해 주었습니다.</p>
+
+<p>페이지 하단에 보이는 KO나 JA같은 것이죠.</p>
+
+<p><strong>댓글</strong></p>
+
+<p>Minimal Mistakes에서도 지원하는 <a href="https://disqus.com/">disqus</a>를 이용해서 추가했습니다.</p>
+
+<h1 id="후기">후기</h1>
+
+<p>만들다 보니 시간이 꽤나 흘렀습니다.</p>
+
+<p>앞으로는 글도 쓰면서, 이것저것 업데이트 해 볼까 합니다.</p>
+
+
+<ul class="taxonomy__index">
+  
+  
+    <li>
+      <a href="#2019">
+        <strong>2019</strong> <span class="taxonomy__count">1</span>
+      </a>
+    </li>
+  
+</ul>
+
+
+
+  <section id="2019" class="taxonomy__section">
+    <h2 class="archive__subtitle">2019</h2>
+    <div class="entries-list">
       
-        <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Github Pages로 블로그 만들기
-</h1>
-          
-            <p class="page__meta"><i class="far fa-clock" aria-hidden="true"></i> 
+        
 
 
 
-
-  1 minute read
+<div class="list__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/2019/10/23/make-blog-with-github-pages" rel="permalink">개발과 경험이 함께 하는 블로그
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.
 
 </p>
-          
-        </header>
-      
-
-      <section class="page__content" itemprop="text">
-        
-        <p>자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.</p>
-
-<p>블로그 서비스를 이용하여 블로그를 운영해 볼 수 도 있고, 웹 호스팅이나 직접 구축한 서버를 이용하여 웹 서비스를 만들어서 운영해 볼 수도 있을 것입니다.</p>
-
-<p>필자도 이러한 생각을 하던 중에 Github Pages라는 것을 알게 되어서 만들어 보게 되었습니다.</p>
-
-<h1 id="github-pages">Github Pages</h1>
-
-<p>Github Pages라는 단어를 처음 들었을때는 반만 익숙한 느낌이였습니다.</p>
-
-<p><em>Github는 들어봤는데, Pages는 뭐지?</em></p>
-
-<p><a href="https://pages.github.com/">Github Pages</a>는 Github에서 제공하는 웹 페이지 서비스입니다.</p>
-
-<p>Git repogitory를 웹 페이지 서비스로 이용한다고 합니다.</p>
-
-<p><em>git repogitory를 웹 서비스로?</em></p>
-
-<p>Github Pages는 repogitory에 저장되어 있는 html파일을 url에 연결시켜주어, 브라우저에서 누구나 접속 가능하도록 해줍니다.</p>
-
-<p>URL은 주로 다음과 같이 생겼습니다.</p>
-<blockquote>
-  <p>https://[username].github.io/</p>
-
-</blockquote>
-
-<p>Github Pages로 설정된 repogitory의 index.html 파일을 해당 URL로 바로 볼 수 있게 됩니다.</p>
-
-<p>즉, repogitory에 html를 만들어 두는 것만으로도 누구나 웹 페이지를 볼 수 있게 됩니다.</p>
-
-<h1 id="indexhtml-만들어보기">index.html 만들어보기</h1>
-
-<p>URL을 입력했을때 바로 보이는 웹 페이지를 한번 만들어서 잘 작동하는지 확인해 봅시다.</p>
-
-<p><strong>Github Page용 repogitory 생성</strong></p>
-
-<p>가장 먼저 웹 페이지로 만들 repogitory가 필요합니다.</p>
-
-<p><a href="https://github.com/">Github</a>에 로그인하여 repogitory를 만들어줍니다.</p>
-
-<blockquote>
-  <p><img src="/assets/images/2019-10-23-make-blog-with-github-pages/create-repogitory.png" alt="repogitory 만들기" /></p>
-
-</blockquote>
-
-<p>username에는 자신의 Github ID 를 넣고, Create repogitory를 클릭하면 완성됩니다.</p>
-
-<p><strong>index.html 을 repogitory 에 추가하기</strong></p>
-
-<p>이미 git에 익숙한 분들이라면, 익숙한 방법으로 repogitory에 index.html이라는 파일명으로 html을 하나 만들어서 넣어주면 됩니다.</p>
-
-<p>이번에는 간단하게 github.com에서 만들어 봅시다.</p>
-
-<p>방금 만든 repogitory에서 create new file 버튼을 누르면 됩니다.</p>
-
-<blockquote>
-  <p><a href="https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files">Creating new files</a></p>
-
-</blockquote>
-
-<p>Github가 익숙하지 않은 분들이라면 상단의 <a href="https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files">Creating new files</a>를 따라하면 문제없이 만들 수 있습니다.</p>
-
-<p>파일 이름은 index.html, 파일 내용은 다음과 같이 입력해봅시다.</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
-<span class="nt">&lt;html&gt;</span>
-<span class="nt">&lt;body&gt;</span>
-<span class="nt">&lt;h1&gt;</span>Hello World<span class="nt">&lt;/h1&gt;</span>
-<span class="nt">&lt;p&gt;</span>I'm hosted with GitHub Pages.<span class="nt">&lt;/p&gt;</span>
-<span class="nt">&lt;/body&gt;</span>
-<span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
-
-<p>파일을 만들 고 난 뒤에 repogitory에 index.html이 있는 것을 확인 한 후, 브라우저의 URL에 repogitory이름을 넣어봅시다.</p>
-
-<blockquote>
-  <p><img src="\assets\images\2019-10-23-make-blog-with-github-pages\index.png" alt="index.html" /></p>
-</blockquote>
-
-<p>위와 같은 화면을 확인 할 수 있습니다.</p>
-
-<p>그럼 이제 index.html을 직접 수정하여 웹 서비스를 운영해야하는 건가 의문이 들 것입니다.</p>
-
-<p>다음에는 이를 간단히 해주는 방법을 알아보도록 하겠습니다.</p>
-
-        
-      </section>
-
-      <footer class="page__meta">
-        
-        
-
-
-        
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-23T00:00:00+09:00">October 23, 2019</time></p>
-        
-      </footer>
-
-      
-
-      
-    </div>
-
-    
-      <div class="page__comments">
-  
-  
-      <h4 class="page__comments-title">Comments</h4>
-      <section id="disqus_thread"></section>
-    
-</div>
-
-    
   </article>
-
-  
-  
-    <div class="page__related">
-      <h4 class="page__related-title">You May Also Enjoy</h4>
-      <div class="grid__wrapper">
-        
-          
-            
-      </div>
-    </div>
-  
 </div>
 
+      
+    </div>
+    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
+  </section>
+
+
+  </div>
+</div>
     </div>
 
     

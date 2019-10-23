@@ -1,84 +1,108 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/ja/" rel="alternate" type="text/html" /><updated>2019-10-23T21:30:05+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ko"><title type="html">Github Pages로 블로그 만들기</title><link href="https://duinaru.github.io/ja/2019/10/23/make-blog-with-github-pages" rel="alternate" type="text/html" title="Github Pages로 블로그 만들기" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/make-blog-with-github-pages-ko</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">&lt;p&gt;자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/ja/" rel="alternate" type="text/html" /><updated>2019-10-24T00:16:31+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ja"><title type="html">開発と経験があるブログ</title><link href="https://duinaru.github.io/ja/2019/10/23/make-blog-with-github-pages" rel="alternate" type="text/html" title="開発と経験があるブログ" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ja</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/make-blog-with-github-pages">&lt;p&gt;普段、考えていた色々なものを書こうとブログを作ることにしました。&lt;/p&gt;
 
-&lt;p&gt;블로그 서비스를 이용하여 블로그를 운영해 볼 수 도 있고, 웹 호스팅이나 직접 구축한 서버를 이용하여 웹 서비스를 만들어서 운영해 볼 수도 있을 것입니다.&lt;/p&gt;
+&lt;p&gt;ブログを運営しようとしたらブログサービスを利用する方が簡単で便利そうでしたが、github.ioというドメインが目立ちました。&lt;/p&gt;
 
-&lt;p&gt;필자도 이러한 생각을 하던 중에 Github Pages라는 것을 알게 되어서 만들어 보게 되었습니다.&lt;/p&gt;
+&lt;p&gt;それで、github pagesで作ることにしました。&lt;/p&gt;
 
-&lt;h1 id=&quot;github-pages&quot;&gt;Github Pages&lt;/h1&gt;
+&lt;h1 id=&quot;必要な物&quot;&gt;必要な物&lt;/h1&gt;
 
-&lt;p&gt;Github Pages라는 단어를 처음 들었을때는 반만 익숙한 느낌이였습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;github&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Github는 들어봤는데, Pages는 뭐지?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;github pagesをサービスするrepogitoryを作りました。&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://pages.github.com/&quot;&gt;Github Pages&lt;/a&gt;는 Github에서 제공하는 웹 페이지 서비스입니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;jekyll&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Git repogitory를 웹 페이지 서비스로 이용한다고 합니다.&lt;/p&gt;
+&lt;p&gt;github pagesはjekyllをサポートします。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;git repogitory를 웹 서비스로?&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;jekyllのソースをrepogitoryに置いておくだけでビルド-デプロイをしてくれます。&lt;/p&gt;
 
-&lt;p&gt;Github Pages는 repogitory에 저장되어 있는 html파일을 url에 연결시켜주어, 브라우저에서 누구나 접속 가능하도록 해줍니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;ruby&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;URL은 주로 다음과 같이 생겼습니다.&lt;/p&gt;
+&lt;p&gt;jekyllで作るにはrubyが必要です。&lt;/p&gt;
+
+&lt;p&gt;buildをしたり、pluginをインストールして機能を追加することができます。&lt;/p&gt;
+
+&lt;h1 id=&quot;作る&quot;&gt;作る&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;ruby&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;jekyllのbuildと色々なpluginを利用するためにインストールしました。&lt;/p&gt;
+
+&lt;p&gt;jekyllの公式ホームページに手順があり、便利でした。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;マルチランゲージ&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;二つ以上の言語で運営することを目指してしていまして、マルチランゲージのサポートのため&lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polygot plugin&lt;/a&gt;を使用しました。&lt;/p&gt;
+
+&lt;p&gt;このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepogitoryにソースを置いておくことだけでビルドはできません。&lt;/p&gt;
+
+&lt;p&gt;しかし、方法はありました。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;テーマ&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;テーマを選ぶことに時間がかなりかかりました。&lt;/p&gt;
+
+&lt;p&gt;これにしようかあれにしようかとしたら時間があっという間に過ぎました。&lt;/p&gt;
+
+&lt;p&gt;結局は&lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/&quot;&gt;Minimal Mistakes&lt;/a&gt;にすることにしました。&lt;/p&gt;
+
+&lt;p&gt;しかし、ここで問題が出ました。&lt;/p&gt;
+
 &lt;blockquote&gt;
-  &lt;p&gt;https://[username].github.io/&lt;/p&gt;
+  &lt;p&gt;buildの時、エラーが出ます。&lt;/p&gt;
+
+  &lt;p&gt;polygot pluginが動かないです。&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;Github Pages로 설정된 repogitory의 index.html 파일을 해당 URL로 바로 볼 수 있게 됩니다.&lt;/p&gt;
+&lt;h1 id=&quot;問題解決&quot;&gt;問題解決&lt;/h1&gt;
 
-&lt;p&gt;즉, repogitory에 html를 만들어 두는 것만으로도 누구나 웹 페이지를 볼 수 있게 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;windows環境でbuildの時、文字関連のエラー解決&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;indexhtml-만들어보기&quot;&gt;index.html 만들어보기&lt;/h1&gt;
-
-&lt;p&gt;URL을 입력했을때 바로 보이는 웹 페이지를 한번 만들어서 잘 작동하는지 확인해 봅시다.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Github Page용 repogitory 생성&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;가장 먼저 웹 페이지로 만들 repogitory가 필요합니다.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/&quot;&gt;Github&lt;/a&gt;에 로그인하여 repogitory를 만들어줍니다.&lt;/p&gt;
+&lt;p&gt;rubyをwindowsの環境で使おうとしたら出るエラーでした。&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;/assets/images/2019-10-23-make-blog-with-github-pages/create-repogitory.png&quot; alt=&quot;repogitory 만들기&quot; /&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-10-23-blog-with-development-and-experience\build-error.png&quot; alt=&quot;ビルドエラー&quot; /&gt;&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;username에는 자신의 Github ID 를 넣고, Create repogitory를 클릭하면 완성됩니다.&lt;/p&gt;
+&lt;p&gt;vscodeからcmdでビルドしていたので、chcp 65001 でUTF-8に変えて解決しました。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;index.html 을 repogitory 에 추가하기&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;また、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限しました。&lt;/p&gt;
 
-&lt;p&gt;이미 git에 익숙한 분들이라면, 익숙한 방법으로 repogitory에 index.html이라는 파일명으로 html을 하나 만들어서 넣어주면 됩니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Minimal Mistakesとpolygot pluginを共に使用&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;이번에는 간단하게 github.com에서 만들어 봅시다.&lt;/p&gt;
+&lt;p&gt;ウェブページを正常に作れない問題が出ました。&lt;/p&gt;
 
-&lt;p&gt;방금 만든 repogitory에서 create new file 버튼을 누르면 됩니다.&lt;/p&gt;
+&lt;p&gt;繰り返して試し、次のように解決できました。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;jekyllバージョン制限&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;jekyllのバージョンを3.8.5としたら、polygot pluginと共に動きました。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;polyglot pluginの_config.xml設定&lt;/em&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files&quot;&gt;Creating new files&lt;/a&gt;&lt;/p&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-10-23-blog-with-development-and-experience\polyglot-setting.png&quot; alt=&quot;polyglot setting&quot; /&gt;&lt;/p&gt;
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;Github가 익숙하지 않은 분들이라면 상단의 &lt;a href=&quot;https://help.github.com/en/github/managing-files-in-a-repository/creating-new-files&quot;&gt;Creating new files&lt;/a&gt;를 따라하면 문제없이 만들 수 있습니다.&lt;/p&gt;
+&lt;p&gt;languagesの言語の順番をdefault_langで設定した言語を先にするとpolygot pluginがうまく動きました。&lt;/p&gt;
 
-&lt;p&gt;파일 이름은 index.html, 파일 내용은 다음과 같이 입력해봅시다.&lt;/p&gt;
+&lt;h1 id=&quot;機能追加&quot;&gt;機能追加&lt;/h1&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;cp&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;Hello World&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;I'm hosted with GitHub Pages.&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
-&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;言語セレクタ&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;파일을 만들 고 난 뒤에 repogitory에 index.html이 있는 것을 확인 한 후, 브라우저의 URL에 repogitory이름을 넣어봅시다.&lt;/p&gt;
+&lt;p&gt;マルチランゲージのサポートのため、言語を変更する機能を追加しました。&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-10-23-make-blog-with-github-pages\index.png&quot; alt=&quot;index.html&quot; /&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;ページの下に見えるJAやKOなどのものです。&lt;/p&gt;
 
-&lt;p&gt;위와 같은 화면을 확인 할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;コメント&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;그럼 이제 index.html을 직접 수정하여 웹 서비스를 운영해야하는 건가 의문이 들 것입니다.&lt;/p&gt;
+&lt;p&gt;Minimal Mistakesでサポートする&lt;a href=&quot;https://disqus.com/&quot;&gt;disqus&lt;/a&gt;を利用し、追加しました。&lt;/p&gt;
 
-&lt;p&gt;다음에는 이를 간단히 해주는 방법을 알아보도록 하겠습니다.&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">자신의 홈페이지를 가지고 싶다는 생각을 해본 적이 있는 분들이 있을 것입니다.</summary></entry></feed>
+&lt;h1 id=&quot;感想&quot;&gt;感想&lt;/h1&gt;
+
+&lt;p&gt;作るうちにかなり時間が過ぎました。&lt;/p&gt;
+
+&lt;p&gt;これからは色々書くかアップデートしようと思います。&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">普段、考えていた色々なものを書こうとブログを作ることにしました。</summary></entry></feed>
