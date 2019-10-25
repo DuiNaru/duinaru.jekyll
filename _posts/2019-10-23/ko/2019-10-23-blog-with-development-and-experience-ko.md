@@ -14,17 +14,17 @@ permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
 
 **github**
 
-github pages를 서비스할 repogitory를 만들었습니다.
+github pages를 서비스할 repository를 만들었습니다.
 
 **jekyll**
 
 github pages는 jekyll을 지원합니다.
 
-jekyll로 된 소스를 repogitory에 올려 두는 것 만으로도 빌드-배포를 해주죠.
+jekyll로 만든 소스를 repository에 올려 두는 것 만으로도 빌드-배포를 해주죠.
 
 **ruby**
 
-jekyll로 만드려면 ruby가 필요합니다.
+jekyll로 만들려면 ruby가 필요합니다.
 
 build를 하거나, plugin을 설치해서 기능을 추가해볼 수 있습니다.
 
@@ -40,7 +40,7 @@ jekyll 공식 홈페이지에 사용 방법이 친절히 적혀있어서 별 어
 
 적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 [polygot plugin](https://polyglot.untra.io/)을 설치해 주었습니다.
 
-이 플러그인이 github pages에서 공식적으로 지원하는 플러그인이 아니기에, 단순히 repogitory에 소스를 올려두는 것으로 빌드가 되지 않습니다.
+이 플러그인이 github pages에서 공식적으로 지원하는 플러그인이 아니기에, 단순히 repository에 소스를 올려두는 것으로 빌드가 되지 않습니다.
 
 하지만, 다 방법이 있죠.
 
@@ -70,7 +70,7 @@ ruby를 windows환경에서 쓰려다 보니 발생하는 에러 였습니다.
 
 vscode에서 cmd로 빌드 하고 있었기에, chcp 65001 을 이용해서 UTF-8로 바꿔서 해결했습니다.
 
-또는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.
+다르게는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.
 
 **Minimal Mistakes과 polygot plugin을 함께 사용하기**
 
@@ -78,11 +78,11 @@ vscode에서 cmd로 빌드 하고 있었기에, chcp 65001 을 이용해서 UTF-
 
 시행착오 끝에, 다음과 같이 해결이 되었습니다.
 
-**jekyll버전**
+*jekyll버전*
 
 jekyll를 3.8.5으로 사용하니, polygot plugin과 함께 작동합니다.
 
-**polyglot plugin의 _config.xml설정**
+*polyglot plugin의 _config.xml설정*
 
 > ![polyglot setting](\assets\images\2019-10-23-blog-with-development-and-experience\polyglot-setting.png)
 > 
