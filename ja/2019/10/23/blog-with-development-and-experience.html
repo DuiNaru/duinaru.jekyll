@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>開発と経験があるブログ - DuiNaru’s Blog</title>
-<meta name="description" content="普段、考えていた色々なものを書こうとブログを作ることにしました。">
+<meta name="description" content="普段考えていた色々なものを書こうとブログを作ることにしました。">
 
 
   <meta name="author" content="DuiNaru">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">
 
 
-  <meta property="og:description" content="普段、考えていた色々なものを書こうとブログを作ることにしました。">
+  <meta property="og:description" content="普段考えていた色々なものを書こうとブログを作ることにしました。">
 
 
 
@@ -103,7 +103,7 @@
 
   </head>
 
-  <body class="layout--posts">
+  <body class="layout--single">
     <nav class="skip-links">
   <h2 class="screen-reader-text">Skip links</h2>
   <ul>
@@ -261,27 +261,40 @@
   </div>
 
 
-  <div class="archive">
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="開発と経験があるブログ">
+    <meta itemprop="description" content="普段考えていた色々なものを書こうとブログを作ることにしました。">
+    <meta itemprop="datePublished" content="October 23, 2019">
     
-      <h1 id="page-title" class="page__title">開発と経験があるブログ</h1>
-    
-    <p>普段、考えていた色々なものを書こうとブログを作ることにしました。</p>
 
-<p>ブログを運営しようとしたらブログサービスを利用する方が簡単で便利そうでしたが、github.ioというドメインが目立ちました。</p>
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">開発と経験があるブログ
+</h1>
+          
+        </header>
+      
 
-<p>それで、github pagesで作ることにしました。</p>
+      <section class="page__content" itemprop="text">
+        
+        <p>普段考えていた色々なものを書こうとブログを作ることにしました。</p>
+
+<p>ブログを運営するならブログサービスを利用した方が簡単で便利だろうと思っていた時にgithub.ioというドメインを見つけました。</p>
+
+<p>結果としては、github pagesで実装しました。</p>
 
 <h1 id="必要な物">必要な物</h1>
 
 <p><strong>github</strong></p>
 
-<p>github pagesをサービスするrepogitoryを作りました。</p>
+<p>github pagesをサービスするrepositoryを作りました。</p>
 
 <p><strong>jekyll</strong></p>
 
 <p>github pagesはjekyllをサポートします。</p>
 
-<p>jekyllのソースをrepogitoryに置いておくだけでビルド-デプロイをしてくれます。</p>
+<p>jekyllで作ったソースをrepositoryに置いておくだけでビルド-デプロイをしてくれます。</p>
 
 <p><strong>ruby</strong></p>
 
@@ -293,17 +306,17 @@
 
 <p><strong>ruby</strong></p>
 
-<p>jekyllのbuildと色々なpluginを利用するためにインストールしました。</p>
+<p>jekyllのbuildと様々なpluginを利用するためにインストールしました。</p>
 
 <p>jekyllの公式ホームページに手順があり、便利でした。</p>
 
 <p><strong>マルチランゲージ</strong></p>
 
-<p>二つ以上の言語で運営することを目指してしていまして、マルチランゲージのサポートのため<a href="https://polyglot.untra.io/">polygot plugin</a>を使用しました。</p>
+<p>少なくとも2ヶ国語で運営することを目指してしていまして、マルチランゲージのサポートのため<a href="https://polyglot.untra.io/">polygot plugin</a>を使用しました。</p>
 
-<p>このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepogitoryにソースを置いておくことだけでビルドはできません。</p>
+<p>このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepositoryにソースを置いておくことだけでビルドはできません。</p>
 
-<p>しかし、方法はありました。</p>
+<p>でも、対策はあるでしょう。</p>
 
 <p><strong>テーマ</strong></p>
 
@@ -313,7 +326,7 @@
 
 <p>結局は<a href="https://mmistakes.github.io/minimal-mistakes/">Minimal Mistakes</a>にすることにしました。</p>
 
-<p>しかし、ここで問題が出ました。</p>
+<p>しかし、ここで問題が発生しました。</p>
 
 <blockquote>
   <p>buildの時、エラーが出ます。</p>
@@ -324,7 +337,7 @@
 
 <h1 id="問題解決">問題解決</h1>
 
-<p><strong>windows環境でbuildの時、文字関連のエラー解決</strong></p>
+<p><strong>windows環境でbuildの時、文字関連エラーの解決</strong></p>
 
 <p>rubyをwindowsの環境で使おうとしたら出るエラーでした。</p>
 
@@ -335,13 +348,13 @@
 
 <p>vscodeからcmdでビルドしていたので、chcp 65001 でUTF-8に変えて解決しました。</p>
 
-<p>また、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限しました。</p>
+<p>他には、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限するしかありませんでした。</p>
 
 <p><strong>Minimal Mistakesとpolygot pluginを共に使用</strong></p>
 
 <p>ウェブページを正常に作れない問題が出ました。</p>
 
-<p>繰り返して試し、次のように解決できました。</p>
+<p>これについては色々トライし、次のように解決できました。</p>
 
 <p><em>jekyllバージョン制限</em></p>
 
@@ -354,7 +367,7 @@
 
 </blockquote>
 
-<p>languagesの言語の順番をdefault_langで設定した言語を先にするとpolygot pluginがうまく動きました。</p>
+<p>languagesの言語の一番目をdefault_langに設定したらpolygot pluginがうまく動きました。</p>
 
 <h1 id="機能追加">機能追加</h1>
 
@@ -362,64 +375,61 @@
 
 <p>マルチランゲージのサポートのため、言語を変更する機能を追加しました。</p>
 
-<p>ページの下に見えるJAやKOなどのものです。</p>
+<p>ページの下にあるJAやKOなどのものです。</p>
 
 <p><strong>コメント</strong></p>
 
-<p>Minimal Mistakesでサポートする<a href="https://disqus.com/">disqus</a>を利用し、追加しました。</p>
+<p>Minimal Mistakesで提供する<a href="https://disqus.com/">disqus</a>を利用し、実装しました。</p>
 
 <h1 id="感想">感想</h1>
 
-<p>作るうちにかなり時間が過ぎました。</p>
+<p>多様な機能を実現してかなり時間が過ぎました。</p>
 
-<p>これからは色々書くかアップデートしようと思います。</p>
+<p>これからはポストも作成しつつ、また新しい機能を追加していきたいと思います。</p>
 
+        
+      </section>
 
-<ul class="taxonomy__index">
-  
-  
-    <li>
-      <a href="#2019">
-        <strong>2019</strong> <span class="taxonomy__count">1</span>
-      </a>
-    </li>
-  
-</ul>
-
-
-
-  <section id="2019" class="taxonomy__section">
-    <h2 class="archive__subtitle">2019</h2>
-    <div class="entries-list">
-      
+      <footer class="page__meta">
+        
         
 
 
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-23T00:00:00+09:00">October 23, 2019</time></p>
+        
+      </footer>
 
-<div class="list__item">
-  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
-    
-    <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/ja/2019/10/23/blog-with-development-and-experience" rel="permalink">開発と経験があるブログ
-</a>
-      
-    </h2>
-    
-    <p class="archive__item-excerpt" itemprop="description">普段、考えていた色々なものを書こうとブログを作ることにしました。
-
-</p>
-  </article>
-</div>
 
       
     </div>
-    <a href="#page-title" class="back-to-top">Back to Top &uarr;</a>
-  </section>
 
-
-  </div>
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
 </div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+            
+      </div>
+    </div>
+  
+</div>
+
     </div>
 
     

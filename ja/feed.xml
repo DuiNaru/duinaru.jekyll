@@ -1,20 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/ja/" rel="alternate" type="text/html" /><updated>2019-10-24T00:31:19+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ja"><title type="html">開発と経験があるブログ</title><link href="https://duinaru.github.io/ja/2019/10/23/blog-with-development-and-experience" rel="alternate" type="text/html" title="開発と経験があるブログ" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ja</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">&lt;p&gt;普段、考えていた色々なものを書こうとブログを作ることにしました。&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/ja/" rel="alternate" type="text/html" /><updated>2019-10-25T23:03:51+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ja"><title type="html">開発と経験があるブログ</title><link href="https://duinaru.github.io/ja/2019/10/23/blog-with-development-and-experience" rel="alternate" type="text/html" title="開発と経験があるブログ" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ja</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">&lt;p&gt;普段考えていた色々なものを書こうとブログを作ることにしました。&lt;/p&gt;
 
-&lt;p&gt;ブログを運営しようとしたらブログサービスを利用する方が簡単で便利そうでしたが、github.ioというドメインが目立ちました。&lt;/p&gt;
+&lt;p&gt;ブログを運営するならブログサービスを利用した方が簡単で便利だろうと思っていた時にgithub.ioというドメインを見つけました。&lt;/p&gt;
 
-&lt;p&gt;それで、github pagesで作ることにしました。&lt;/p&gt;
+&lt;p&gt;結果としては、github pagesで実装しました。&lt;/p&gt;
 
 &lt;h1 id=&quot;必要な物&quot;&gt;必要な物&lt;/h1&gt;
 
 &lt;p&gt;&lt;strong&gt;github&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;github pagesをサービスするrepogitoryを作りました。&lt;/p&gt;
+&lt;p&gt;github pagesをサービスするrepositoryを作りました。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;jekyll&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;github pagesはjekyllをサポートします。&lt;/p&gt;
 
-&lt;p&gt;jekyllのソースをrepogitoryに置いておくだけでビルド-デプロイをしてくれます。&lt;/p&gt;
+&lt;p&gt;jekyllで作ったソースをrepositoryに置いておくだけでビルド-デプロイをしてくれます。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;ruby&lt;/strong&gt;&lt;/p&gt;
 
@@ -26,17 +26,17 @@
 
 &lt;p&gt;&lt;strong&gt;ruby&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;jekyllのbuildと色々なpluginを利用するためにインストールしました。&lt;/p&gt;
+&lt;p&gt;jekyllのbuildと様々なpluginを利用するためにインストールしました。&lt;/p&gt;
 
 &lt;p&gt;jekyllの公式ホームページに手順があり、便利でした。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;マルチランゲージ&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;二つ以上の言語で運営することを目指してしていまして、マルチランゲージのサポートのため&lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polygot plugin&lt;/a&gt;を使用しました。&lt;/p&gt;
+&lt;p&gt;少なくとも2ヶ国語で運営することを目指してしていまして、マルチランゲージのサポートのため&lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polygot plugin&lt;/a&gt;を使用しました。&lt;/p&gt;
 
-&lt;p&gt;このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepogitoryにソースを置いておくことだけでビルドはできません。&lt;/p&gt;
+&lt;p&gt;このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepositoryにソースを置いておくことだけでビルドはできません。&lt;/p&gt;
 
-&lt;p&gt;しかし、方法はありました。&lt;/p&gt;
+&lt;p&gt;でも、対策はあるでしょう。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;テーマ&lt;/strong&gt;&lt;/p&gt;
 
@@ -46,7 +46,7 @@
 
 &lt;p&gt;結局は&lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/&quot;&gt;Minimal Mistakes&lt;/a&gt;にすることにしました。&lt;/p&gt;
 
-&lt;p&gt;しかし、ここで問題が出ました。&lt;/p&gt;
+&lt;p&gt;しかし、ここで問題が発生しました。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;buildの時、エラーが出ます。&lt;/p&gt;
@@ -57,7 +57,7 @@
 
 &lt;h1 id=&quot;問題解決&quot;&gt;問題解決&lt;/h1&gt;
 
-&lt;p&gt;&lt;strong&gt;windows環境でbuildの時、文字関連のエラー解決&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;windows環境でbuildの時、文字関連エラーの解決&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;rubyをwindowsの環境で使おうとしたら出るエラーでした。&lt;/p&gt;
 
@@ -68,13 +68,13 @@
 
 &lt;p&gt;vscodeからcmdでビルドしていたので、chcp 65001 でUTF-8に変えて解決しました。&lt;/p&gt;
 
-&lt;p&gt;また、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限しました。&lt;/p&gt;
+&lt;p&gt;他には、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限するしかありませんでした。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Minimal Mistakesとpolygot pluginを共に使用&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;ウェブページを正常に作れない問題が出ました。&lt;/p&gt;
 
-&lt;p&gt;繰り返して試し、次のように解決できました。&lt;/p&gt;
+&lt;p&gt;これについては色々トライし、次のように解決できました。&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;jekyllバージョン制限&lt;/em&gt;&lt;/p&gt;
 
@@ -87,7 +87,7 @@
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;languagesの言語の順番をdefault_langで設定した言語を先にするとpolygot pluginがうまく動きました。&lt;/p&gt;
+&lt;p&gt;languagesの言語の一番目をdefault_langに設定したらpolygot pluginがうまく動きました。&lt;/p&gt;
 
 &lt;h1 id=&quot;機能追加&quot;&gt;機能追加&lt;/h1&gt;
 
@@ -95,14 +95,14 @@
 
 &lt;p&gt;マルチランゲージのサポートのため、言語を変更する機能を追加しました。&lt;/p&gt;
 
-&lt;p&gt;ページの下に見えるJAやKOなどのものです。&lt;/p&gt;
+&lt;p&gt;ページの下にあるJAやKOなどのものです。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;コメント&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Minimal Mistakesでサポートする&lt;a href=&quot;https://disqus.com/&quot;&gt;disqus&lt;/a&gt;を利用し、追加しました。&lt;/p&gt;
+&lt;p&gt;Minimal Mistakesで提供する&lt;a href=&quot;https://disqus.com/&quot;&gt;disqus&lt;/a&gt;を利用し、実装しました。&lt;/p&gt;
 
 &lt;h1 id=&quot;感想&quot;&gt;感想&lt;/h1&gt;
 
-&lt;p&gt;作るうちにかなり時間が過ぎました。&lt;/p&gt;
+&lt;p&gt;多様な機能を実現してかなり時間が過ぎました。&lt;/p&gt;
 
-&lt;p&gt;これからは色々書くかアップデートしようと思います。&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">普段、考えていた色々なものを書こうとブログを作ることにしました。</summary></entry></feed>
+&lt;p&gt;これからはポストも作成しつつ、また新しい機能を追加していきたいと思います。&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">普段考えていた色々なものを書こうとブログを作ることにしました。</summary></entry></feed>
