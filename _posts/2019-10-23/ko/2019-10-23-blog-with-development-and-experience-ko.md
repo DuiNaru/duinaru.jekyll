@@ -1,5 +1,9 @@
 ---
 title: 개발과 경험이 함께 하는 블로그
+layout: single
+author_profile: true
+comments: true
+related: true
 lang: ko
 permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
 ---
@@ -68,7 +72,7 @@ ruby를 windows환경에서 쓰려다 보니 발생하는 에러 였습니다.
 > ![빌드 에러](\assets\images\2019-10-23-blog-with-development-and-experience\build-error.png)
 > 
 
-vscode에서 cmd로 빌드 하고 있었기에, chcp 65001 을 이용해서 UTF-8로 바꿔서 해결했습니다.
+vscode에서 cmd로 빌드 하고 있었기에, `chcp 65001` 을 이용해서 UTF-8로 바꿔서 해결했습니다.
 
 다르게는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.
 

@@ -1,5 +1,9 @@
 ---
 title: 開発と経験があるブログ
+layout: single
+author_profile: true
+comments: true
+related: true
 lang: ja
 permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
 ---
@@ -68,7 +72,7 @@ rubyをwindowsの環境で使おうとしたら出るエラーでした。
 > ![ビルドエラー](\assets\images\2019-10-23-blog-with-development-and-experience\build-error.png)
 > 
 
-vscodeからcmdでビルドしていたので、chcp 65001 でUTF-8に変えて解決しました。
+vscodeからcmdでビルドしていたので、`chcp 65001` でUTF-8に変えて解決しました。
 
 他には、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限するしかありませんでした。
 
