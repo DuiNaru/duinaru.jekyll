@@ -84,7 +84,7 @@ vscode에서 cmd로 빌드 하고 있었기에, `chcp 65001` 을 이용해서 UT
 
 *jekyll버전*
 
-jekyll를 3.8.5으로 사용하니, polygot plugin과 함께 작동합니다.
+jekyll를 3.8.6으로 사용하니, polygot plugin과 함께 작동합니다.
 
 *polyglot plugin의 _config.xml설정*
 
