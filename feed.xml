@@ -1,4 +1,77 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/" rel="alternate" type="text/html" /><updated>2019-10-25T23:03:50+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ko"><title type="html">개발과 경험이 함께 하는 블로그</title><link href="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience" rel="alternate" type="text/html" title="개발과 경험이 함께 하는 블로그" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ko</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">&lt;p&gt;평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.8.6">Jekyll</generator><link href="https://duinaru.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="https://duinaru.github.io/" rel="alternate" type="text/html" /><updated>2019-10-27T21:37:13+09:00</updated><id>https://duinaru.github.io/feed.xml</id><title type="html">DuiNaru’s Blog</title><subtitle>Blog with development and experience</subtitle><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><entry xml:lang="ko"><title type="html">GitHub Pages에서 지원하지 않는 플러그인 쓰기</title><link href="https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin" rel="alternate" type="text/html" title="GitHub Pages에서 지원하지 않는 플러그인 쓰기" /><published>2019-10-26T00:00:00+09:00</published><updated>2019-10-26T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin-ko</id><content type="html" xml:base="https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin">&lt;p&gt;jekyll을 공식적으로 지원하는 GitHub Pages이지만, 모든 jekyll의 플러그인까지 지원하는 것은 아닙니다.&lt;/p&gt;
+
+&lt;p&gt;GitHub Pages는  &lt;a href=&quot;http://pages.github.com/versions/&quot;&gt;지원하는 플러그인&lt;/a&gt;이 제한 되어있습니다.&lt;/p&gt;
+
+&lt;p&gt;이 이외의 플러그인은 GitHub Pages에서 jekyll을 build할때, 제한되어 적용되지 않습니다.&lt;/p&gt;
+
+&lt;p&gt;그럼, GitHub Pages에서 jekyll로 웹 페이지 서비스를 만들 때는 일부 플러그인만 사용해야 하는 것 일까요?&lt;/p&gt;
+
+&lt;p&gt;반은 맞고 반은 틀립니다.&lt;/p&gt;
+
+&lt;p&gt;알아보기 전에, 먼저 어떻게 GitHub Pages가  jekyll를 쓰는지 살펴봅시다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GitHub Pages with jekyll source&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;GitHub Pages에서 jekyll을 쓰는 간단한 방법입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://help.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll&quot;&gt;공식 도움말&lt;/a&gt;에서도 설명하는 방법처럼 jekyll 소스를 repository에 올려두고 GitHub Pages가 jekyll을 build를 하는 방법입니다.&lt;/p&gt;
+
+&lt;p&gt;GitHub Pages에서 문제 없이 사용가능한 플러그인으로 제한을 하니, plugin의 호환성 같은 문제들에 대해 신경 덜 쓰고 만들 수 있다는 장점이 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;GitHub Pages without jekyll source&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;GitHub Pages는 기본적으로 정적 웹 페이지 호스팅 서비스이므로, jekyll소스가 아닌 웹 파일만 있어도 서비스가 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;즉, 무엇으로 만들었던, 서비스에 필요한 파일만 있으면 문제 없다는 것입니다.&lt;/p&gt;
+
+&lt;p&gt;이러한 파일들은 jekyll로 build를 할 때, 하위 디렉토리인 _site에 생기니, 이 파일을 직접 GitHub Pages의 repository에 올려서 사용해도 문제 없이 서비스 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;GitHub Pages에서 지원하지 않는 jekyll의 Plugin으로 만든 파일이라도 말이죠.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;github-pages-with-an-unsupported-plugin&quot;&gt;GitHub Pages with an unsupported plugin&lt;/h1&gt;
+
+&lt;p&gt;지원하지 않는 plugin이라도 로컬에서 build를 한 뒤에 웹 파일만 올리면, 서비스가 가능하게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;이를 위해서 우선 어떤 branch가 GitHub Pages로 설정 되어 있는지 확인 해 볼 필요가 있습니다.&lt;/p&gt;
+
+&lt;p&gt;repository의 settings에서 GitHub Pages라는 항목을 찾아 볼 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-10-26-how-to-make-a-github-pages-work-with-an-unsupported-plugin\settings-github-pages.png&quot; alt=&quot;GitHub Pages Settings&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;저는 master branch를 사용중이라고 확인 할 수 있었습니다.&lt;/p&gt;
+
+&lt;p&gt;그러므로, master branch에 jekyll로 build한 파일들을 올려두면, GitHub Pages를 서비스 할 수 있게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;소스랑 파일을 분리해서 관리&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;master branch에 build된 파일을 올리니, 소스는 분리하고 싶어졌습니다.&lt;/p&gt;
+
+&lt;p&gt;그래서 sources라는 branch를 만들고 소스는 해당 branch에만 push를 하고 있습니다.&lt;/p&gt;
+
+&lt;p&gt;하지만, build된 파일은 master branch에 push해야 하니, 매번 branch를 변경해서 push를 해야하는 번거로움이 생겼습니다.&lt;/p&gt;
+
+&lt;p&gt;이를 모두 수작업으로 하려면 실수도 하기 마련이고, 번거로우니 아래와 같은 &lt;em&gt;PowerShell Script&lt;/em&gt;를 만들어서 자동화하였습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;PowerShell Script&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;chcp 65001
+$env:JEKYLL_ENV = 'production'
+rm -r _site/*
+git clone -b master https://github.com/DuiNaru/duinaru.github.io.git _site
+bundle exec jekyll build
+cd _site
+git add -A
+git commit -am 'jekyll build'
+git push
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&quot;/2019/10/23/blog-with-development-and-experience#%EB%AC%B8%EC%A0%9C-%ED%95%B4%EA%B2%B0&quot;&gt;build시 문자 오류&lt;/a&gt;를 해결하기 위한 &lt;code class=&quot;highlighter-rouge&quot;&gt;chcp 65001&lt;/code&gt; 과 jekyll을 production환경으로 build하기 위한 &lt;code class=&quot;highlighter-rouge&quot;&gt;$env:JEKYLL_ENV = 'production'&lt;/code&gt;이 포함되어있습니다.&lt;/p&gt;
+
+&lt;p&gt;jekyll을 production환경으로 build를 해서 올리는 이유에 대해서는 다음에 설명하도록 하겠습니다.&lt;/p&gt;
+
+&lt;p&gt;이걸로 지원하지 않는 플러그인이라도 GitHub Pages에 서비스 할 수 있게 되었습니다.&lt;/p&gt;</content><author><name>DuiNaru</name><email>duinaru@gmail.com</email></author><summary type="html">jekyll을 공식적으로 지원하는 GitHub Pages이지만, 모든 jekyll의 플러그인까지 지원하는 것은 아닙니다.</summary></entry><entry xml:lang="ko"><title type="html">개발과 경험이 함께 하는 블로그</title><link href="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience" rel="alternate" type="text/html" title="개발과 경험이 함께 하는 블로그" /><published>2019-10-23T00:00:00+09:00</published><updated>2019-10-23T00:00:00+09:00</updated><id>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience-ko</id><content type="html" xml:base="https://duinaru.github.io/2019/10/23/blog-with-development-and-experience">&lt;p&gt;평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.&lt;/p&gt;
 
 &lt;p&gt;블로그를 운영한다면 블로그 서비스를 이용하는 편이 간단하고 편할 듯 했지만, github.io 라는 도메인이 눈에 들어오더군요.&lt;/p&gt;
 
@@ -66,7 +139,7 @@
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;vscode에서 cmd로 빌드 하고 있었기에, chcp 65001 을 이용해서 UTF-8로 바꿔서 해결했습니다.&lt;/p&gt;
+&lt;p&gt;vscode에서 cmd로 빌드 하고 있었기에, &lt;code class=&quot;highlighter-rouge&quot;&gt;chcp 65001&lt;/code&gt; 을 이용해서 UTF-8로 바꿔서 해결했습니다.&lt;/p&gt;
 
 &lt;p&gt;다르게는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.&lt;/p&gt;
 
