@@ -42,7 +42,7 @@ GitHub Pages는 기본적으로 정적 웹 페이지 호스팅 서비스이므�
 
 지원하지 않는 plugin이라도 로컬에서 build를 한 뒤에 웹 파일만 올리면, 서비스가 가능하게 됩니다.
 
-이를 위해서 우선 repository의 어떤 branch가 GitHub Pages로 설정 되어 있는지 확인 해 볼 필요가 있습니다.
+이를 위해서 우선 어떤 branch가 GitHub Pages로 설정 되어 있는지 확인 해 볼 필요가 있습니다.
 
 repository의 settings에서 GitHub Pages라는 항목을 찾아 볼 수 있습니다.
 
@@ -80,4 +80,4 @@ git push
 
 jekyll을 production환경으로 build를 해서 올리는 이유에 대해서는 다음에 설명하도록 하겠습니다.
 
-이제는 지원하지 않는 플러그인이라도 GitHub Pages에 서비스 할 수 있게 되었습니다.
+이걸로 지원하지 않는 플러그인이라도 GitHub Pages에 서비스 할 수 있게 되었습니다.
