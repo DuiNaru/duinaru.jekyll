@@ -84,7 +84,7 @@ vscodeからcmdでビルドしていたので、`chcp 65001` でUTF-8に変え�
 
 *jekyllバージョン制限*
 
-jekyllのバージョンを3.8.5としたら、polygot pluginと共に動きました。
+jekyllのバージョンを3.8.6としたら、polygot pluginと共に動きました。
 
 *polyglot pluginの_config.xml設定*
 
