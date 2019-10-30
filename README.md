@@ -6,3 +6,20 @@
 Blog with development and experience
 
 Static blog site made with Jekyll
+
+## Using Themes
+[minimal-mistakes](https://mmistakes.github.io/minimal-mistakes/)
+
+## Using Libraries
+
+[jekyll-admin](https://github.com/jekyll/jekyll-admin)
+
+[jekyll-polyglot](https://github.com/untra/polyglot)
+
+[jekyll-paginate](https://github.com/jekyll/jekyll-paginate)
+
+[jekyll-gist](https://github.com/jekyll/jekyll-gist)
+
+[jekyll-feed](https://github.com/jekyll/jekyll-feed)
+
+[jekyll-include-cache](https://github.com/benbalter/jekyll-include-cache)
