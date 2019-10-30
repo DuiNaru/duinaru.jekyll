@@ -1,4 +1,5 @@
 # duinaru.github.io
+[![html](https://img.shields.io/badge/lang-html-lightgrey)](https://en.wikipedia.org/wiki/HTML)
 [![ruby](https://img.shields.io/badge/lang-ruby-red)](https://www.ruby-lang.org)
 [![Jekyll](https://img.shields.io/badge/jekyll-3.8.6-blue)](https://jekyllrb.com/)
 [![Theme](https://img.shields.io/badge/Theme-Minimal%20Mistakes-brightgreen)](https://mmistakes.github.io/minimal-mistakes/)
@@ -10,7 +11,7 @@ Static blog site made with Jekyll
 ## Using Themes
 [minimal-mistakes](https://mmistakes.github.io/minimal-mistakes/)
 
-## Using Libraries
+## Using Plugins
 
 [jekyll-admin](https://github.com/jekyll/jekyll-admin)
 
