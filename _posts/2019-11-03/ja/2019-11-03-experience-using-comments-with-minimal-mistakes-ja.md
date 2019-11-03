@@ -9,7 +9,7 @@ lang: ja
 permalink: "/:categories/:year/:month/:day/experience-using-comments-with-minimal-mistakes"
 ---
 
-使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように[設定](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments)できます。
+使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように[設定](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments)できて、使いました。
 
 コメントを追加するページに`comment: true`を追加し、`_config.xml`には使用するサービスの情報を入力すればできます。
 

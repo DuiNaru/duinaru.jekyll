@@ -9,7 +9,7 @@ lang: ko
 permalink: "/:categories/:year/:month/:day/experience-using-comments-with-minimal-mistakes"
 ---
 
-사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 [설정](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments) 할 수 있습니다.
+사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 [설정](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments) 할 수 있어서, 사용해보았습니다.
 
 댓글을 사용할 페이지에 `comment: true`를 추가하고, `_config.xml`에 사용할 서비스와 정보를 입력하기만 하면 됩니다.
 
