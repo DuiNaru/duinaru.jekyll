@@ -5,9 +5,109 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 31 Oct 2019 21:45:42 +0900</pubDate>
-    <lastBuildDate>Thu, 31 Oct 2019 21:45:42 +0900</lastBuildDate>
+    <pubDate>Sun, 03 Nov 2019 14:42:22 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Nov 2019 14:42:22 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>ブログにコメント機能を追加しました</title>
+        <description>&lt;p&gt;使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように&lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments&quot;&gt;設定&lt;/a&gt;できます。&lt;/p&gt;
+
+&lt;p&gt;コメントを追加するページに&lt;code class=&quot;highlighter-rouge&quot;&gt;comment: true&lt;/code&gt;を追加し、&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.xml&lt;/code&gt;には使用するサービスの情報を入力すればできます。&lt;/p&gt;
+
+&lt;p&gt;筆者はdisqusというコメントサービスを使ってみました。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://disqus.com/&quot;&gt;disqus&lt;/a&gt;に会員登録してサイトを&lt;a href=&quot;http://disqus.com/admin/create&quot;&gt;生成&lt;/a&gt;し、&lt;a href=&quot;https://help.disqus.com/en/articles/1717111-what-s-a-shortname&quot;&gt;ShortName&lt;/a&gt;を分かればできます。&lt;/p&gt;
+
+&lt;p&gt;shortnameはサイトを生成する時や、生成した後に設定ページでも分かります。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://disqus.com/admin/create&quot;&gt;site生成&lt;/a&gt;
+ &lt;img src=&quot;\assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\create-site.png&quot; alt=&quot;shortname&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://disqus.com/admin/settings/general/&quot;&gt;site設定&lt;/a&gt;
+ &lt;img src=&quot;/assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\shortname.png&quot; alt=&quot;shortname&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;後は&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.xml&lt;/code&gt;に&lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/docs/configuration/#disqus&quot;&gt;設定&lt;/a&gt;すればできます。&lt;/p&gt;
+
+&lt;p&gt;会員登録と使用設定すれば終わるので、簡単ですね。&lt;/p&gt;
+
+&lt;p&gt;確認してみましょう。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;出ない。&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;理由を探してみましょう。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;おかしいです。どう見ても今までの設定でできそうです。&lt;/p&gt;
+
+&lt;p&gt;それで、Minimal Mistakesでdisqusと関係したcommentのソースコードを探してみました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;_includes\comments.html
+&lt;img src=&quot;/assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\comments.png&quot; alt=&quot;comments.html&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;disqusのためにsectionを作っていることが確認できます。&lt;/p&gt;
+
+&lt;p&gt;それで、該当のhtmlをincludeしているファイルを探してみました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;_layouts\single.html
+&lt;img src=&quot;\assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\single.png&quot; alt=&quot;single&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;singleのレイアウトページの一部です。&lt;/p&gt;
+
+&lt;p&gt;何かの条件でincludeをしていることが確認できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;site.comments.provider&lt;/code&gt;は&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.xml&lt;/code&gt;で設定し、&lt;code class=&quot;highlighter-rouge&quot;&gt;page.comments&lt;/code&gt;は&lt;code class=&quot;highlighter-rouge&quot;&gt;true&lt;/code&gt;に設定しておきました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;jekyll.environment == ‘production’は？&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;あ、Minimal Mistakes  &lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments&quot;&gt;comment設定&lt;/a&gt;のNoteがこの内容のようですね！&lt;/p&gt;
+
+&lt;h1 id=&quot;jekyllをproduction環境でbuildする&quot;&gt;jekyllをproduction環境でbuildする&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://jekyllrb.com/docs/configuration/options/#build-command-options&quot;&gt;jekyll build オプション&lt;/a&gt;で&lt;a href=&quot;https://jekyllrb.com/docs/configuration/environments/&quot;&gt;Environment&lt;/a&gt;を設定できます。&lt;/p&gt;
+
+&lt;p&gt;コードからは&lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll.environment&lt;/code&gt;で読み取れ、buildの設定に分けて異なる結果物を作ることができるようになります。&lt;/p&gt;
+
+&lt;p&gt;Minimal Mistakesはproductionでbuildした場合のみ、commentを使用できるようにしてありますので、buildの時にEnvironmentをproductionに設定しなければなりません。&lt;/p&gt;
+
+&lt;p&gt;GitHub Pagesでbuildする場合なら、自動的にproductionに設定されてbuildされますが、筆者はlocalでbuildをしているので設定する必要がありました。&lt;/p&gt;
+
+&lt;p&gt;linuxの環境でしたら、&lt;a href=&quot;https://jekyllrb.com/docs/configuration/environments/&quot;&gt;Environment&lt;/a&gt;で説明しているようにすればいいですが、windowsなら別です。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;cmdの場合&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;set JEKYLL_ENV=production
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;powershellの場合&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;$env:JEKYLL_ENV = 'production'
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上記のコマンドを実行した後にbuildやserveをしたら、productionで作られます。&lt;/p&gt;
+
+&lt;p&gt;これで、Minimal Mistakesにコメント機能を追加することができました。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 03 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/ja/2019/11/03/experience-using-comments-with-minimal-mistakes</link>
+        <guid isPermaLink="true">https://duinaru.github.io/ja/2019/11/03/experience-using-comments-with-minimal-mistakes</guid>
+        
+        
+      </item>
     
       <item>
         <title>GitHub PagesでサポートされないPluginを使う方法</title>

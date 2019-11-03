@@ -8,4 +8,9 @@ var store = [{
         "excerpt":"jekyll을 공식적으로 지원하는 GitHub Pages이지만, 모든 jekyll의 플러그인까지 지원하는 것은 아닙니다. GitHub Pages는 지원하는 플러그인이 제한 되어있습니다. 이 이외의 플러그인은 GitHub Pages에서 jekyll을 build할때, 제한되어 적용되지 않습니다. 그럼, GitHub Pages에서 jekyll로 웹 페이지 서비스를 만들 때는 일부 플러그인만 사용해야 하는 것 일까요? 반은 맞고 반은 틀립니다. 알아보기 전에, 먼저 어떻게...","categories": [],
         "tags": [],
         "url": "https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin",
+        "teaser":null},{
+        "title": "Blog에 댓글 기능을 추가하였습니다",
+        "excerpt":"사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있습니다. 댓글을 사용할 페이지에 comment: true를 추가하고, _config.xml에 사용할 서비스와 정보를 입력하기만 하면 됩니다. 이번에는 disqus라는 댓글 서비스를 사용해 보았습니다. disqus에 가입한 뒤에 사이트를 생성해주고, ShortName을 알면 됩니다. shortname은 사이트를 생성할 때, 또는 생성하고 설정 화면에서도...","categories": [],
+        "tags": [],
+        "url": "https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes",
         "teaser":null}]

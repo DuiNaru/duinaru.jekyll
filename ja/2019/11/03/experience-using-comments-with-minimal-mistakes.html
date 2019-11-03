@@ -1,0 +1,574 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.17.1 by Michael Rose
+  Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin _includes/seo.html --><title>ブログにコメント機能を追加しました - DuiNaru’s Blog</title>
+<meta name="description" content="使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように設定できます。">
+
+
+  <meta name="author" content="DuiNaru">
+
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="en_US">
+<meta property="og:site_name" content="DuiNaru's Blog">
+<meta property="og:title" content="ブログにコメント機能を追加しました">
+<meta property="og:url" content="https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes">
+
+
+  <meta property="og:description" content="使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように設定できます。">
+
+
+
+
+
+
+
+  <meta property="article:published_time" content="2019-11-03T00:00:00+09:00">
+
+
+
+
+
+  
+
+  
+
+
+<link rel="canonical" href="https://duinaru.github.io/ja/2019/11/03/experience-using-comments-with-minimal-mistakes">
+
+
+
+
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    
+      "@type": "Person",
+      "name": "DuiNaru",
+      "url": "https://duinaru.github.io/"
+    
+  }
+</script>
+
+
+
+
+
+
+<!-- end _includes/seo.html -->
+
+
+<link href="/ja/feed.xml" type="application/atom+xml" rel="alternate" title="DuiNaru's Blog Feed">
+
+<!-- https://t.co/dKP3o1e -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/ja/assets/css/main.css">
+
+<!--[if IE]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+    <nav class="skip-links">
+  <h2 class="screen-reader-text">Skip links</h2>
+  <ul>
+    <li><a href="#site-nav" class="screen-reader-shortcut">Skip to primary navigation</a></li>
+    <li><a href="#main" class="screen-reader-shortcut">Skip to content</a></li>
+    <li><a href="#footer" class="screen-reader-shortcut">Skip to footer</a></li>
+  </ul>
+</nav>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        
+        <a class="site-title" href="/ja/">
+          DuiNaru's Blog
+          
+        </a>
+        <ul class="visible-links"><li class="masthead__menu-item">
+              <a href="/ja/year-archive/" >Posts</a>
+            </li></ul>
+        
+        <button class="greedy-nav__toggle hidden" type="button">
+          <span class="visually-hidden">Toggle menu</span>
+          <div class="navicon"></div>
+        </button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+    <div class="initial-content">
+      
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+
+<div itemscope itemtype="https://schema.org/Person">
+
+  
+
+  <div class="author__content">
+    
+      <h3 class="author__name" itemprop="name">DuiNaru</h3>
+    
+    
+      <div class="author__bio" itemprop="description">
+        <p>IT Engineer</p>
+
+      </div>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+            <li><a href="https://github.com/DuiNaru/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+          
+        
+          
+        
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:duinaru@gmail.com">
+            <meta itemprop="email" content="duinaru@gmail.com" />
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs" rel="nofollow noopener noreferrer">
+      <i class="fas fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
+    <meta itemprop="headline" content="ブログにコメント機能を追加しました">
+    <meta itemprop="description" content="使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように設定できます。">
+    <meta itemprop="datePublished" content="November 03, 2019">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 id="page-title" class="page__title" itemprop="headline">ブログにコメント機能を追加しました
+</h1>
+          
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        
+        <p>使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように<a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments">設定</a>できます。</p>
+
+<p>コメントを追加するページに<code class="highlighter-rouge">comment: true</code>を追加し、<code class="highlighter-rouge">_config.xml</code>には使用するサービスの情報を入力すればできます。</p>
+
+<p>筆者はdisqusというコメントサービスを使ってみました。</p>
+
+<p><a href="https://disqus.com/">disqus</a>に会員登録してサイトを<a href="http://disqus.com/admin/create">生成</a>し、<a href="https://help.disqus.com/en/articles/1717111-what-s-a-shortname">ShortName</a>を分かればできます。</p>
+
+<p>shortnameはサイトを生成する時や、生成した後に設定ページでも分かります。</p>
+
+<blockquote>
+  <p><a href="http://disqus.com/admin/create">site生成</a>
+ <img src="\assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\create-site.png" alt="shortname" /></p>
+
+</blockquote>
+
+<blockquote>
+  <p><a href="https://disqus.com/admin/settings/general/">site設定</a>
+ <img src="/assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\shortname.png" alt="shortname" /></p>
+
+</blockquote>
+
+<p>後は<code class="highlighter-rouge">_config.xml</code>に<a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#disqus">設定</a>すればできます。</p>
+
+<p>会員登録と使用設定すれば終わるので、簡単ですね。</p>
+
+<p>確認してみましょう。</p>
+
+<blockquote>
+  <p>出ない。</p>
+
+</blockquote>
+
+<p><strong>理由を探してみましょう。</strong></p>
+
+<p>おかしいです。どう見ても今までの設定でできそうです。</p>
+
+<p>それで、Minimal Mistakesでdisqusと関係したcommentのソースコードを探してみました。</p>
+
+<blockquote>
+  <p>_includes\comments.html
+<img src="/assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\comments.png" alt="comments.html" /></p>
+
+</blockquote>
+
+<p>disqusのためにsectionを作っていることが確認できます。</p>
+
+<p>それで、該当のhtmlをincludeしているファイルを探してみました。</p>
+
+<blockquote>
+  <p>_layouts\single.html
+<img src="\assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\single.png" alt="single" /></p>
+
+</blockquote>
+
+<p>singleのレイアウトページの一部です。</p>
+
+<p>何かの条件でincludeをしていることが確認できます。</p>
+
+<p><code class="highlighter-rouge">site.comments.provider</code>は<code class="highlighter-rouge">_config.xml</code>で設定し、<code class="highlighter-rouge">page.comments</code>は<code class="highlighter-rouge">true</code>に設定しておきました。</p>
+
+<blockquote>
+  <p>jekyll.environment == ‘production’は？</p>
+
+</blockquote>
+
+<p>あ、Minimal Mistakes  <a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments">comment設定</a>のNoteがこの内容のようですね！</p>
+
+<h1 id="jekyllをproduction環境でbuildする">jekyllをproduction環境でbuildする</h1>
+
+<p><a href="https://jekyllrb.com/docs/configuration/options/#build-command-options">jekyll build オプション</a>で<a href="https://jekyllrb.com/docs/configuration/environments/">Environment</a>を設定できます。</p>
+
+<p>コードからは<code class="highlighter-rouge">jekyll.environment</code>で読み取れ、buildの設定に分けて異なる結果物を作ることができるようになります。</p>
+
+<p>Minimal Mistakesはproductionでbuildした場合のみ、commentを使用できるようにしてありますので、buildの時にEnvironmentをproductionに設定しなければなりません。</p>
+
+<p>GitHub Pagesでbuildする場合なら、自動的にproductionに設定されてbuildされますが、筆者はlocalでbuildをしているので設定する必要がありました。</p>
+
+<p>linuxの環境でしたら、<a href="https://jekyllrb.com/docs/configuration/environments/">Environment</a>で説明しているようにすればいいですが、windowsなら別です。</p>
+
+<p><em>cmdの場合</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set JEKYLL_ENV=production
+</code></pre></div></div>
+
+<p><em>powershellの場合</em></p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$env:JEKYLL_ENV = 'production'
+</code></pre></div></div>
+
+<p>上記のコマンドを実行した後にbuildやserveをしたら、productionで作られます。</p>
+
+<p>これで、Minimal Mistakesにコメント機能を追加することができました。</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-03T00:00:00+09:00">November 03, 2019</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+
+  <a href="https://twitter.com/intent/tweet?text=%E3%83%96%E3%83%AD%E3%82%B0%E3%81%AB%E3%82%B3%E3%83%A1%E3%83%B3%E3%83%88%E6%A9%9F%E8%83%BD%E3%82%92%E8%BF%BD%E5%8A%A0%E3%81%97%E3%81%BE%E3%81%97%E3%81%9F%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F03%2Fexperience-using-comments-with-minimal-mistakes" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F03%2Fexperience-using-comments-with-minimal-mistakes" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F03%2Fexperience-using-comments-with-minimal-mistakes" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="/ja/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin" class="pagination--pager" title="GitHub PagesでサポートされないPluginを使う方法
+">Previous</a>
+    
+    
+      <a href="#" class="pagination--pager disabled">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+  
+      <h4 class="page__comments-title">Comments</h4>
+      <section id="disqus_thread"></section>
+    
+</div>
+
+    
+  </article>
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ja/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin" rel="permalink">GitHub PagesでサポートされないPluginを使う方法
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">jekyllを公式的にサポートするGitHub Pagesですが、全てのjekyllのpluginまでサポートすることではありません。
+
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      
+        <a href="/ja/2019/10/23/blog-with-development-and-experience" rel="permalink">開発と経験があるブログ
+</a>
+      
+    </h2>
+    
+    <p class="archive__item-excerpt" itemprop="description">普段考えていた色々なものを書こうとブログを作ることにしました。
+
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+    </div>
+
+    
+
+    <div id="footer" class="page__footer">
+      <footer>
+        <!-- start custom footer snippets --><div class="page__footer-follow">
+<ul class="social-icons"><li>
+      <a href="/ja/2019/11/03/experience-using-comments-with-minimal-mistakes"><img src="/assets/images/lang/ja.png">ja
+      </a>
+    </li><li>
+          <a href=" /2019/11/03/experience-using-comments-with-minimal-mistakes"><img src="/assets/images/lang/ko.png">ko
+          </a>
+        </li></ul>
+</div>
+<!-- end custom footer snippets -->
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+
+    <li><a href="/ja/feed.xml"><i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2019 DuiNaru. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/assets/js/main.min.js"></script>
+  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
+
+
+
+
+
+
+
+  <script>
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-151248385-1']);
+  
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+
+
+    
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/11/03/experience-using-comments-with-minimal-mistakes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://duinaru.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+
+
+
+
+
+  </body>
+</html>
