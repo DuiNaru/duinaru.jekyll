@@ -5,13 +5,13 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 03 Nov 2019 14:42:22 +0900</pubDate>
-    <lastBuildDate>Sun, 03 Nov 2019 14:42:22 +0900</lastBuildDate>
+    <pubDate>Sun, 03 Nov 2019 23:53:15 +0900</pubDate>
+    <lastBuildDate>Sun, 03 Nov 2019 23:53:15 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>ブログにコメント機能を追加しました</title>
-        <description>&lt;p&gt;使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように&lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments&quot;&gt;設定&lt;/a&gt;できます。&lt;/p&gt;
+        <description>&lt;p&gt;使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように&lt;a href=&quot;https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments&quot;&gt;設定&lt;/a&gt;できて、使いました。&lt;/p&gt;
 
 &lt;p&gt;コメントを追加するページに&lt;code class=&quot;highlighter-rouge&quot;&gt;comment: true&lt;/code&gt;を追加し、&lt;code class=&quot;highlighter-rouge&quot;&gt;_config.xml&lt;/code&gt;には使用するサービスの情報を入力すればできます。&lt;/p&gt;
 

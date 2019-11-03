@@ -10,7 +10,7 @@ var store = [{
         "url": "https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin",
         "teaser":null},{
         "title": "Blog에 댓글 기능을 추가하였습니다",
-        "excerpt":"사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있습니다. 댓글을 사용할 페이지에 comment: true를 추가하고, _config.xml에 사용할 서비스와 정보를 입력하기만 하면 됩니다. 이번에는 disqus라는 댓글 서비스를 사용해 보았습니다. disqus에 가입한 뒤에 사이트를 생성해주고, ShortName을 알면 됩니다. shortname은 사이트를 생성할 때, 또는 생성하고 설정 화면에서도...","categories": [],
+        "excerpt":"사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있어서, 사용해보았습니다. 댓글을 사용할 페이지에 comment: true를 추가하고, _config.xml에 사용할 서비스와 정보를 입력하기만 하면 됩니다. 이번에는 disqus라는 댓글 서비스를 사용해 보았습니다. disqus에 가입한 뒤에 사이트를 생성해주고, ShortName을 알면 됩니다. shortname은 사이트를 생성할 때, 또는 생성하고 설정...","categories": [],
         "tags": [],
         "url": "https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes",
         "teaser":null}]
