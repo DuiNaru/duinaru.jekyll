@@ -42,7 +42,7 @@ jekyll 공식 홈페이지에 사용 방법이 친절히 적혀있어서 별 어
 
 **다국어 지원**
 
-적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 [polygot plugin](https://polyglot.untra.io/)을 설치해 주었습니다.
+적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 [polyglot plugin](https://polyglot.untra.io/)을 설치해 주었습니다.
 
 이 플러그인이 github pages에서 공식적으로 지원하는 플러그인이 아니기에, 단순히 repository에 소스를 올려두는 것으로 빌드가 되지 않습니다.
 
@@ -76,7 +76,7 @@ vscode에서 cmd로 빌드 하고 있었기에, `chcp 65001` 을 이용해서 UT
 
 다르게는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.
 
-**Minimal Mistakes과 polygot plugin을 함께 사용하기**
+**Minimal Mistakes과 polyglot plugin을 함께 사용하기**
 
 웹 페이지가 제대로 만들어 지지 않는 문제가 발생하였습니다.
 
@@ -84,14 +84,14 @@ vscode에서 cmd로 빌드 하고 있었기에, `chcp 65001` 을 이용해서 UT
 
 *jekyll버전*
 
-jekyll를 3.8.6으로 사용하니, polygot plugin과 함께 작동합니다.
+jekyll를 3.8.6으로 사용하니, polyglot plugin과 함께 작동합니다.
 
 *polyglot plugin의 _config.xml설정*
 
 > ![polyglot setting](\assets\images\2019-10-23-blog-with-development-and-experience\polyglot-setting.png)
 > 
 
-languages의 언어 설정 순서를 default_lang에서 설정한 언어를 먼저 오게 설정하니 polygot plugin이 잘 작동합니다.
+languages의 언어 설정 순서를 default_lang에서 설정한 언어를 먼저 오게 설정하니 polyglot plugin이 잘 작동합니다.
 
 # 기능 추가
 
