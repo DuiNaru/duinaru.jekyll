@@ -5,8 +5,8 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Nov 2019 01:35:24 +0900</pubDate>
-    <lastBuildDate>Mon, 04 Nov 2019 01:35:24 +0900</lastBuildDate>
+    <pubDate>Tue, 05 Nov 2019 00:22:47 +0900</pubDate>
+    <lastBuildDate>Tue, 05 Nov 2019 00:22:47 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -228,7 +228,7 @@ git push
 
 &lt;p&gt;&lt;strong&gt;다국어 지원&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 &lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polygot plugin&lt;/a&gt;을 설치해 주었습니다.&lt;/p&gt;
+&lt;p&gt;적어도 2개국어로 운영할 생각이니, 다국어 지원을 위해 &lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polyglot plugin&lt;/a&gt;을 설치해 주었습니다.&lt;/p&gt;
 
 &lt;p&gt;이 플러그인이 github pages에서 공식적으로 지원하는 플러그인이 아니기에, 단순히 repository에 소스를 올려두는 것으로 빌드가 되지 않습니다.&lt;/p&gt;
 
@@ -266,7 +266,7 @@ git push
 
 &lt;p&gt;다르게는 jekyll을 에러가 발생하지 않는 버전으로 바꾸는 방법도 있으나, 아래의 문제로 인해 버전을 제한 할 수 밖에 없었습니다.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Minimal Mistakes과 polygot plugin을 함께 사용하기&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Minimal Mistakes과 polyglot plugin을 함께 사용하기&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;웹 페이지가 제대로 만들어 지지 않는 문제가 발생하였습니다.&lt;/p&gt;
 
@@ -274,7 +274,7 @@ git push
 
 &lt;p&gt;&lt;em&gt;jekyll버전&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;jekyll를 3.8.6으로 사용하니, polygot plugin과 함께 작동합니다.&lt;/p&gt;
+&lt;p&gt;jekyll를 3.8.6으로 사용하니, polyglot plugin과 함께 작동합니다.&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;polyglot plugin의 _config.xml설정&lt;/em&gt;&lt;/p&gt;
 
@@ -283,7 +283,7 @@ git push
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;languages의 언어 설정 순서를 default_lang에서 설정한 언어를 먼저 오게 설정하니 polygot plugin이 잘 작동합니다.&lt;/p&gt;
+&lt;p&gt;languages의 언어 설정 순서를 default_lang에서 설정한 언어를 먼저 오게 설정하니 polyglot plugin이 잘 작동합니다.&lt;/p&gt;
 
 &lt;h1 id=&quot;기능-추가&quot;&gt;기능 추가&lt;/h1&gt;
 

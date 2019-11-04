@@ -5,8 +5,8 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 04 Nov 2019 01:35:26 +0900</pubDate>
-    <lastBuildDate>Mon, 04 Nov 2019 01:35:26 +0900</lastBuildDate>
+    <pubDate>Tue, 05 Nov 2019 00:22:49 +0900</pubDate>
+    <lastBuildDate>Tue, 05 Nov 2019 00:22:49 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -228,7 +228,7 @@ git push
 
 &lt;p&gt;&lt;strong&gt;マルチランゲージ&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;少なくとも2ヶ国語で運営することを目指してしていまして、マルチランゲージのサポートのため&lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polygot plugin&lt;/a&gt;を使用しました。&lt;/p&gt;
+&lt;p&gt;少なくとも2ヶ国語で運営することを目指してしていまして、マルチランゲージのサポートのため&lt;a href=&quot;https://polyglot.untra.io/&quot;&gt;polyglot plugin&lt;/a&gt;を使用しました。&lt;/p&gt;
 
 &lt;p&gt;このプラグインはgithub pagesで公式的にサポートするプラグインではありませんので、単純にrepositoryにソースを置いておくことだけでビルドはできません。&lt;/p&gt;
 
@@ -266,7 +266,7 @@ git push
 
 &lt;p&gt;他には、jekyllをエラーが出ないバージョンに変更する方法もありますが、下記の問題でバージョンを制限するしかありませんでした。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Minimal Mistakesとpolygot pluginを共に使用&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Minimal Mistakesとpolyglot pluginを共に使用&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;ウェブページを正常に作れない問題が出ました。&lt;/p&gt;
 
@@ -274,7 +274,7 @@ git push
 
 &lt;p&gt;&lt;em&gt;jekyllバージョン制限&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;jekyllのバージョンを3.8.6としたら、polygot pluginと共に動きました。&lt;/p&gt;
+&lt;p&gt;jekyllのバージョンを3.8.6としたら、polyglot pluginと共に動きました。&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;polyglot pluginの_config.xml設定&lt;/em&gt;&lt;/p&gt;
 
@@ -283,7 +283,7 @@ git push
 
 &lt;/blockquote&gt;
 
-&lt;p&gt;languagesの言語の一番目をdefault_langに設定したらpolygot pluginがうまく動きました。&lt;/p&gt;
+&lt;p&gt;languagesの言語の一番目をdefault_langに設定したらpolyglot pluginがうまく動きました。&lt;/p&gt;
 
 &lt;h1 id=&quot;機能追加&quot;&gt;機能追加&lt;/h1&gt;
 
