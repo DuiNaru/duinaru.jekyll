@@ -19,4 +19,11 @@ var store = [{
         
         "url": "https://duinaru.github.io/ja/2019/11/03/experience-using-comments-with-minimal-mistakes",
         
+        "teaser":null},{
+        "title": "ruby on railsをec2に実装してみました。",
+        "excerpt":"rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。   開発しながらruby on railsを学習する目的で、環境構築から始めました。   EC2 生成   AMI   ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)を選びました。   他の設定はfree-tierができるようにしました。   Security groups   SSHができるように22ポートは可能にし、他はその時に解放します。   インストール   SSHで接続し、インストールします。   Ruby on Rails の Getting Started with Rails を元に進めました。   パッケージアップデート   sudo apt-get update   Ruby インストール   sudo apt-get install ruby-full   Ruby バージョン確認  ruby -v  railsで要求されるruby 2.5.0の以降のバージョンか確認します。          2.5.xですね。   sqlite3 インストール  sudo apt-get install sqlite3   sqlite3 バージョン確認  sqlite3 --version   rails インストール  sudo gem install rails   インストールのエラー       Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.    インストールの途中でエラーが発生しました。Nokogiriで一部のライブラリがなくて出るエラーのようですね。   Nokogiri Homepageで解決策を探してみましょう。   install-with-system-librariesのようにしたらできました。  sudo apt-get install pkg-config  rails のインストールを続きます。   rails バージョン確認  rails --version          やっとインストール完了です。   次はCreating the Blog Applicationでメイン画面まで進んでみます。  ","categories": [],
+        "tags": [],
+        
+        "url": "https://duinaru.github.io/ja/2019/11/14/set-up-ruby-on-rails-ec2",
+        
         "teaser":null}]

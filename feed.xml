@@ -5,9 +5,103 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Nov 2019 00:22:47 +0900</pubDate>
-    <lastBuildDate>Tue, 05 Nov 2019 00:22:47 +0900</lastBuildDate>
+    <pubDate>Thu, 14 Nov 2019 22:18:47 +0900</pubDate>
+    <lastBuildDate>Thu, 14 Nov 2019 22:18:47 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>ruby on rails를 ec2에 구축해보았습니다</title>
+        <description>&lt;p&gt;ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.&lt;/p&gt;
+
+&lt;p&gt;개발을 하면서 동시에 ruby on rails를 익히려는 목적이므로 기본적인 환경 구축부터 시작하였습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;ec2-생성&quot;&gt;EC2 생성&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;AMI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;편하게 ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)를 선택하였습니다.&lt;/p&gt;
+
+&lt;p&gt;나머지 설정은 free-tier 가능한 설정으로 생성했습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Security groups&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;SSH 접속 가능하게 22포트는 열어두고, 나머지는 나중에 설정하면서 열어주었습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;클릭 몇 번에 생성이 끝났습니다. 고마워요. AWS&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;설치&quot;&gt;설치&lt;/h2&gt;
+
+&lt;p&gt;SSH로 접속해서, 차근차근 설치를 진행합니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://rubyonrails.org/&quot;&gt;Ruby on Rails&lt;/a&gt; 의 &lt;a href=&quot;https://guides.rubyonrails.org/getting_started.html&quot;&gt;Getting Started with Rails&lt;/a&gt; 를 바탕으로 진행하였습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;패키지-업데이트&quot;&gt;패키지 업데이트&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ruby-설치&quot;&gt;Ruby 설치&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install ruby-full
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ruby-버전-확인&quot;&gt;Ruby 버전 확인&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ruby -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;rails에서 요구하는 ruby 2.5.0이후 버전인지 확인합니다.&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png&quot; alt=&quot;ruby -v&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;2.5.대 버전이군요.&lt;/p&gt;
+
+&lt;h3 id=&quot;sqlite3-설치&quot;&gt;sqlite3 설치&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install sqlite3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sqlite3-버전-확인&quot;&gt;sqlite3 버전 확인&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sqlite3 --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rails-설치&quot;&gt;rails 설치&lt;/h3&gt;
+&lt;p&gt;드디어 rails를 설치할 차례입니다.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install rails
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;설치-에러&quot;&gt;설치 에러&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png&quot; alt=&quot;Error on installing rails about nokogiri&quot; /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;설치 중간에 에러가 나왔습니다. Nokogiri 에서 일부 라이브러리가 없어서 생기는 에러 같군요.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nokogiri.org/&quot;&gt;Nokogiri 홈페이지&lt;/a&gt;에서 해결법을 찾아봅시다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries&quot;&gt;install-with-system-libraries&lt;/a&gt;처럼 설치하니 되는 군요.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install pkg-config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;rails 설치를 계속 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;rails-버전-확인&quot;&gt;rails 버전 확인&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rails --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png&quot; alt=&quot;rails --version&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;드디어 설치 완료했습니다. 중간에 에러 나서 당황했네요.&lt;/p&gt;
+
+&lt;p&gt;다음엔, &lt;a href=&quot;https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application&quot;&gt;Creating the Blog Application&lt;/a&gt;으로 메인 화면까지 띄우도록 해보겠습니다.&lt;/p&gt;
+</description>
+        <pubDate>Thu, 14 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2</link>
+        <guid isPermaLink="true">https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2</guid>
+        
+        
+      </item>
     
       <item>
         <title>Blog에 댓글 기능을 추가하였습니다</title>

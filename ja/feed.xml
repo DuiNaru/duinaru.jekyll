@@ -5,9 +5,100 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 05 Nov 2019 00:22:49 +0900</pubDate>
-    <lastBuildDate>Tue, 05 Nov 2019 00:22:49 +0900</lastBuildDate>
+    <pubDate>Thu, 14 Nov 2019 22:18:48 +0900</pubDate>
+    <lastBuildDate>Thu, 14 Nov 2019 22:18:48 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>ruby on railsをec2に実装してみました。</title>
+        <description>&lt;p&gt;rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。&lt;/p&gt;
+
+&lt;p&gt;開発しながらruby on railsを学習する目的で、環境構築から始めました。&lt;/p&gt;
+
+&lt;h2 id=&quot;ec2-生成&quot;&gt;EC2 生成&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;AMI&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)を選びました。&lt;/p&gt;
+
+&lt;p&gt;他の設定はfree-tierができるようにしました。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Security groups&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;SSHができるように22ポートは可能にし、他はその時に解放します。&lt;/p&gt;
+
+&lt;h2 id=&quot;インストール&quot;&gt;インストール&lt;/h2&gt;
+
+&lt;p&gt;SSHで接続し、インストールします。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://rubyonrails.org/&quot;&gt;Ruby on Rails&lt;/a&gt; の &lt;a href=&quot;https://guides.rubyonrails.org/getting_started.html&quot;&gt;Getting Started with Rails&lt;/a&gt; を元に進めました。&lt;/p&gt;
+
+&lt;h3 id=&quot;パッケージアップデート&quot;&gt;パッケージアップデート&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ruby-インストール&quot;&gt;Ruby インストール&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install ruby-full
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;ruby-バージョン確認&quot;&gt;Ruby バージョン確認&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ruby -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;railsで要求されるruby 2.5.0の以降のバージョンか確認します。&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png&quot; alt=&quot;ruby -v&quot; /&gt;&lt;/p&gt;
+
+&lt;/blockquote&gt;
+
+&lt;p&gt;2.5.xですね。&lt;/p&gt;
+
+&lt;h3 id=&quot;sqlite3-インストール&quot;&gt;sqlite3 インストール&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install sqlite3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;sqlite3-バージョン確認&quot;&gt;sqlite3 バージョン確認&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sqlite3 --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;rails-インストール&quot;&gt;rails インストール&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo gem install rails
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;インストールのエラー&quot;&gt;インストールのエラー&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png&quot; alt=&quot;Error on installing rails about nokogiri&quot; /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;インストールの途中でエラーが発生しました。Nokogiriで一部のライブラリがなくて出るエラーのようですね。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nokogiri.org/&quot;&gt;Nokogiri Homepage&lt;/a&gt;で解決策を探してみましょう。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries&quot;&gt;install-with-system-libraries&lt;/a&gt;のようにしたらできました。&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install pkg-config
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;rails のインストールを続きます。&lt;/p&gt;
+
+&lt;h3 id=&quot;rails-バージョン確認&quot;&gt;rails バージョン確認&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rails --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png&quot; alt=&quot;rails --version&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;やっとインストール完了です。&lt;/p&gt;
+
+&lt;p&gt;次は&lt;a href=&quot;https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application&quot;&gt;Creating the Blog Application&lt;/a&gt;でメイン画面まで進んでみます。&lt;/p&gt;
+</description>
+        <pubDate>Thu, 14 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/ja/2019/11/14/set-up-ruby-on-rails-ec2</link>
+        <guid isPermaLink="true">https://duinaru.github.io/ja/2019/11/14/set-up-ruby-on-rails-ec2</guid>
+        
+        
+      </item>
     
       <item>
         <title>ブログにコメント機能を追加しました</title>

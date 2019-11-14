@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>Blog에 댓글 기능을 추가하였습니다 - DuiNaru’s Blog</title>
-<meta name="description" content="사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있어서, 사용해보았습니다.">
+<!-- begin _includes/seo.html --><title>ruby on rails를 ec2에 구축해보았습니다 - DuiNaru’s Blog</title>
+<meta name="description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,30 +19,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="Blog에 댓글 기능을 추가하였습니다">
-<meta property="og:url" content="https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes">
+<meta property="og:title" content="ruby on rails를 ec2에 구축해보았습니다">
+<meta property="og:url" content="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
 
 
-  <meta property="og:description" content="사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있어서, 사용해보았습니다.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-11-03T00:00:00+09:00">
+  <meta property="og:description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-11-14T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes">
+
+<link rel="canonical" href="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
 
 
 
@@ -271,15 +271,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="Blog에 댓글 기능을 추가하였습니다">
-    <meta itemprop="description" content="사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있어서, 사용해보았습니다.">
-    <meta itemprop="datePublished" content="November 03, 2019">
+    <meta itemprop="headline" content="ruby on rails를 ec2에 구축해보았습니다">
+    <meta itemprop="description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
+    <meta itemprop="datePublished" content="November 14, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">Blog에 댓글 기능을 추가하였습니다
+          <h1 id="page-title" class="page__title" itemprop="headline">ruby on rails를 ec2에 구축해보았습니다
 </h1>
           
         </header>
@@ -287,97 +287,91 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 <a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments">설정</a> 할 수 있어서, 사용해보았습니다.</p>
+        <p>ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.</p>
 
-<p>댓글을 사용할 페이지에 <code class="highlighter-rouge">comment: true</code>를 추가하고, <code class="highlighter-rouge">_config.xml</code>에 사용할 서비스와 정보를 입력하기만 하면 됩니다.</p>
+<p>개발을 하면서 동시에 ruby on rails를 익히려는 목적이므로 기본적인 환경 구축부터 시작하였습니다.</p>
 
-<p>이번에는 disqus라는 댓글 서비스를 사용해 보았습니다.</p>
+<h2 id="ec2-생성">EC2 생성</h2>
 
-<p><a href="https://disqus.com/">disqus</a>에 가입한 뒤에 사이트를 <a href="http://disqus.com/admin/create">생성</a>해주고, <a href="https://help.disqus.com/en/articles/1717111-what-s-a-shortname">ShortName</a>을 알면 됩니다.</p>
+<p><strong>AMI</strong></p>
 
-<p>shortname은 사이트를 생성할 때, 또는 생성하고 설정 화면에서도 알 수 있습니다.</p>
+<p>편하게 ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)를 선택하였습니다.</p>
 
-<blockquote>
-  <p><a href="http://disqus.com/admin/create">site생성</a>
- <img src="\assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\create-site.png" alt="shortname" /></p>
+<p>나머지 설정은 free-tier 가능한 설정으로 생성했습니다.</p>
 
-</blockquote>
+<p><strong>Security groups</strong></p>
 
-<blockquote>
-  <p><a href="https://disqus.com/admin/settings/general/">site설정</a>
- <img src="/assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\shortname.png" alt="shortname" /></p>
+<p>SSH 접속 가능하게 22포트는 열어두고, 나머지는 나중에 설정하면서 열어주었습니다.</p>
 
-</blockquote>
+<p><em>클릭 몇 번에 생성이 끝났습니다. 고마워요. AWS</em></p>
 
-<p>그런다음에, <code class="highlighter-rouge">_config.xml</code> 에 <a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#disqus">설정</a>하면 됩니다.</p>
+<h2 id="설치">설치</h2>
 
-<p>가입하고 테마에 사용 설정만 하면 되니 간단하네요.</p>
+<p>SSH로 접속해서, 차근차근 설치를 진행합니다.</p>
 
-<p>이제 확인 해봅시다.</p>
+<p><a href="https://rubyonrails.org/">Ruby on Rails</a> 의 <a href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> 를 바탕으로 진행하였습니다.</p>
 
-<blockquote>
-  <p>안 보이네요.</p>
+<h3 id="패키지-업데이트">패키지 업데이트</h3>
 
-</blockquote>
-
-<p><strong>이유를 찾아봅시다.</strong></p>
-
-<p>이상합니다. 아무리 봐도 위의 설정으로 될 것 같은데요.</p>
-
-<p>그래서, Minimal Mistakes 테마에서 disqus와 관련된 comment소스를 찾아 봤습니다.</p>
-
-<blockquote>
-  <p>_includes\comments.html
-<img src="/assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\comments.png" alt="comments.html" /></p>
-
-</blockquote>
-
-<p>disqus를 위해 section을 만들고 있습니다.</p>
-
-<p>그래서 이번엔 해당 html을 include하는 파일을 찾아봤습니다.</p>
-
-<blockquote>
-  <p>_layouts\single.html
-<img src="\assets\images\2019-11-03-experience-using-comments-with-minimal-mistakes\single.png" alt="single" /></p>
-
-</blockquote>
-
-<p>single 레이아웃 페이지의 일부입니다.</p>
-
-<p>무언가의 조건으로 include를 하고 있는게 보입니다.</p>
-
-<p><code class="highlighter-rouge">site.comments.provider</code> 은 <code class="highlighter-rouge">_config.xml</code> 에서 설정했고, <code class="highlighter-rouge">page.comments</code> 는 <code class="highlighter-rouge">true</code> 로 설정해 두었죠.</p>
-
-<blockquote>
-  <p>jekyll.environment == ‘production’ 는 뭐죠?</p>
-
-</blockquote>
-
-<p>아, Minimal Mistakes  <a href="https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments">comment설정</a> 의 Note가 이 내용인듯 하군요!</p>
-
-<h1 id="jekyll을-production환경으로-build하기">jekyll을 production환경으로 build하기</h1>
-
-<p><a href="https://jekyllrb.com/docs/configuration/options/#build-command-options">jekyll build 옵션</a>에서 <a href="https://jekyllrb.com/docs/configuration/environments/">Environment</a>를 설정할 수 있습니다.</p>
-
-<p>이 값는 <code class="highlighter-rouge">jekyll.environment</code>로 알아낼 수 있으며,  build 설정에 따라 다른 결과물을 출력 할 수 있게 해줍니다.</p>
-
-<p>Minimal Mistakes 는 production으로 build된 경우에만 comment를 사용하도록 하였기 때문에, build시 Environment를 production으로 설정해야합니다.</p>
-
-<p>GitHub Pages에서 build를 하는 경우라면 자동적으로 production으로 설정되어 build가 되나, 필자는 local에서 build를 하고 있기에 따로 설정을 해주었습니다.</p>
-
-<p>linux환경이였다면 <a href="https://jekyllrb.com/docs/configuration/environments/">Environment</a>페이지 처럼 하면 되지만, windows라면 다릅니다.</p>
-
-<p><em>cmd인 경우</em></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>set JEKYLL_ENV=production
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
 </code></pre></div></div>
 
-<p><em>powershell인 경우</em></p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$env:JEKYLL_ENV = 'production'
+<h3 id="ruby-설치">Ruby 설치</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install ruby-full
 </code></pre></div></div>
 
-<p>해당 명령어 뒤에 build나 serve를 하면 production으로 만들어집니다.</p>
+<h3 id="ruby-버전-확인">Ruby 버전 확인</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
+</code></pre></div></div>
+<p>rails에서 요구하는 ruby 2.5.0이후 버전인지 확인합니다.</p>
+<blockquote>
+  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png" alt="ruby -v" /></p>
 
-<p>이로써, Minimal Mistakes 에 댓글 기능을 추가할 수 있었습니다.</p>
+</blockquote>
+
+<p>2.5.대 버전이군요.</p>
+
+<h3 id="sqlite3-설치">sqlite3 설치</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install sqlite3
+</code></pre></div></div>
+
+<h3 id="sqlite3-버전-확인">sqlite3 버전 확인</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3 --version
+</code></pre></div></div>
+
+<h3 id="rails-설치">rails 설치</h3>
+<p>드디어 rails를 설치할 차례입니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install rails
+</code></pre></div></div>
+
+<h3 id="설치-에러">설치 에러</h3>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png" alt="Error on installing rails about nokogiri" />
+<code class="highlighter-rouge">Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.</code></p>
+</blockquote>
+
+<p>설치 중간에 에러가 나왔습니다. Nokogiri 에서 일부 라이브러리가 없어서 생기는 에러 같군요.</p>
+
+<p><a href="https://nokogiri.org/">Nokogiri 홈페이지</a>에서 해결법을 찾아봅시다.</p>
+
+<p><a href="https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries">install-with-system-libraries</a>처럼 설치하니 되는 군요.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install pkg-config
+</code></pre></div></div>
+<p>rails 설치를 계속 합니다.</p>
+
+<h3 id="rails-버전-확인">rails 버전 확인</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails --version
+</code></pre></div></div>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png" alt="rails --version" /></p>
+</blockquote>
+
+<p>드디어 설치 완료했습니다. 중간에 에러 나서 당황했네요.</p>
+
+<p>다음엔, <a href="https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application">Creating the Blog Application</a>으로 메인 화면까지 띄우도록 해보겠습니다.</p>
 
         
       </section>
@@ -388,30 +382,29 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-03T00:00:00+09:00">November 03, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-14T00:00:00+09:00">November 14, 2019</time></p>
         
       </footer>
 
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=Blog%EC%97%90+%EB%8C%93%EA%B8%80+%EA%B8%B0%EB%8A%A5%EC%9D%84+%EC%B6%94%EA%B0%80%ED%95%98%EC%98%80%EC%8A%B5%EB%8B%88%EB%8B%A4%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F03%2Fexperience-using-comments-with-minimal-mistakes" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=ruby+on+rails%EB%A5%BC+ec2%EC%97%90+%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%95%98%EC%8A%B5%EB%8B%88%EB%8B%A4%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F03%2Fexperience-using-comments-with-minimal-mistakes" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F03%2Fexperience-using-comments-with-minimal-mistakes" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin" class="pagination--pager" title="GitHub Pages에서 지원하지 않는 플러그인 쓰기
+      <a href="/2019/11/03/experience-using-comments-with-minimal-mistakes" class="pagination--pager" title="Blog에 댓글 기능을 추가하였습니다
 ">Previous</a>
     
     
-      <a href="/2019/11/14/set-up-ruby-on-rails-ec2" class="pagination--pager" title="ruby on rails를 ec2에 구축해보았습니다
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -444,12 +437,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on rails를 ec2에 구축해보았습니다
+        <a href="/2019/11/03/experience-using-comments-with-minimal-mistakes" rel="permalink">Blog에 댓글 기능을 추가하였습니다
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.
+    <p class="archive__item-excerpt" itemprop="description">사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있어서, 사용해보았습니다.
 
 </p>
   </article>
@@ -523,10 +516,10 @@
       <footer>
         <!-- start custom footer snippets --><div class="page__footer-follow">
 <ul class="social-icons"><li>
-      <a href=" /2019/11/03/experience-using-comments-with-minimal-mistakes"><img src="/assets/images/lang/ko.png">ko
+      <a href=" /2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ko.png">ko
       </a>
     </li><li>
-          <a href="/ja/2019/11/03/experience-using-comments-with-minimal-mistakes"><img src="/assets/images/lang/ja.png">ja
+          <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ja.png">ja
           </a>
         </li></ul>
 </div>
@@ -597,8 +590,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2019/11/03/experience-using-comments-with-minimal-mistakes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/11/14/set-up-ruby-on-rails-ec2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
