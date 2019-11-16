@@ -10,7 +10,7 @@
     <meta charset="utf-8">
 
 <!-- begin _includes/seo.html --><title>Rails画面確認とCloud9設定 - DuiNaru’s Blog</title>
-<meta name="description" content="サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。">
+<meta name="description" content="サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。">
 
 
   <meta name="author" content="DuiNaru">
@@ -23,7 +23,7 @@
 <meta property="og:url" content="https://duinaru.github.io/2019/11/16/develop-using-cloud9">
 
 
-  <meta property="og:description" content="サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。">
+  <meta property="og:description" content="サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。">
 
 
 
@@ -272,7 +272,7 @@
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Rails画面確認とCloud9設定">
-    <meta itemprop="description" content="サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。">
+    <meta itemprop="description" content="サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。">
     <meta itemprop="datePublished" content="November 16, 2019">
     
 
@@ -287,7 +287,7 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。</p>
+        <p>サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。</p>
 
 <h2 id="blog-生成">blog 生成</h2>
 
@@ -314,9 +314,9 @@ libraries and/or headers.  Check the mkmf.log file for more details.  You may
 need configuration options.
 </code></pre></div></div>
 
-<p>sqlite3 1.4.1がちゃんとインストール出来ていないと出ます。</p>
+<p>sqlite3 1.4.1がちゃんとインストール出来ていないようです。</p>
 
-<p><code class="highlighter-rouge">gem install sqlite3 -v '1.4.1'</code>でも同じでしたので、次のように解決できました。</p>
+<p><code class="highlighter-rouge">gem install sqlite3 -v '1.4.1'</code>でも同じでしたので、次のコマンドで解決できました。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libsqlite3-dev
 sudo gem update
@@ -336,7 +336,7 @@ bundle install
 Please run rails webpacker:install Error: No such file or directory @ rb_sysopen - /home/ubuntu/blog/config/webpacker.yml (RuntimeError)
 </code></pre></div></div>
 
-<p>webpackerをインストールが必要そうですね。</p>
+<p>webpackerのインストールが必要そうですね。</p>
 
 <p>先ずはnode.jsとyarnをインストールし、webpackerをインストールしました。</p>
 
@@ -387,7 +387,7 @@ rails webpacker:install
 
 <p>SSHでアクセスすればどんなIDEも使用可能ですが、AWSのEC2で環境を構築しまして、IDEもAWSの物を使ってみます。</p>
 
-<p>Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回に作ったEC2を使用します。</p>
+<p>Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回は作ったEC2を使用します。</p>
 
 <p><a href="https://docs.aws.amazon.com/ko_kr/cloud9/latest/user-guide/create-environment-ssh.html">Creating an SSH Environment</a></p>
 

@@ -5,13 +5,13 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Nov 2019 02:16:39 +0900</pubDate>
-    <lastBuildDate>Sun, 17 Nov 2019 02:16:39 +0900</lastBuildDate>
+    <pubDate>Sun, 17 Nov 2019 02:35:30 +0900</pubDate>
+    <lastBuildDate>Sun, 17 Nov 2019 02:35:30 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>Rails画面確認とCloud9設定</title>
-        <description>&lt;p&gt;サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。&lt;/p&gt;
+        <description>&lt;p&gt;サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。&lt;/p&gt;
 
 &lt;h2 id=&quot;blog-生成&quot;&gt;blog 生成&lt;/h2&gt;
 
@@ -38,9 +38,9 @@ libraries and/or headers.  Check the mkmf.log file for more details.  You may
 need configuration options.
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;sqlite3 1.4.1がちゃんとインストール出来ていないと出ます。&lt;/p&gt;
+&lt;p&gt;sqlite3 1.4.1がちゃんとインストール出来ていないようです。&lt;/p&gt;
 
-&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install sqlite3 -v '1.4.1'&lt;/code&gt;でも同じでしたので、次のように解決できました。&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;gem install sqlite3 -v '1.4.1'&lt;/code&gt;でも同じでしたので、次のコマンドで解決できました。&lt;/p&gt;
 
 &lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install libsqlite3-dev
 sudo gem update
@@ -60,7 +60,7 @@ bundle install
 Please run rails webpacker:install Error: No such file or directory @ rb_sysopen - /home/ubuntu/blog/config/webpacker.yml (RuntimeError)
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;webpackerをインストールが必要そうですね。&lt;/p&gt;
+&lt;p&gt;webpackerのインストールが必要そうですね。&lt;/p&gt;
 
 &lt;p&gt;先ずはnode.jsとyarnをインストールし、webpackerをインストールしました。&lt;/p&gt;
 
@@ -111,7 +111,7 @@ rails webpacker:install
 
 &lt;p&gt;SSHでアクセスすればどんなIDEも使用可能ですが、AWSのEC2で環境を構築しまして、IDEもAWSの物を使ってみます。&lt;/p&gt;
 
-&lt;p&gt;Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回に作ったEC2を使用します。&lt;/p&gt;
+&lt;p&gt;Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回は作ったEC2を使用します。&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/ko_kr/cloud9/latest/user-guide/create-environment-ssh.html&quot;&gt;Creating an SSH Environment&lt;/a&gt;&lt;/p&gt;
 
