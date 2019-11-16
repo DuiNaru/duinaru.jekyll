@@ -9,7 +9,7 @@ lang: ja
 permalink: "/:categories/:year/:month/:day/develop-using-cloud9"
 ---
 
-サンプル画面を確認し、本格的な開発にあたってCloud9でIDEを使用するように設定しました。
+サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。
 
 ## blog 生成
 
