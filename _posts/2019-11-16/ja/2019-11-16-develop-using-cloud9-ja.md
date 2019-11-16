@@ -9,7 +9,7 @@ lang: ja
 permalink: "/:categories/:year/:month/:day/develop-using-cloud9"
 ---
 
-サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。
+サンプル画面を確認し、本格的な開発にあたってCloud9でIDEを使用するように設定しました。
 
 ## blog 生成
 
@@ -38,9 +38,9 @@ libraries and/or headers.  Check the mkmf.log file for more details.  You may
 need configuration options.
 ```
 
-sqlite3 1.4.1がちゃんとインストール出来ていないと出ます。
+sqlite3 1.4.1がちゃんとインストール出来ていないようです。
 
-`gem install sqlite3 -v '1.4.1'`でも同じでしたので、次のように解決できました。
+`gem install sqlite3 -v '1.4.1'`でも同じでしたので、次のコマンドで解決できました。
 
 ```
 sudo apt-get install libsqlite3-dev
@@ -63,7 +63,7 @@ rails server
 Please run rails webpacker:install Error: No such file or directory @ rb_sysopen - /home/ubuntu/blog/config/webpacker.yml (RuntimeError)
 ```
 
-webpackerをインストールが必要そうですね。
+webpackerのインストールが必要そうですね。
 
 先ずはnode.jsとyarnをインストールし、webpackerをインストールしました。
 
@@ -112,7 +112,7 @@ EC2のパブリックipに接続してみました。
 
 SSHでアクセスすればどんなIDEも使用可能ですが、AWSのEC2で環境を構築しまして、IDEもAWSの物を使ってみます。
 
-Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回に作ったEC2を使用します。
+Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回は作ったEC2を使用します。
 
 [Creating an SSH Environment](https://docs.aws.amazon.com/ko_kr/cloud9/latest/user-guide/create-environment-ssh.html)
 
