@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>ruby on rails를 ec2에 구축해보았습니다 - DuiNaru’s Blog</title>
-<meta name="description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
+<!-- begin _includes/seo.html --><title>Rails 화면 띄우기 및 Cloud9 사용 - DuiNaru’s Blog</title>
+<meta name="description" content="샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,30 +19,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="ruby on rails를 ec2에 구축해보았습니다">
-<meta property="og:url" content="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
+<meta property="og:title" content="Rails 화면 띄우기 및 Cloud9 사용">
+<meta property="og:url" content="https://duinaru.github.io/2019/11/16/develop-using-cloud9">
 
 
-  <meta property="og:description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-11-14T00:00:00+09:00">
+  <meta property="og:description" content="샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-11-16T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
+
+<link rel="canonical" href="https://duinaru.github.io/2019/11/16/develop-using-cloud9">
 
 
 
@@ -271,15 +271,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="ruby on rails를 ec2에 구축해보았습니다">
-    <meta itemprop="description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
-    <meta itemprop="datePublished" content="November 14, 2019">
+    <meta itemprop="headline" content="Rails 화면 띄우기 및 Cloud9 사용">
+    <meta itemprop="description" content="샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.">
+    <meta itemprop="datePublished" content="November 16, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">ruby on rails를 ec2에 구축해보았습니다
+          <h1 id="page-title" class="page__title" itemprop="headline">Rails 화면 띄우기 및 Cloud9 사용
 </h1>
           
         </header>
@@ -287,91 +287,121 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.</p>
+        <p>샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.</p>
 
-<p>개발을 하면서 동시에 ruby on rails를 익히려는 목적이므로 기본적인 환경 구축부터 시작하였습니다.</p>
+<h2 id="blog-생성">blog 생성</h2>
 
-<h2 id="ec2-생성">EC2 생성</h2>
+<p>blog라는 이름의 rails 어플을 생성하였습니다.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails new blog
+</code></pre></div></div>
+<p>해당 명령어로 미리 설정되어 있는 blog 어플리케이션을 가져와서 다운로드한다네요.</p>
 
-<p><strong>AMI</strong></p>
+<h2 id="에러-발생">에러 발생</h2>
 
-<p>편하게 ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)를 선택하였습니다.</p>
+<p>설치는 되었는데, 중간에 에러가 나왔네요. 역시 한번에 되는건 없나봅니다.</p>
 
-<p>나머지 설정은 free-tier 가능한 설정으로 생성했습니다.</p>
-
-<p><strong>Security groups</strong></p>
-
-<p>SSH 접속 가능하게 22포트는 열어두고, 나머지는 나중에 설정하면서 열어주었습니다.</p>
-
-<p><em>클릭 몇 번에 생성이 끝났습니다. 고마워요. AWS</em></p>
-
-<h2 id="설치">설치</h2>
-
-<p>SSH로 접속해서, 차근차근 설치를 진행합니다.</p>
-
-<p><a href="https://rubyonrails.org/">Ruby on Rails</a> 의 <a href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> 를 바탕으로 진행하였습니다.</p>
-
-<h3 id="패키지-업데이트">패키지 업데이트</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+current directory: /tmp/bundler20191116-12860-iie6sqlite3-1.4.1/gems/sqlite3-1.4.1/ext/sqlite3
+/usr/bin/ruby2.5 -r ./siteconf20191116-12860-3nvvhf.rb extconf.rb
+checking for sqlite3.h... no
+sqlite3.h is missing. Try 'brew install sqlite3',
+'yum install sqlite-devel' or 'apt-get install libsqlite3-dev'
+and check your shared library search path (the
+location where your sqlite3 shared library is located).
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
 </code></pre></div></div>
 
-<h3 id="ruby-설치">Ruby 설치</h3>
+<p>sqlite3 1.4.1가 제대로 설치되지 않았다고 나옵니다.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install ruby-full
+<p><code class="highlighter-rouge">gem install sqlite3 -v '1.4.1'</code>을 해보니 마찬가지로 에러가 나와서 다음 명령어로 해결하였습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libsqlite3-dev
+sudo gem update
+bundle install
 </code></pre></div></div>
 
-<h3 id="ruby-버전-확인">Ruby 버전 확인</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
-</code></pre></div></div>
-<p>rails에서 요구하는 ruby 2.5.0이후 버전인지 확인합니다.</p>
-<blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png" alt="ruby -v" /></p>
+<p>잘 설치되었습니다. rails를 한번 실행해봐야 곘네요.</p>
 
-</blockquote>
-
-<p>2.5.대 버전이군요.</p>
-
-<h3 id="sqlite3-설치">sqlite3 설치</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install sqlite3
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails server
 </code></pre></div></div>
 
-<h3 id="sqlite3-버전-확인">sqlite3 버전 확인</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3 --version
+<h2 id="또-에러">또, 에러</h2>
+
+<p>에러가 나오는 군요.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/lib/gems/2.5.0/gems/webpacker-4.2.0/lib/webpacker/configuration.rb:95:in `rescue in load': Webpacker configuration file not found /home/ubuntu/blog/config/webpacker.yml.
+Please run rails webpacker:install Error: No such file or directory @ rb_sysopen - /home/ubuntu/blog/config/webpacker.yml (RuntimeError)
 </code></pre></div></div>
 
-<h3 id="rails-설치">rails 설치</h3>
-<p>드디어 rails를 설치할 차례입니다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install rails
+<p>webpacker을 설치해달라는 군요.</p>
+
+<p>우선, node.js를 설치해줍니다. 이후 yarn을 설치하고, webpacker를 설치했습니다.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+sudo apt-get install -y nodejs
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update &amp;&amp; sudo apt-get install yarn
+rails webpacker:install
 </code></pre></div></div>
 
-<h3 id="설치-에러">설치 에러</h3>
-
-<blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png" alt="Error on installing rails about nokogiri" />
-<code class="highlighter-rouge">Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.</code></p>
-</blockquote>
-
-<p>설치 중간에 에러가 나왔습니다. Nokogiri 에서 일부 라이브러리가 없어서 생기는 에러 같군요.</p>
-
-<p><a href="https://nokogiri.org/">Nokogiri 홈페이지</a>에서 해결법을 찾아봅시다.</p>
-
-<p><a href="https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries">install-with-system-libraries</a>처럼 설치하니 되는 군요.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install pkg-config
-</code></pre></div></div>
-<p>rails 설치를 계속 합니다.</p>
-
-<h3 id="rails-버전-확인">rails 버전 확인</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails --version
-</code></pre></div></div>
+<p>설치가 되었습니다. rails 서버도 기동하는 군요.</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png" alt="rails --version" /></p>
+  <p><img src="\assets\images\2019-11-16-develop-using-cloud9\rails-server.png" alt="rails server" /></p>
 </blockquote>
 
-<p>드디어 설치 완료했습니다. 중간에 에러 나서 당황했네요.</p>
+<h2 id="접속해보기">접속해보기</h2>
 
-<p>다음엔, <a href="https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application">Creating the Blog Application</a>으로 메인 화면까지 띄우도록 해보겠습니다.</p>
+<p>로컬 환경이였다면, <code class="highlighter-rouge">127.0.0.1:3000</code>으로 접속이 가능했겠지만, ec2라서 살짝 설정을 바꿔주었습니다.</p>
+
+<h3 id="포트를-80-을-접속-가능하도록-security-group-설정-변경">포트를 80 을 접속 가능하도록 Security Group 설정 변경</h3>
+
+<p>EC2의 Security Group의 Inbound에 80포트를 설정해주었습니다.</p>
+
+<h3 id="000080-으로-서버-기동">0.0.0.0:80 으로 서버 기동</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails server -b 0.0.0.0 -p 80
+</code></pre></div></div>
+
+<h3 id="접속">접속</h3>
+
+<p>EC2의 공인 ip로 접속해보았습니다.</p>
+
+<blockquote>
+  <p><em>서버 실행 중</em>
+<img src="\assets\images\2019-11-16-develop-using-cloud9\rails-server-80.png" alt="rails server -b 0.0.0.0 -p 80" /></p>
+
+  <p><em>메인 화면</em>
+<img src="\assets\images\2019-11-16-develop-using-cloud9\success.png" alt="main page" /></p>
+</blockquote>
+
+<p>드디어 메인 화면이 나왔습니다. 이제부터는 본격적인 개발이 될 듯 하네요.</p>
+
+<h2 id="cloud9-설정">Cloud9 설정</h2>
+
+<p>그 전에, IDE를 설정했습니다.</p>
+
+<p>SSH 접속으로 설정하면 어떤 IDE도 사용할 수 있으나, AWS에 만들어 봤으니, IDE도 AWS를 사용해보았습니다.</p>
+
+<p>Cloud9은 EC2로 처음부터 바로 환경 구축을 할 수도 있지만, 이번에는 미리 만든 EC2가 있으니 만들어 둔 EC2를 사용하였습니다.</p>
+
+<p><a href="https://docs.aws.amazon.com/ko_kr/cloud9/latest/user-guide/create-environment-ssh.html">Creating an SSH Environment</a></p>
+
+<p>앞으로 계속 같은 ip 접속하기 위해 elastic ip을 할당하고, 위의 도움말에서 <code class="highlighter-rouge">~/.ssh/authorized_keys</code>를 만드는 과정을 했습니다.</p>
+
+<p>이후, AWS Cloud9 Installer가 실행되어서 이것저것 설치되었습니다.</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-16-develop-using-cloud9\AWS-Cloud9-Installer.png" alt="AWS Cloud9 Installer" /></p>
+</blockquote>
+
+<p>설치가 끝난 다음, 하단의 bash에 <code class="highlighter-rouge">rails server -b 0.0.0.0 -p 80</code>으로 서버를 실행하고 접속 할 수 있었습니다.</p>
+
+<p>이제 본격적으로 개발을 할 수 있겠네요.</p>
 
         
       </section>
@@ -382,30 +412,29 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-14T00:00:00+09:00">November 14, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-16T00:00:00+09:00">November 16, 2019</time></p>
         
       </footer>
 
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=ruby+on+rails%EB%A5%BC+ec2%EC%97%90+%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%95%98%EC%8A%B5%EB%8B%88%EB%8B%A4%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Rails+%ED%99%94%EB%A9%B4+%EB%9D%84%EC%9A%B0%EA%B8%B0+%EB%B0%8F+Cloud9+%EC%82%AC%EC%9A%A9%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F16%2Fdevelop-using-cloud9" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F16%2Fdevelop-using-cloud9" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F16%2Fdevelop-using-cloud9" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2019/11/03/experience-using-comments-with-minimal-mistakes" class="pagination--pager" title="Blog에 댓글 기능을 추가하였습니다
+      <a href="/2019/11/14/set-up-ruby-on-rails-ec2" class="pagination--pager" title="ruby on rails를 ec2에 구축해보았습니다
 ">Previous</a>
     
     
-      <a href="/2019/11/16/develop-using-cloud9" class="pagination--pager" title="Rails 화면 띄우기 및 Cloud9 사용
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -438,12 +467,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/2019/11/16/develop-using-cloud9" rel="permalink">Rails 화면 띄우기 및 Cloud9 사용
+        <a href="/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on rails를 ec2에 구축해보았습니다
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.
+    <p class="archive__item-excerpt" itemprop="description">ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.
 
 </p>
   </article>
@@ -538,10 +567,10 @@
       <footer>
         <!-- start custom footer snippets --><div class="page__footer-follow">
 <ul class="social-icons"><li>
-      <a href=" /2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ko.png">ko
+      <a href=" /2019/11/16/develop-using-cloud9"><img src="/assets/images/lang/ko.png">ko
       </a>
     </li><li>
-          <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ja.png">ja
+          <a href="/ja/2019/11/16/develop-using-cloud9"><img src="/assets/images/lang/ja.png">ja
           </a>
         </li></ul>
 </div>
@@ -612,8 +641,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2019/11/14/set-up-ruby-on-rails-ec2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "https://duinaru.github.io/2019/11/16/develop-using-cloud9";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/11/16/develop-using-cloud9"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');

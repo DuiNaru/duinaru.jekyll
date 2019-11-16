@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>ruby on railsをec2に実装してみました。 - DuiNaru’s Blog</title>
-<meta name="description" content="rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。">
+<!-- begin _includes/seo.html --><title>Rails画面確認とCloud9設定 - DuiNaru’s Blog</title>
+<meta name="description" content="サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,30 +19,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="ruby on railsをec2に実装してみました。">
-<meta property="og:url" content="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
+<meta property="og:title" content="Rails画面確認とCloud9設定">
+<meta property="og:url" content="https://duinaru.github.io/2019/11/16/develop-using-cloud9">
 
 
-  <meta property="og:description" content="rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-11-14T00:00:00+09:00">
+  <meta property="og:description" content="サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-11-16T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://duinaru.github.io/ja/2019/11/14/set-up-ruby-on-rails-ec2">
+
+<link rel="canonical" href="https://duinaru.github.io/ja/2019/11/16/develop-using-cloud9">
 
 
 
@@ -271,15 +271,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="ruby on railsをec2に実装してみました。">
-    <meta itemprop="description" content="rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。">
-    <meta itemprop="datePublished" content="November 14, 2019">
+    <meta itemprop="headline" content="Rails画面確認とCloud9設定">
+    <meta itemprop="description" content="サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。">
+    <meta itemprop="datePublished" content="November 16, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">ruby on railsをec2に実装してみました。
+          <h1 id="page-title" class="page__title" itemprop="headline">Rails画面確認とCloud9設定
 </h1>
           
         </header>
@@ -287,88 +287,121 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。</p>
+        <p>サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。</p>
 
-<p>開発しながらruby on railsを学習する目的で、環境構築から始めました。</p>
+<h2 id="blog-生成">blog 生成</h2>
 
-<h2 id="ec2-生成">EC2 生成</h2>
+<p>blogという名前のrailsアプリケーションを作りました。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails new blog
+</code></pre></div></div>
+<p>該当のコマンドで予め用意されているblogアプリケーションがダウンロードされます。</p>
 
-<p><strong>AMI</strong></p>
+<h2 id="エラー発生">エラー発生</h2>
 
-<p>ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)を選びました。</p>
+<p>ダウンロードは完了しましたが、エラーが出ました。</p>
 
-<p>他の設定はfree-tierができるようにしました。</p>
-
-<p><strong>Security groups</strong></p>
-
-<p>SSHができるように22ポートは可能にし、他はその時に解放します。</p>
-
-<h2 id="インストール">インストール</h2>
-
-<p>SSHで接続し、インストールします。</p>
-
-<p><a href="https://rubyonrails.org/">Ruby on Rails</a> の <a href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> を元に進めました。</p>
-
-<h3 id="パッケージアップデート">パッケージアップデート</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+current directory: /tmp/bundler20191116-12860-iie6sqlite3-1.4.1/gems/sqlite3-1.4.1/ext/sqlite3
+/usr/bin/ruby2.5 -r ./siteconf20191116-12860-3nvvhf.rb extconf.rb
+checking for sqlite3.h... no
+sqlite3.h is missing. Try 'brew install sqlite3',
+'yum install sqlite-devel' or 'apt-get install libsqlite3-dev'
+and check your shared library search path (the
+location where your sqlite3 shared library is located).
+*** extconf.rb failed ***
+Could not create Makefile due to some reason, probably lack of necessary
+libraries and/or headers.  Check the mkmf.log file for more details.  You may
+need configuration options.
 </code></pre></div></div>
 
-<h3 id="ruby-インストール">Ruby インストール</h3>
+<p>sqlite3 1.4.1がちゃんとインストール出来ていないと出ます。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install ruby-full
+<p><code class="highlighter-rouge">gem install sqlite3 -v '1.4.1'</code>でも同じでしたので、次のように解決できました。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install libsqlite3-dev
+sudo gem update
+bundle install
 </code></pre></div></div>
 
-<h3 id="ruby-バージョン確認">Ruby バージョン確認</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
-</code></pre></div></div>
-<p>railsで要求されるruby 2.5.0の以降のバージョンか確認します。</p>
-<blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png" alt="ruby -v" /></p>
+<p>railsを実行してみましょう。</p>
 
-</blockquote>
-
-<p>2.5.xですね。</p>
-
-<h3 id="sqlite3-インストール">sqlite3 インストール</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install sqlite3
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails server
 </code></pre></div></div>
 
-<h3 id="sqlite3-バージョン確認">sqlite3 バージョン確認</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3 --version
+<h2 id="またエラー">また、エラー</h2>
+
+<p>エラーが出ました。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/var/lib/gems/2.5.0/gems/webpacker-4.2.0/lib/webpacker/configuration.rb:95:in `rescue in load': Webpacker configuration file not found /home/ubuntu/blog/config/webpacker.yml.
+Please run rails webpacker:install Error: No such file or directory @ rb_sysopen - /home/ubuntu/blog/config/webpacker.yml (RuntimeError)
 </code></pre></div></div>
 
-<h3 id="rails-インストール">rails インストール</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install rails
+<p>webpackerをインストールが必要そうですね。</p>
+
+<p>先ずはnode.jsとyarnをインストールし、webpackerをインストールしました。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -sL https://deb.nodesource.com/setup_13.x | sudo -E bash -
+sudo apt-get install -y nodejs
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+sudo apt-get update &amp;&amp; sudo apt-get install yarn
+rails webpacker:install
 </code></pre></div></div>
 
-<h3 id="インストールのエラー">インストールのエラー</h3>
-
-<blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png" alt="Error on installing rails about nokogiri" />
-<code class="highlighter-rouge">Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.</code></p>
-</blockquote>
-
-<p>インストールの途中でエラーが発生しました。Nokogiriで一部のライブラリがなくて出るエラーのようですね。</p>
-
-<p><a href="https://nokogiri.org/">Nokogiri Homepage</a>で解決策を探してみましょう。</p>
-
-<p><a href="https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries">install-with-system-libraries</a>のようにしたらできました。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install pkg-config
-</code></pre></div></div>
-<p>rails のインストールを続きます。</p>
-
-<h3 id="rails-バージョン確認">rails バージョン確認</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails --version
-</code></pre></div></div>
+<p>インストール完了後、railsサーバを立ち上げることができました。</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png" alt="rails --version" /></p>
+  <p><img src="\assets\images\2019-11-16-develop-using-cloud9\rails-server.png" alt="rails server" /></p>
 </blockquote>
 
-<p>やっとインストール完了です。</p>
+<h2 id="接続してみましょう">接続してみましょう。</h2>
 
-<p>次は<a href="https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application">Creating the Blog Application</a>でメイン画面まで進んでみます。</p>
+<p>ローカル環境でしたら、<code class="highlighter-rouge">127.0.0.1:3000</code>で接続できますが、今はec2で、設定を変えました。</p>
+
+<h3 id="80ポートを使用可能にsecurity-groupの設定を変更">80ポートを使用可能にSecurity Groupの設定を変更</h3>
+
+<p>EC2のSecurity GroupのInboundに80ポートを追加しました。</p>
+
+<h3 id="000080でサーバ起動">0.0.0.0:80でサーバ起動</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails server -b 0.0.0.0 -p 80
+</code></pre></div></div>
+
+<h3 id="接続">接続</h3>
+
+<p>EC2のパブリックipに接続してみました。</p>
+
+<blockquote>
+  <p><em>サーバ起動中</em>
+<img src="\assets\images\2019-11-16-develop-using-cloud9\rails-server-80.png" alt="rails server -b 0.0.0.0 -p 80" /></p>
+
+  <p><em>メイン画面</em>
+<img src="\assets\images\2019-11-16-develop-using-cloud9\success.png" alt="main page" /></p>
+</blockquote>
+
+<p>やっとメイン画面が出ました。これからは本格な開発になりそうですね。</p>
+
+<h2 id="cloud9設定">Cloud9設定</h2>
+
+<p>その前に、IDEを使用するために設定しました。</p>
+
+<p>SSHでアクセスすればどんなIDEも使用可能ですが、AWSのEC2で環境を構築しまして、IDEもAWSの物を使ってみます。</p>
+
+<p>Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回に作ったEC2を使用します。</p>
+
+<p><a href="https://docs.aws.amazon.com/ko_kr/cloud9/latest/user-guide/create-environment-ssh.html">Creating an SSH Environment</a></p>
+
+<p>接続するipが変わらないようにelastic ipを割り当て、上のリンクにある<code class="highlighter-rouge">~/.ssh/authorized_keys</code>を作成しました。</p>
+
+<p>後は、AWS Cloud9 Installerが実行されました。</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-16-develop-using-cloud9\AWS-Cloud9-Installer.png" alt="AWS Cloud9 Installer" /></p>
+</blockquote>
+
+<p>インストールが終わった後、Cloud9の画面の下のbashに<code class="highlighter-rouge">rails server -b 0.0.0.0 -p 80</code>を実行し、サーバが立ち上がってメイン画面も確認できました。</p>
+
+<p>これからは本格な開発になりそうです。</p>
 
         
       </section>
@@ -379,30 +412,29 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-14T00:00:00+09:00">November 14, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-16T00:00:00+09:00">November 16, 2019</time></p>
         
       </footer>
 
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=ruby+on+rails%E3%82%92ec2%E3%81%AB%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=Rails%E7%94%BB%E9%9D%A2%E7%A2%BA%E8%AA%8D%E3%81%A8Cloud9%E8%A8%AD%E5%AE%9A%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F16%2Fdevelop-using-cloud9" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F16%2Fdevelop-using-cloud9" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F16%2Fdevelop-using-cloud9" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/ja/2019/11/03/experience-using-comments-with-minimal-mistakes" class="pagination--pager" title="ブログにコメント機能を追加しました
+      <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2" class="pagination--pager" title="ruby on railsをec2に実装してみました。
 ">Previous</a>
     
     
-      <a href="/ja/2019/11/16/develop-using-cloud9" class="pagination--pager" title="Rails画面確認とCloud9設定
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -435,12 +467,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/ja/2019/11/16/develop-using-cloud9" rel="permalink">Rails画面確認とCloud9設定
+        <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on railsをec2に実装してみました。
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">サンプル画面を確認し、本格的な開発にあたってIDEを使用するように設定しました。
+    <p class="archive__item-excerpt" itemprop="description">rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。
 
 </p>
   </article>
@@ -535,10 +567,10 @@
       <footer>
         <!-- start custom footer snippets --><div class="page__footer-follow">
 <ul class="social-icons"><li>
-      <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ja.png">ja
+      <a href="/ja/2019/11/16/develop-using-cloud9"><img src="/assets/images/lang/ja.png">ja
       </a>
     </li><li>
-          <a href=" /2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ko.png">ko
+          <a href=" /2019/11/16/develop-using-cloud9"><img src="/assets/images/lang/ko.png">ko
           </a>
         </li></ul>
 </div>
@@ -609,8 +641,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2019/11/14/set-up-ruby-on-rails-ec2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "https://duinaru.github.io/2019/11/16/develop-using-cloud9";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/11/16/develop-using-cloud9"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
