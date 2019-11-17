@@ -5,8 +5,10 @@ author_profile: true
 comments: true
 share: true
 related: true
+category: programming
+tags: [jekyll, ruby]
 lang: ko
-permalink: "/:categories/:year/:month/:day/experience-using-comments-with-minimal-mistakes"
+permalink: "/:year/:month/:day/experience-using-comments-with-minimal-mistakes"
 ---
 
 사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 [설정](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments) 할 수 있어서, 사용해보았습니다.

@@ -4,8 +4,10 @@ layout: single
 author_profile: true
 comments: true
 related: true
+category: programming
+tags: [jekyll, ruby]
 lang: ja
-permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
+permalink: "/:year/:month/:day/blog-with-development-and-experience"
 ---
 
 普段考えていた色々なものを書こうとブログを作ることにしました。

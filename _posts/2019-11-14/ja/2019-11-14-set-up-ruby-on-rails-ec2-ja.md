@@ -5,8 +5,10 @@ author_profile: true
 comments: true
 share: true
 related: true
+category: programming
+tags: [rails, aws, ec2]
 lang: ja
-permalink: "/:categories/:year/:month/:day/set-up-ruby-on-rails-ec2"
+permalink: "/:year/:month/:day/set-up-ruby-on-rails-ec2"
 ---
 
 rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。

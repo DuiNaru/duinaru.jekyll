@@ -4,8 +4,10 @@ layout: single
 author_profile: true
 comments: true
 related: true
+category: programming
+tags: [jekyll, ruby]
 lang: ko
-permalink: "/:categories/:year/:month/:day/how-to-make-a-github-pages-work-with-an-unsupported-plugin"
+permalink: "/:year/:month/:day/how-to-make-a-github-pages-work-with-an-unsupported-plugin"
 ---
 
 jekyll을 공식적으로 지원하는 GitHub Pages이지만, 모든 jekyll의 플러그인까지 지원하는 것은 아닙니다.

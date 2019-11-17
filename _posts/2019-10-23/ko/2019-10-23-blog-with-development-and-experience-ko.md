@@ -4,8 +4,10 @@ layout: single
 author_profile: true
 comments: true
 related: true
+category: programming
+tags: [jekyll, ruby]
 lang: ko
-permalink: "/:categories/:year/:month/:day/blog-with-development-and-experience"
+permalink: "/:year/:month/:day/blog-with-development-and-experience"
 ---
 
 평소에 생각하던 이것저것을 적어볼까 하다가 블로그를 만들게 되었습니다.

@@ -5,8 +5,10 @@ author_profile: true
 comments: true
 share: true
 related: true
+category: programming
+tags: [rails, aws, ec2]
 lang: ko
-permalink: "/:categories/:year/:month/:day/set-up-ruby-on-rails-ec2"
+permalink: "/:year/:month/:day/set-up-ruby-on-rails-ec2"
 ---
 
 ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.

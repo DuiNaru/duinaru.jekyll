@@ -308,6 +308,10 @@ defaults:
       comments: true
       share: true
       related: true
+      category: 
+      tags: []
+      lang: 
+      permalink: "/:year/:month/:day/"
   # multilanguage icons
   - scope:
       path: "assets/images/lang"

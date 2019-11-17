@@ -5,8 +5,10 @@ author_profile: true
 comments: true
 share: true
 related: true
+category: programming
+tags: [rails, aws, cloud9]
 lang: ja
-permalink: "/:categories/:year/:month/:day/develop-using-cloud9"
+permalink: "/:year/:month/:day/develop-using-cloud9"
 ---
 
 サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。
@@ -104,7 +106,7 @@ EC2のパブリックipに接続してみました。
 > *メイン画面*
 > ![main page](\assets\images\2019-11-16-develop-using-cloud9\success.png)
 
-やっとメイン画面が出ました。これからは本格な開発になりそうですね。
+やっとメイン画面が出ました。これからは本格的な開発になりそうですね。
 
 ## Cloud9設定
 
@@ -124,4 +126,4 @@ Cloud9は最初からすぐにEC2で環境構築が可能ですが、今回は�
 
 インストールが終わった後、Cloud9の画面の下のbashに`rails server -b 0.0.0.0 -p 80`を実行し、サーバが立ち上がってメイン画面も確認できました。
 
-これからは本格な開発になりそうです。
+これからは本格的な開発になりそうです。
