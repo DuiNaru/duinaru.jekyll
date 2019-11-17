@@ -5,8 +5,10 @@ author_profile: true
 comments: true
 share: true
 related: true
+category: programming
+tags: [ruby, rails, aws, cloud9]
 lang: ko
-permalink: "/:categories/:year/:month/:day/develop-using-cloud9"
+permalink: "/:year/:month/:day/develop-using-cloud9"
 ---
 
 샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.

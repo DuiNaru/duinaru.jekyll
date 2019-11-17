@@ -5,8 +5,10 @@ author_profile: true
 comments: true
 share: true
 related: true
+category: programming
+tags: [jekyll, ruby]
 lang: ja
-permalink: "/:categories/:year/:month/:day/experience-using-comments-with-minimal-mistakes"
+permalink: "/:year/:month/:day/experience-using-comments-with-minimal-mistakes"
 ---
 
 使用しているMinimal Mistakes テーマは多様なコメントサービスを使えるように[設定](https://mmistakes.github.io/minimal-mistakes/docs/configuration/#comments)できて、使いました。
