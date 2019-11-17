@@ -5,8 +5,8 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Nov 2019 02:35:28 +0900</pubDate>
-    <lastBuildDate>Sun, 17 Nov 2019 02:35:28 +0900</lastBuildDate>
+    <pubDate>Sun, 17 Nov 2019 11:56:56 +0900</pubDate>
+    <lastBuildDate>Sun, 17 Nov 2019 11:56:56 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -130,6 +130,16 @@ rails webpacker:install
         <pubDate>Sat, 16 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/11/16/develop-using-cloud9</link>
         <guid isPermaLink="true">https://duinaru.github.io/2019/11/16/develop-using-cloud9</guid>
         
+        <category>ruby</category>
+        
+        <category>rails</category>
+        
+        <category>aws</category>
+        
+        <category>cloud9</category>
+        
+        
+        <category>programming</category>
         
       </item>
     
@@ -224,6 +234,16 @@ rails webpacker:install
         <pubDate>Thu, 14 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2</link>
         <guid isPermaLink="true">https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2</guid>
         
+        <category>ruby</category>
+        
+        <category>rails</category>
+        
+        <category>aws</category>
+        
+        <category>ec2</category>
+        
+        
+        <category>programming</category>
         
       </item>
     
@@ -324,6 +344,12 @@ rails webpacker:install
         <pubDate>Sun, 03 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes</link>
         <guid isPermaLink="true">https://duinaru.github.io/2019/11/03/experience-using-comments-with-minimal-mistakes</guid>
         
+        <category>jekyll</category>
+        
+        <category>ruby</category>
+        
+        
+        <category>programming</category>
         
       </item>
     
@@ -407,6 +433,12 @@ git push
         <pubDate>Sat, 26 Oct 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin</link>
         <guid isPermaLink="true">https://duinaru.github.io/2019/10/26/how-to-make-a-github-pages-work-with-an-unsupported-plugin</guid>
         
+        <category>jekyll</category>
+        
+        <category>ruby</category>
+        
+        
+        <category>programming</category>
         
       </item>
     
@@ -524,6 +556,12 @@ git push
         <pubDate>Wed, 23 Oct 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/10/23/blog-with-development-and-experience</link>
         <guid isPermaLink="true">https://duinaru.github.io/2019/10/23/blog-with-development-and-experience</guid>
         
+        <category>jekyll</category>
+        
+        <category>ruby</category>
+        
+        
+        <category>programming</category>
         
       </item>
     
