@@ -6,7 +6,7 @@ comments: true
 share: true
 related: true
 category: programming
-tags: [rails, aws, ec2]
+tags: [ruby, rails, aws, ec2]
 lang: ko
 permalink: "/:year/:month/:day/set-up-ruby-on-rails-ec2"
 ---

@@ -6,7 +6,7 @@ comments: true
 share: true
 related: true
 category: programming
-tags: [rails, aws, cloud9]
+tags: [ruby, rails, aws, cloud9]
 lang: ja
 permalink: "/:year/:month/:day/develop-using-cloud9"
 ---
