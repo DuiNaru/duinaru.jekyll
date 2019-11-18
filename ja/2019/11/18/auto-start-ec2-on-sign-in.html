@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>ruby on railsをec2に実装してみました。 - DuiNaru’s Blog</title>
-<meta name="description" content="rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。">
+<!-- begin _includes/seo.html --><title>SSMとCloudWatchでログインする時、EC2が自動起動されるように設定 - DuiNaru’s Blog</title>
+<meta name="description" content="Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,30 +19,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="ruby on railsをec2に実装してみました。">
-<meta property="og:url" content="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
+<meta property="og:title" content="SSMとCloudWatchでログインする時、EC2が自動起動されるように設定">
+<meta property="og:url" content="https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in">
 
 
-  <meta property="og:description" content="rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-11-14T00:00:00+09:00">
+  <meta property="og:description" content="Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-11-18T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://duinaru.github.io/ja/2019/11/14/set-up-ruby-on-rails-ec2">
+
+<link rel="canonical" href="https://duinaru.github.io/ja/2019/11/18/auto-start-ec2-on-sign-in">
 
 
 
@@ -273,15 +273,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="ruby on railsをec2に実装してみました。">
-    <meta itemprop="description" content="rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。">
-    <meta itemprop="datePublished" content="November 14, 2019">
+    <meta itemprop="headline" content="SSMとCloudWatchでログインする時、EC2が自動起動されるように設定">
+    <meta itemprop="description" content="Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。">
+    <meta itemprop="datePublished" content="November 18, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">ruby on railsをec2に実装してみました。
+          <h1 id="page-title" class="page__title" itemprop="headline">SSMとCloudWatchでログインする時、EC2が自動起動されるように設定
 </h1>
           
         </header>
@@ -289,88 +289,119 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。</p>
+        <p>Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。</p>
 
-<p>開発しながらruby on railsを学習する目的で、環境構築から始めました。</p>
+<p>しかし、Cloud9が始まる時にEC2をスタートさせることはできなくてConsoleにSign inする時、起動されるようにしました。</p>
 
-<h2 id="ec2-生成">EC2 生成</h2>
+<h2 id="aws-system-manager">AWS System Manager</h2>
 
-<p><strong>AMI</strong></p>
+<p>EC2を起動させるためにSSMを利用します。</p>
 
-<p>ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)を選びました。</p>
+<p>そのため、SSMがEC2を管理できるようにセットアップをしなければなりません。</p>
 
-<p>他の設定はfree-tierができるようにしました。</p>
+<h3 id="iam-role-作成--amazonssmmanagedinstancecore">IAM Role 作成 : AmazonSSMManagedInstanceCore</h3>
 
-<p><strong>Security groups</strong></p>
+<p>EC2をSSMで使用できるようにIAM Roleを作成します。</p>
 
-<p>SSHができるように22ポートは可能にし、他はその時に解放します。</p>
-
-<h2 id="インストール">インストール</h2>
-
-<p>SSHで接続し、インストールします。</p>
-
-<p><a href="https://rubyonrails.org/">Ruby on Rails</a> の <a href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> を元に進めました。</p>
-
-<h3 id="パッケージアップデート">パッケージアップデート</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
-</code></pre></div></div>
-
-<h3 id="ruby-インストール">Ruby インストール</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install ruby-full
-</code></pre></div></div>
-
-<h3 id="ruby-バージョン確認">Ruby バージョン確認</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
-</code></pre></div></div>
-<p>railsで要求されるruby 2.5.0の以降のバージョンか確認します。</p>
-<blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png" alt="ruby -v" /></p>
-
-</blockquote>
-
-<p>2.5.xですね。</p>
-
-<h3 id="sqlite3-インストール">sqlite3 インストール</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install sqlite3
-</code></pre></div></div>
-
-<h3 id="sqlite3-バージョン確認">sqlite3 バージョン確認</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3 --version
-</code></pre></div></div>
-
-<h3 id="rails-インストール">rails インストール</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install rails
-</code></pre></div></div>
-
-<h3 id="インストールのエラー">インストールのエラー</h3>
+<p>AmazonSSMManagedInstanceCoreのpolicyを選択し、作ります。</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png" alt="Error on installing rails about nokogiri" />
-<code class="highlighter-rouge">Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.</code></p>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\AmazonSSMManagedInstanceCore.png" alt="AmazonSSMManagedInstanceCore" /></p>
 </blockquote>
 
-<p>インストールの途中でエラーが発生しました。Nokogiriで一部のライブラリがなくて出るエラーのようですね。</p>
+<p>作ったIAMを自動起動させようとするEC2にattachすればいいです。</p>
 
-<p><a href="https://nokogiri.org/">Nokogiri Homepage</a>で解決策を探してみましょう。</p>
+<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html?icmpid=docs_ec2_console#attach-iam-role">Attaching an IAM Role to an Instance</a></p>
 
-<p><a href="https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries">install-with-system-libraries</a>のようにしたらできました。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install pkg-config
-</code></pre></div></div>
-<p>rails のインストールを続きます。</p>
+<p>上のリンクのようにすればいいです。</p>
 
-<h3 id="rails-バージョン確認">rails バージョン確認</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails --version
-</code></pre></div></div>
+<h3 id="iam-role-作成--amazonssmautomationrole">IAM Role 作成 : AmazonSSMAutomationRole</h3>
+
+<p>今度はSSMを実行する時に必要なIAM Roleを作成します。</p>
+
+<p>AmazonSSMAutomationRoleのpolicyを選択し、作ります。</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png" alt="rails --version" /></p>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\AmazonSSMAutomationRole.png" alt="AmazonSSMAutomationRole" /></p>
 </blockquote>
 
-<p>やっとインストール完了です。</p>
+<p>このroleは後で使います。</p>
 
-<p>次は<a href="https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application">Creating the Blog Application</a>でメイン画面まで進んでみます。</p>
+<p>次はログインイベントが発生するとEC2が起動されるように設定します。</p>
+
+<h2 id="cloudtrail-設定">CloudTrail 設定</h2>
+
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-aws-console-sign-in-events.html">ログインイベント</a>を使用するためにはCloudTrailを設定する必要があります。</p>
+
+<p>CloudTrailの左メニューで Trails - Create Trail を選択しましょう。</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-trail.png" alt="create trail" /></p>
+</blockquote>
+
+<p>作成し、設定を見るとLoggingがONになっていることが確認できます。</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\logging-on.png" alt="Logging ON" /></p>
+</blockquote>
+
+<p>CloudTrailの設定が終わりました。</p>
+
+<h2 id="cloudwatchのrules設定">CloudWatchのRules設定</h2>
+
+<p>ログインイベントをCloudWatchで感知し、処理されるようにしましょう。</p>
+
+<p>CloudWatchの左メニューで Rules - Creates rule を選択します。</p>
+
+<h3 id="event-source">Event Source</h3>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-rule.png" alt="create rule" /></p>
+</blockquote>
+
+<p>Service NameはAWS Console Sign-inを選択します。</p>
+
+<p>どんなユーザーもログインする時、イベントに対して処理させたいと思ったらAny userを選択し、</p>
+
+<p>特定のユーザーがログインする時、イベントに対して処理させたいと思ったらSpecific users(s) by ARNを選択し、ユーザーのarnを入力します。</p>
+
+<h3 id="targets">Targets</h3>
+
+<p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\target.png" alt="target setting" /></p>
+
+<p>ログインイベントの記録とEC2が起動されるように設定します。</p>
+
+<p>CloudWatch log GroupはLog Groupを入力し、</p>
+
+<p>SSM AutomationはDocumentをAWS-StartEC2Instanceに選択し、InstanceIdに起動させたいEC2のInstanceIDを入力します。</p>
+
+<p>下はUse existing roleを選択し、<a href="#iam-role-作成--amazonssmautomationrole">IAM Role 作成 : AmazonSSMAutomationRole</a>で作成したRoleを指定します。</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-rule-2.png" alt="create rule step2" /></p>
+</blockquote>
+
+<p>nameを入力し、Enabledがチェックされた状態で作ります。</p>
+
+<h2 id="確認">確認</h2>
+
+<p>EC2が自動的に起動されるか確認してみましょう。</p>
+
+<p>そのためなら、再ログインしなければならないですね。</p>
+
+<p>1~2分ぐらいの時間が過ぎたら、<a href="#targets">Targets</a>で作成したCloudWatchのLog Groupにログインイベントが記録され、EC2が起動されていました。</p>
+
+<h2 id="感想">感想</h2>
+
+<p>CloudTrailを設定しなくて、ログインイベントが繋がらないとか、</p>
+
+<p>SSM Automationのroleをちゃんと設定しなくてruleが実行できないとか等、</p>
+
+<p>試行錯誤を繰り返して成功するようになりました。</p>
+
+<p>Cloud9で作る時に使用可能なEC2の自動起動と似ているように使用することができそうです。</p>
+
+<p>次は、一定の時間で接続がないと終了されるようにするつもりです。</p>
 
         
       </section>
@@ -395,15 +426,23 @@
     
       
       
+      <a href="/ja/tags/#cloud9" class="page__taxonomy-item" rel="tag">cloud9</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/ja/tags/#cloudtrail" class="page__taxonomy-item" rel="tag">cloudtrail</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/ja/tags/#cloudwatch" class="page__taxonomy-item" rel="tag">cloudwatch</a><span class="sep">, </span>
+    
+      
+      
       <a href="/ja/tags/#ec2" class="page__taxonomy-item" rel="tag">ec2</a><span class="sep">, </span>
     
       
       
-      <a href="/ja/tags/#rails" class="page__taxonomy-item" rel="tag">rails</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/ja/tags/#ruby" class="page__taxonomy-item" rel="tag">ruby</a>
+      <a href="/ja/tags/#ssm" class="page__taxonomy-item" rel="tag">ssm</a>
     
     </span>
   </p>
@@ -424,37 +463,36 @@
     
       
       
-      <a href="/ja/categories/#programming" class="page__taxonomy-item" rel="tag">programming</a>
+      <a href="/ja/categories/#aws" class="page__taxonomy-item" rel="tag">aws</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-14T00:00:00+09:00">November 14, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-18T00:00:00+09:00">November 18, 2019</time></p>
         
       </footer>
 
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=ruby+on+rails%E3%82%92ec2%E3%81%AB%E5%AE%9F%E8%A3%85%E3%81%97%E3%81%A6%E3%81%BF%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=SSM%E3%81%A8CloudWatch%E3%81%A7%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%E3%81%99%E3%82%8B%E6%99%82%E3%80%81EC2%E3%81%8C%E8%87%AA%E5%8B%95%E8%B5%B7%E5%8B%95%E3%81%95%E3%82%8C%E3%82%8B%E3%82%88%E3%81%86%E3%81%AB%E8%A8%AD%E5%AE%9A%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F18%2Fauto-start-ec2-on-sign-in" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F18%2Fauto-start-ec2-on-sign-in" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F18%2Fauto-start-ec2-on-sign-in" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/ja/2019/11/03/experience-using-comments-with-minimal-mistakes" class="pagination--pager" title="ブログにコメント機能を追加しました
+      <a href="/ja/2019/11/16/develop-using-cloud9" class="pagination--pager" title="Rails画面確認とCloud9設定
 ">Previous</a>
     
     
-      <a href="/ja/2019/11/16/develop-using-cloud9" class="pagination--pager" title="Rails画面確認とCloud9設定
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -487,12 +525,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/ja/2019/11/18/auto-start-ec2-on-sign-in" rel="permalink">SSMとCloudWatchでログインする時、EC2が自動起動されるように設定
+        <a href="/ja/2019/11/16/develop-using-cloud9" rel="permalink">Rails画面確認とCloud9設定
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。
+    <p class="archive__item-excerpt" itemprop="description">サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。
 
 </p>
   </article>
@@ -508,12 +546,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/ja/2019/11/16/develop-using-cloud9" rel="permalink">Rails画面確認とCloud9設定
+        <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on railsをec2に実装してみました。
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。
+    <p class="archive__item-excerpt" itemprop="description">rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。
 
 </p>
   </article>
@@ -587,10 +625,10 @@
       <footer>
         <!-- start custom footer snippets --><div class="page__footer-follow">
 <ul class="social-icons"><li>
-      <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ja.png">ja
+      <a href="/ja/2019/11/18/auto-start-ec2-on-sign-in"><img src="/assets/images/lang/ja.png">ja
       </a>
     </li><li>
-          <a href=" /2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ko.png">ko
+          <a href=" /2019/11/18/auto-start-ec2-on-sign-in"><img src="/assets/images/lang/ko.png">ko
           </a>
         </li></ul>
 </div>
@@ -661,8 +699,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2019/11/14/set-up-ruby-on-rails-ec2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/11/18/auto-start-ec2-on-sign-in"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');

@@ -96,9 +96,23 @@
             
         
     
+        
+        
+            
+            
+                <url>
+                    <loc>https://duinaru.github.io/page2/</loc>
+                </url>
+            
+        
+    
 
     
     
+        
+            <url>
+                <loc>https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in</loc>
+            </url>
         
             <url>
                 <loc>https://duinaru.github.io/2019/11/16/develop-using-cloud9</loc>
@@ -218,9 +232,23 @@
             
         
     
+        
+        
+            
+            
+                <url>
+                    <loc>https://duinaru.github.io/ja/page2/</loc>
+                </url>
+            
+        
+    
 
     
     
+        
+            <url>
+                <loc>https://duinaru.github.io/ja/2019/11/18/auto-start-ec2-on-sign-in</loc>
+            </url>
         
             <url>
                 <loc>https://duinaru.github.io/ja/2019/11/16/develop-using-cloud9</loc>

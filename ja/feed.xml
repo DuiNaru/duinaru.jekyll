@@ -5,9 +5,145 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Nov 2019 11:56:59 +0900</pubDate>
-    <lastBuildDate>Sun, 17 Nov 2019 11:56:59 +0900</lastBuildDate>
+    <pubDate>Mon, 18 Nov 2019 23:21:59 +0900</pubDate>
+    <lastBuildDate>Mon, 18 Nov 2019 23:21:59 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>SSMとCloudWatchでログインする時、EC2が自動起動されるように設定</title>
+        <description>&lt;p&gt;Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。&lt;/p&gt;
+
+&lt;p&gt;しかし、Cloud9が始まる時にEC2をスタートさせることはできなくてConsoleにSign inする時、起動されるようにしました。&lt;/p&gt;
+
+&lt;h2 id=&quot;aws-system-manager&quot;&gt;AWS System Manager&lt;/h2&gt;
+
+&lt;p&gt;EC2を起動させるためにSSMを利用します。&lt;/p&gt;
+
+&lt;p&gt;そのため、SSMがEC2を管理できるようにセットアップをしなければなりません。&lt;/p&gt;
+
+&lt;h3 id=&quot;iam-role-作成--amazonssmmanagedinstancecore&quot;&gt;IAM Role 作成 : AmazonSSMManagedInstanceCore&lt;/h3&gt;
+
+&lt;p&gt;EC2をSSMで使用できるようにIAM Roleを作成します。&lt;/p&gt;
+
+&lt;p&gt;AmazonSSMManagedInstanceCoreのpolicyを選択し、作ります。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\AmazonSSMManagedInstanceCore.png&quot; alt=&quot;AmazonSSMManagedInstanceCore&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;作ったIAMを自動起動させようとするEC2にattachすればいいです。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html?icmpid=docs_ec2_console#attach-iam-role&quot;&gt;Attaching an IAM Role to an Instance&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;上のリンクのようにすればいいです。&lt;/p&gt;
+
+&lt;h3 id=&quot;iam-role-作成--amazonssmautomationrole&quot;&gt;IAM Role 作成 : AmazonSSMAutomationRole&lt;/h3&gt;
+
+&lt;p&gt;今度はSSMを実行する時に必要なIAM Roleを作成します。&lt;/p&gt;
+
+&lt;p&gt;AmazonSSMAutomationRoleのpolicyを選択し、作ります。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\AmazonSSMAutomationRole.png&quot; alt=&quot;AmazonSSMAutomationRole&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;このroleは後で使います。&lt;/p&gt;
+
+&lt;p&gt;次はログインイベントが発生するとEC2が起動されるように設定します。&lt;/p&gt;
+
+&lt;h2 id=&quot;cloudtrail-設定&quot;&gt;CloudTrail 設定&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-aws-console-sign-in-events.html&quot;&gt;ログインイベント&lt;/a&gt;を使用するためにはCloudTrailを設定する必要があります。&lt;/p&gt;
+
+&lt;p&gt;CloudTrailの左メニューで Trails - Create Trail を選択しましょう。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-trail.png&quot; alt=&quot;create trail&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;作成し、設定を見るとLoggingがONになっていることが確認できます。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\logging-on.png&quot; alt=&quot;Logging ON&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;CloudTrailの設定が終わりました。&lt;/p&gt;
+
+&lt;h2 id=&quot;cloudwatchのrules設定&quot;&gt;CloudWatchのRules設定&lt;/h2&gt;
+
+&lt;p&gt;ログインイベントをCloudWatchで感知し、処理されるようにしましょう。&lt;/p&gt;
+
+&lt;p&gt;CloudWatchの左メニューで Rules - Creates rule を選択します。&lt;/p&gt;
+
+&lt;h3 id=&quot;event-source&quot;&gt;Event Source&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-rule.png&quot; alt=&quot;create rule&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Service NameはAWS Console Sign-inを選択します。&lt;/p&gt;
+
+&lt;p&gt;どんなユーザーもログインする時、イベントに対して処理させたいと思ったらAny userを選択し、&lt;/p&gt;
+
+&lt;p&gt;特定のユーザーがログインする時、イベントに対して処理させたいと思ったらSpecific users(s) by ARNを選択し、ユーザーのarnを入力します。&lt;/p&gt;
+
+&lt;h3 id=&quot;targets&quot;&gt;Targets&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\target.png&quot; alt=&quot;target setting&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;ログインイベントの記録とEC2が起動されるように設定します。&lt;/p&gt;
+
+&lt;p&gt;CloudWatch log GroupはLog Groupを入力し、&lt;/p&gt;
+
+&lt;p&gt;SSM AutomationはDocumentをAWS-StartEC2Instanceに選択し、InstanceIdに起動させたいEC2のInstanceIDを入力します。&lt;/p&gt;
+
+&lt;p&gt;下はUse existing roleを選択し、&lt;a href=&quot;#iam-role-作成--amazonssmautomationrole&quot;&gt;IAM Role 作成 : AmazonSSMAutomationRole&lt;/a&gt;で作成したRoleを指定します。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-rule-2.png&quot; alt=&quot;create rule step2&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;nameを入力し、Enabledがチェックされた状態で作ります。&lt;/p&gt;
+
+&lt;h2 id=&quot;確認&quot;&gt;確認&lt;/h2&gt;
+
+&lt;p&gt;EC2が自動的に起動されるか確認してみましょう。&lt;/p&gt;
+
+&lt;p&gt;そのためなら、再ログインしなければならないですね。&lt;/p&gt;
+
+&lt;p&gt;1~2分ぐらいの時間が過ぎたら、&lt;a href=&quot;#targets&quot;&gt;Targets&lt;/a&gt;で作成したCloudWatchのLog Groupにログインイベントが記録され、EC2が起動されていました。&lt;/p&gt;
+
+&lt;h2 id=&quot;感想&quot;&gt;感想&lt;/h2&gt;
+
+&lt;p&gt;CloudTrailを設定しなくて、ログインイベントが繋がらないとか、&lt;/p&gt;
+
+&lt;p&gt;SSM Automationのroleをちゃんと設定しなくてruleが実行できないとか等、&lt;/p&gt;
+
+&lt;p&gt;試行錯誤を繰り返して成功するようになりました。&lt;/p&gt;
+
+&lt;p&gt;Cloud9で作る時に使用可能なEC2の自動起動と似ているように使用することができそうです。&lt;/p&gt;
+
+&lt;p&gt;次は、一定の時間で接続がないと終了されるようにするつもりです。&lt;/p&gt;
+</description>
+        <pubDate>Mon, 18 Nov 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/ja/2019/11/18/auto-start-ec2-on-sign-in</link>
+        <guid isPermaLink="true">https://duinaru.github.io/ja/2019/11/18/auto-start-ec2-on-sign-in</guid>
+        
+        <category>aws</category>
+        
+        <category>ec2</category>
+        
+        <category>ssm</category>
+        
+        <category>cloudtrail</category>
+        
+        <category>cloudwatch</category>
+        
+        <category>cloud9</category>
+        
+        
+        <category>aws</category>
+        
+      </item>
     
       <item>
         <title>Rails画面確認とCloud9設定</title>

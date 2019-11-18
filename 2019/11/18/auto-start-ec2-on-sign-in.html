@@ -9,8 +9,8 @@
   <head>
     <meta charset="utf-8">
 
-<!-- begin _includes/seo.html --><title>ruby on rails를 ec2에 구축해보았습니다 - DuiNaru’s Blog</title>
-<meta name="description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
+<!-- begin _includes/seo.html --><title>SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기 - DuiNaru’s Blog</title>
+<meta name="description" content="Cloud9를 수동으로 만든 EC2로 사용하다보니, 자동으로 만들 때 사용할 수 있는 EC2의 자동 시작-종료 기능을 사용할 수 없어서, 만들어 보기로 했습니다.">
 
 
   <meta name="author" content="DuiNaru">
@@ -19,30 +19,30 @@
 <meta property="og:type" content="article">
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="DuiNaru's Blog">
-<meta property="og:title" content="ruby on rails를 ec2에 구축해보았습니다">
-<meta property="og:url" content="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
+<meta property="og:title" content="SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기">
+<meta property="og:url" content="https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in">
 
 
-  <meta property="og:description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
-
-
-
-
-
-
-
-  <meta property="article:published_time" content="2019-11-14T00:00:00+09:00">
+  <meta property="og:description" content="Cloud9를 수동으로 만든 EC2로 사용하다보니, 자동으로 만들 때 사용할 수 있는 EC2의 자동 시작-종료 기능을 사용할 수 없어서, 만들어 보기로 했습니다.">
 
 
 
 
 
-  
+
+
+  <meta property="article:published_time" content="2019-11-18T00:00:00+09:00">
+
+
+
+
 
   
 
+  
 
-<link rel="canonical" href="https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2">
+
+<link rel="canonical" href="https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in">
 
 
 
@@ -273,15 +273,15 @@
 
 
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
-    <meta itemprop="headline" content="ruby on rails를 ec2에 구축해보았습니다">
-    <meta itemprop="description" content="ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.">
-    <meta itemprop="datePublished" content="November 14, 2019">
+    <meta itemprop="headline" content="SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기">
+    <meta itemprop="description" content="Cloud9를 수동으로 만든 EC2로 사용하다보니, 자동으로 만들 때 사용할 수 있는 EC2의 자동 시작-종료 기능을 사용할 수 없어서, 만들어 보기로 했습니다.">
+    <meta itemprop="datePublished" content="November 18, 2019">
     
 
     <div class="page__inner-wrap">
       
         <header>
-          <h1 id="page-title" class="page__title" itemprop="headline">ruby on rails를 ec2에 구축해보았습니다
+          <h1 id="page-title" class="page__title" itemprop="headline">SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기
 </h1>
           
         </header>
@@ -289,91 +289,117 @@
 
       <section class="page__content" itemprop="text">
         
-        <p>ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.</p>
+        <p>Cloud9를 수동으로 만든 EC2로 사용하다보니, 자동으로 만들 때 사용할 수 있는 EC2의 자동 시작-종료 기능을 사용할 수 없어서, 만들어 보기로 했습니다.</p>
 
-<p>개발을 하면서 동시에 ruby on rails를 익히려는 목적이므로 기본적인 환경 구축부터 시작하였습니다.</p>
+<p>다만, Cloud9이 시작할 때 EC2를 시작 시킬 수 없어서 Console에 Sign in 할 때, 시작 되도록 만들었습니다.</p>
 
-<h2 id="ec2-생성">EC2 생성</h2>
+<h2 id="aws-system-manager">AWS System Manager</h2>
 
-<p><strong>AMI</strong></p>
+<p>EC2를 실행시키기 위해 SSM을 사용할 생각입니다.</p>
 
-<p>편하게 ubuntu(Ubuntu Server 18.04 LTS (HVM), SSD Volume Type)를 선택하였습니다.</p>
+<p>그러기 위해서는 SSM가 EC2를 관리 할 수 있도록 설정을 해야 합니다.</p>
 
-<p>나머지 설정은 free-tier 가능한 설정으로 생성했습니다.</p>
+<h3 id="iam의-role-생성--amazonssmmanagedinstancecore">IAM의 Role 생성 : AmazonSSMManagedInstanceCore</h3>
 
-<p><strong>Security groups</strong></p>
+<p>EC2를 SSM에서 사용하기 위해서 IAM role을 설정해야 합니다.</p>
 
-<p>SSH 접속 가능하게 22포트는 열어두고, 나머지는 나중에 설정하면서 열어주었습니다.</p>
-
-<p><em>클릭 몇 번에 생성이 끝났습니다. 고마워요. AWS</em></p>
-
-<h2 id="설치">설치</h2>
-
-<p>SSH로 접속해서, 차근차근 설치를 진행합니다.</p>
-
-<p><a href="https://rubyonrails.org/">Ruby on Rails</a> 의 <a href="https://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> 를 바탕으로 진행하였습니다.</p>
-
-<h3 id="패키지-업데이트">패키지 업데이트</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
-</code></pre></div></div>
-
-<h3 id="ruby-설치">Ruby 설치</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install ruby-full
-</code></pre></div></div>
-
-<h3 id="ruby-버전-확인">Ruby 버전 확인</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ruby -v
-</code></pre></div></div>
-<p>rails에서 요구하는 ruby 2.5.0이후 버전인지 확인합니다.</p>
-<blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\ruby-v.png" alt="ruby -v" /></p>
-
-</blockquote>
-
-<p>2.5.대 버전이군요.</p>
-
-<h3 id="sqlite3-설치">sqlite3 설치</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install sqlite3
-</code></pre></div></div>
-
-<h3 id="sqlite3-버전-확인">sqlite3 버전 확인</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite3 --version
-</code></pre></div></div>
-
-<h3 id="rails-설치">rails 설치</h3>
-<p>드디어 rails를 설치할 차례입니다.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install rails
-</code></pre></div></div>
-
-<h3 id="설치-에러">설치 에러</h3>
+<p>AmazonSSMManagedInstanceCore의 policy를 선택해서 하나 만들어 줍니다.</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\error_nokogiri.png" alt="Error on installing rails about nokogiri" />
-<code class="highlighter-rouge">Could not create Makefile due to some reason, probably lack of necessary libraries and/or headers.</code></p>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\AmazonSSMManagedInstanceCore.png" alt="AmazonSSMManagedInstanceCore" /></p>
 </blockquote>
 
-<p>설치 중간에 에러가 나왔습니다. Nokogiri 에서 일부 라이브러리가 없어서 생기는 에러 같군요.</p>
+<p>해당 IAM을 자동 시작시키려는 EC2에 붙여 주면 됩니다.</p>
 
-<p><a href="https://nokogiri.org/">Nokogiri 홈페이지</a>에서 해결법을 찾아봅시다.</p>
+<p><a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html?icmpid=docs_ec2_console#attach-iam-role">Attaching an IAM Role to an Instance</a></p>
 
-<p><a href="https://nokogiri.org/tutorials/installing_nokogiri.html#install-with-system-libraries">install-with-system-libraries</a>처럼 설치하니 되는 군요.</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install pkg-config
-</code></pre></div></div>
-<p>rails 설치를 계속 합니다.</p>
+<p>위의 링크처럼 붙여주면 됩니다.</p>
 
-<h3 id="rails-버전-확인">rails 버전 확인</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rails --version
-</code></pre></div></div>
+<h3 id="iam의-role-생성--amazonssmautomationrole">IAM의 Role 생성 : AmazonSSMAutomationRole</h3>
+
+<p>이번에는 SSM을 실행 할 때 필요한 IAM role을 만들어야 합니다.</p>
+
+<p>AmazonSSMAutomationRole의 policy를 선택해서 만들어 주면 됩니다.</p>
 
 <blockquote>
-  <p><img src="\assets\images\2019-11-14-set-up-ruby-on-rails-ec2\rails--version.png" alt="rails --version" /></p>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\AmazonSSMAutomationRole.png" alt="AmazonSSMAutomationRole" /></p>
 </blockquote>
 
-<p>드디어 설치 완료했습니다. 중간에 에러 나서 당황했네요.</p>
+<p>다음은 로그인 이벤트가 발생하면 SSM으로 EC2가 시작되도록 설정합니다.</p>
 
-<p>다음엔, <a href="https://guides.rubyonrails.org/getting_started.html#creating-the-blog-application">Creating the Blog Application</a>으로 메인 화면까지 띄우도록 해보겠습니다.</p>
+<h2 id="cloudtrail-설정">CloudTrail 설정</h2>
+
+<p><a href="https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-event-reference-aws-console-sign-in-events.html">로그인 이벤트</a>를 이용하기 위해서는 CloudTrail를 설정할 필요가 있습니다.</p>
+
+<p>CloudTrail의 왼쪽 메뉴에서 Trails - Create Trail 를 순서대로 눌러줍시다.</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-trail.png" alt="create trail" /></p>
+</blockquote>
+
+<p>만들고 설정을 보면 Logging 이 ON 이 되어 있는 것을 확인 할 수 있습니다.</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\logging-on.png" alt="Logging ON" /></p>
+</blockquote>
+
+<p>설정이 끝났습니다.</p>
+
+<h2 id="cloudwatch의-rules설정">CloudWatch의 Rules설정</h2>
+
+<p>로그인 이벤트를 CloudWatch 에서 감지해서 처리하도록 해봅시다.</p>
+
+<p>CloudWatch의 왼쪽 메뉴에서 Rules - Creates rule 를 순서대로 눌러줍시다.</p>
+
+<h3 id="event-source">Event Source</h3>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-rule.png" alt="create rule" /></p>
+</blockquote>
+
+<p>Service Name 은 AWS Console Sign-in 을 선택합니다.</p>
+
+<p>어떤 유저라도 로그인 할 때 처리할 생각이면, Any user을 선택하고,</p>
+
+<p>특정 유저만 로그인 할 때 처리할 생각이면, Specific users(s) by ARN 을 선택해서 해당 유저의 arn 을 넣어줍시다.</p>
+
+<h3 id="targets">Targets</h3>
+
+<p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\target.png" alt="target setting" /></p>
+
+<p>로그인 이벤트의 기록과 EC2가 시작되도록 설정합시다.</p>
+
+<p>CloudWatch log Group에는 Log Group를 적당히 입력하고,</p>
+
+<p>SSM Automation은 Document를 AWS-StartEC2Instance를 선택, InstanceId에 시작시키고 싶은 인스턴스의 ID를 넣어줍니다.</p>
+
+<p>그 아래는 Use existing role 을 선택하고 <a href="#iam의-role-생성--amazonssmautomationrole">IAM의 Role 생성 : AmazonSSMAutomationRole</a>에서 만든 Role를 지정해줍시다.</p>
+
+<blockquote>
+  <p><img src="\assets\images\2019-11-18-auto-start-ec2-on-sign-in\create-rule-2.png" alt="create rule step2" /></p>
+</blockquote>
+
+<p>name을 지정하고 Enabled가 체크된 상태에서 만들면 됩니다.</p>
+
+<h2 id="확인해보기">확인해보기</h2>
+
+<p>제대로 EC2가 실행되는지 확인해 봅시다.</p>
+
+<p>그러려면 다시 로그인을 해야 겠네요.</p>
+
+<p>1~2분정도의 시간이 지나니, <a href="#targets">Targets</a>에서 만든 CloudWatch의 Log Group에 로그인 이벤트가 기록되고, EC2가 기동하고 있었습니다.</p>
+
+<h2 id="후기">후기</h2>
+
+<p>CloudTrail를 설정하지 않아, 로그인 이벤트가 연결 안 된다거나</p>
+
+<p>SSM Automation의 role를 제대로 설정하지 않아 rule이 실행 되지 않다거나 등등</p>
+
+<p>이것저것 시행착오를 겪어서 성공하게 되었네요.</p>
+
+<p>Cloud9에서 만들 때 사용가능한 EC2의 자동 시작과 비슷하게 쓸 수 있겠네요.</p>
+
+<p>다음엔 일정 시간 동안 접속이 없으면 종료되도록 해 볼 생각입니다.</p>
 
         
       </section>
@@ -398,15 +424,23 @@
     
       
       
+      <a href="/tags/#cloud9" class="page__taxonomy-item" rel="tag">cloud9</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#cloudtrail" class="page__taxonomy-item" rel="tag">cloudtrail</a><span class="sep">, </span>
+    
+      
+      
+      <a href="/tags/#cloudwatch" class="page__taxonomy-item" rel="tag">cloudwatch</a><span class="sep">, </span>
+    
+      
+      
       <a href="/tags/#ec2" class="page__taxonomy-item" rel="tag">ec2</a><span class="sep">, </span>
     
       
       
-      <a href="/tags/#rails" class="page__taxonomy-item" rel="tag">rails</a><span class="sep">, </span>
-    
-      
-      
-      <a href="/tags/#ruby" class="page__taxonomy-item" rel="tag">ruby</a>
+      <a href="/tags/#ssm" class="page__taxonomy-item" rel="tag">ssm</a>
     
     </span>
   </p>
@@ -427,37 +461,36 @@
     
       
       
-      <a href="/categories/#programming" class="page__taxonomy-item" rel="tag">programming</a>
+      <a href="/categories/#aws" class="page__taxonomy-item" rel="tag">aws</a>
     
     </span>
   </p>
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-14T00:00:00+09:00">November 14, 2019</time></p>
+          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-18T00:00:00+09:00">November 18, 2019</time></p>
         
       </footer>
 
       <section class="page__share">
   
 
-  <a href="https://twitter.com/intent/tweet?text=ruby+on+rails%EB%A5%BC+ec2%EC%97%90+%EA%B5%AC%EC%B6%95%ED%95%B4%EB%B3%B4%EC%95%98%EC%8A%B5%EB%8B%88%EB%8B%A4%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+  <a href="https://twitter.com/intent/tweet?text=SSM%EC%99%80+CloudWatch%EB%A1%9C+%EB%A1%9C%EA%B7%B8%EC%9D%B8%ED%95%A0+%EB%95%8C%2C+EC2%EA%B0%80+%EC%9E%90%EB%8F%99+%EC%8B%9C%EC%9E%91%EB%90%98%EA%B2%8C+%ED%95%98%EA%B8%B0%20https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F18%2Fauto-start-ec2-on-sign-in" class="btn btn--twitter" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Twitter"><i class="fab fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
 
-  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F18%2Fauto-start-ec2-on-sign-in" class="btn btn--facebook" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on Facebook"><i class="fab fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
 
-  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F14%2Fset-up-ruby-on-rails-ec2" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fduinaru.github.io%2F2019%2F11%2F18%2Fauto-start-ec2-on-sign-in" class="btn btn--linkedin" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="Share on LinkedIn"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
 </section>
 
 
       
   <nav class="pagination">
     
-      <a href="/2019/11/03/experience-using-comments-with-minimal-mistakes" class="pagination--pager" title="Blog에 댓글 기능을 추가하였습니다
+      <a href="/2019/11/16/develop-using-cloud9" class="pagination--pager" title="Rails 화면 띄우기 및 Cloud9 사용
 ">Previous</a>
     
     
-      <a href="/2019/11/16/develop-using-cloud9" class="pagination--pager" title="Rails 화면 띄우기 및 Cloud9 사용
-">Next</a>
+      <a href="#" class="pagination--pager disabled">Next</a>
     
   </nav>
 
@@ -490,12 +523,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/2019/11/18/auto-start-ec2-on-sign-in" rel="permalink">SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기
+        <a href="/2019/11/16/develop-using-cloud9" rel="permalink">Rails 화면 띄우기 및 Cloud9 사용
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">Cloud9를 수동으로 만든 EC2로 사용하다보니, 자동으로 만들 때 사용할 수 있는 EC2의 자동 시작-종료 기능을 사용할 수 없어서, 만들어 보기로 했습니다.
+    <p class="archive__item-excerpt" itemprop="description">샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.
 
 </p>
   </article>
@@ -511,12 +544,12 @@
     
     <h2 class="archive__item-title" itemprop="headline">
       
-        <a href="/2019/11/16/develop-using-cloud9" rel="permalink">Rails 화면 띄우기 및 Cloud9 사용
+        <a href="/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on rails를 ec2에 구축해보았습니다
 </a>
       
     </h2>
     
-    <p class="archive__item-excerpt" itemprop="description">샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.
+    <p class="archive__item-excerpt" itemprop="description">ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.
 
 </p>
   </article>
@@ -590,10 +623,10 @@
       <footer>
         <!-- start custom footer snippets --><div class="page__footer-follow">
 <ul class="social-icons"><li>
-      <a href=" /2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ko.png">ko
+      <a href=" /2019/11/18/auto-start-ec2-on-sign-in"><img src="/assets/images/lang/ko.png">ko
       </a>
     </li><li>
-          <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2"><img src="/assets/images/lang/ja.png">ja
+          <a href="/ja/2019/11/18/auto-start-ec2-on-sign-in"><img src="/assets/images/lang/ja.png">ja
           </a>
         </li></ul>
 </div>
@@ -664,8 +697,8 @@
     
   <script>
     var disqus_config = function () {
-      this.page.url = "https://duinaru.github.io/2019/11/14/set-up-ruby-on-rails-ec2";  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = "/2019/11/14/set-up-ruby-on-rails-ec2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      this.page.url = "https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/2019/11/18/auto-start-ec2-on-sign-in"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
     (function() { // DON'T EDIT BELOW THIS LINE
       var d = document, s = d.createElement('script');
