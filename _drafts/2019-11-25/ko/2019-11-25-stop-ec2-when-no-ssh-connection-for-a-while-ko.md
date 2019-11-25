@@ -16,13 +16,17 @@ EC2에서 실행되는 스크립트 만으로도 가능할 듯하나, AWS에서 
 
 ## IAM User 작성
 
-AWS에서 모니터링 하는 방법으로 CloudWatch를 이용하였습니다.
+CloudWatch로 데이터를 보내는 역할을 하는 User가 필요합니다.
 
-그러므로, CloudWatch로 데이터를 보내는 역할을 하는 User가 필요합니다.
+AWS CLI에서 접속이 가능하고 권한은 CloudWatchAgentServerPolicy을 가진 User를 생성하였습니다.
+
+> ![user-permission](\assets\images\2019-11-25-stop-ec2-when-no-ssh-connection-for-a-while\user-permission.png)
 
 ## EC2에 aws cli 설정
 
-CloudWatch로 데이터를 보내기 위해서 aws cli를 설치하고, 위에서 만든 User를 설정해둡니다.
+CloudWatch로 데이터를 보내기 위해서 EC2에 aws cli를 설치하고, 위에서 만든 User를 설정해줍니다.
+
+
 
 ## SSH 연결 수 알아내기
 
