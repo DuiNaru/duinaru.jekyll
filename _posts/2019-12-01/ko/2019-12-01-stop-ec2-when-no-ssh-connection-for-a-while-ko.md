@@ -12,19 +12,19 @@ title: "CloudWatch를 이용하여 일정 시간 동안 SSH 연결이 없을 때
 ---
 주로 Cloud9로 사용하는 EC2가 SSH 연결이 없을 때는 사용할 일이 없어서, 일정 시간 대기 한 뒤에 자동 종료가 되도록 만들어 보았습니다.
 
-EC2에서 실행되는 스크립트 만으로도 가능할 듯 하지만, AWS에서 모니터링도 가능하게 하도록 CloudWatch를 이용하였습니다.
+EC2에서 실행되는 스크립트 만으로도 가능할 듯 하지만, AWS에서 SSH의 연결 수도 모니터링할 수 있게 하도록 CloudWatch를 이용하였습니다.
 
 ## IAM User 작성
 
-CloudWatch로 데이터를 보내는 역할을 하는 User가 필요합니다.
+CloudWatch로 SSH의 연결 수를 보내는 역할을 하는 User가 필요합니다.
 
 aws cli에서 접속이 가능하고 권한은 CloudWatchAgentServerPolicy을 가진 User를 생성하였습니다.
 
-> ![user-permission](\assets\images\2019-11-25-stop-ec2-when-no-ssh-connection-for-a-while\user-permission.png)
+> ![user-permission](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\user-permission.png)
 
 ## EC2에 aws cli 설정
 
-CloudWatch로 데이터를 보내기 위해서 EC2에 aws cli를 설치하고, 위에서 만든 User를 설정해줍니다.
+CloudWatch로 SSH의 연결 수를 보내기 위해서 EC2에 aws cli를 설치하고, 위에서 만든 User를 설정해줍니다.
 
 ### 설치
 
@@ -52,17 +52,17 @@ who
 
 SSH로 접속했을 경우, 아래와 같이 확인할 수 있습니다.
 
-> ![SSH-User]()
+> ![SSH-User](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\ssh-users.png)
 
 다만, Cloud9로 접속했을 경우에는 아무것도 나오지 않는 것을 확인 할 수 있습니다.
 
-> ![Cloud9-User]()
+> ![Cloud9-User](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\cloud9-users.png)
 
 ### Cloud9의 연결은 확인 되지 않음
 
 왜 일까요?
 
-[SSH Host Requirements](https://docs.aws.amazon.com/cloud9/latest/user-guide/ssh-settings.html#ssh-settings-requirements)을 보면 SSH 접속 가능이 요구되어 있어서 SSH를 이용하는 것은 알 수가 있습니다.
+Cloud9의 [SSH Host Requirements](https://docs.aws.amazon.com/cloud9/latest/user-guide/ssh-settings.html#ssh-settings-requirements)을 보면 SSH 접속 가능이 요구되어 있어서 SSH를 이용하는 것은 알 수가 있습니다.
 
 ### 현재 실행 중인 SSHD의 갯수로 알아내기
 
@@ -72,9 +72,7 @@ SSH로 연결은 하는 것 같으니까, 실행 중인 SSHD를 알아봅시다.
 ps -A x | grep "sshd"
 ```
 
-실행 중인 프로세스 중에 sshd 를 포함하는 프로세스만 추려보았습니다.
-
-> ![sshd list]()
+> ![sshd list](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\sshd-list.png)
 
 `sshd: ubuntu [priv]`과 `sshd: ubuntu@notty`이 각각 2개씩, 총 4개가 보이네요. 
 
@@ -91,6 +89,8 @@ SSH로 접속할 때 보안 강화의 방법으로 priv 로 프로세스를 만�
 ```
 ps -A x | grep "sshd" | grep "\\[priv\\]" | wc -l
 ```
+
+> ![sshd 수](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\sshd-count.png)
 
 ## SSH 연결 수 전송
 
@@ -112,32 +112,21 @@ aws cli를 이용하여 CloudWatch에 Metric을 보내는 명령입니다.
 
 보낸 데이터를 시간 단위로 기록하게 되고, 시간의 경과에 따른 변화를 살펴 볼 수 있게 됩니다.
 
-```
-aws put-metric-data
-
-
-
-
-
-
-
-```
-
 해당 명령어로 위에서 알아낸 SSH의 연결 수를 CloudWatch로 보낼 수 있게 됩니다.
 
-#### demension
+### demension
 
 보내는 데이터의 상세 정보와 같은 느낌으로 설정할 수 있습니다.
 
-**`InstanceId=인스턴스ID`로 인스턴스 ID를 설정하였는데, 이는 CloudWatch Alarm에서 _인스턴스 종료 명령은 `InstanceId`가 설정되어 있는 Metric만 가능_하였기 때문입니다.**
+*`InstanceId=인스턴스ID`로 인스턴스 ID를 설정하였는데, 이는 CloudWatch Alarm에서 _인스턴스 종료 명령은 `InstanceId`가 설정되어 있는 Metric만 가능_하였기 때문입니다.*
 
 그렇기 때문에, 자동 종료를 위해서는 `InstanceId`로 설정해주어야 합니다.
 
-#### value
+### value
 
 보내는 Metric의 값 입니다.
 
-[현재 실행 중인 SSHD의 갯수로 알아내기](#현재 실행 중인 SSHD의 갯수로 알아내기)에서 알아낸 연결 수를 넣어주었습니다.
+[현재 실행 중인 SSHD의 갯수로 알아내기](#현재-실행-중인-sshd의-갯수로-알아내기)에서 알아낸 연결 수를 넣어주었습니다.
 
 ### timestamp
 
@@ -153,31 +142,19 @@ Metric의 시간을 지정해 줄 수 있습니다.
 
 #### 반복 수행할 스크립트 작성
 
-`put-metric-data` 를 실행하는 스크립트를 만듭니다.
+`/home/ubuntu/ssh-count.sh` 으로 다음과 같은 스크립트를 만들었습니다.
 
 ```
+#!/bin/bash
 
+SSH_CONNECTIONS=$(ps -A x | grep sshd | grep \\[priv\\] | wc -l)
 
+TIMESTAMP=$(date --utc +%FT%T.%3NZ)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/home/ubuntu/.local/bin/aws cloudwatch put-metric-data --metric-name "SSH Connections" --dimensions InstanceId="인스턴스ID" --namespace "EC2" --value $SSH_CONNECTIONS --timestamp $TIMESTAMP
 ```
+
+metric-name는 지정 하고 싶은 이름으로, InstanceId는 종료 시키고 싶은 인스턴스의 ID를 넣어줍니다.
 
 #### crontab에 스크립트 등록
 
@@ -186,14 +163,12 @@ Metric의 시간을 지정해 줄 수 있습니다.
 가장 마지막에 아래 명령을 추가하면 됩니다.
 
 ```
-
+*/1 * * * * /home/ubuntu/ssh-count.sh
 ```
 
 ### 확인
 
-CloudWatch - Metrics 에서 전송한 `namespace`에서 확인 할 수 있습니다.
-
-> ![Metric]()
+CloudWatch - Metrics 에서 Custom Namespaces 항목의 EC2 - InstanceId 에서 확인 할 수 있습니다.
 
 ## EC2 자동 종료
 
@@ -203,45 +178,47 @@ CloudWatch - Metrics 에서 전송한 `namespace`에서 확인 할 수 있습니
 
 CloudWatch - Alarms 에서 Create alarm 을 눌러서 Alarm을 만듭니다.
 
-#### Specify metric and conditions
+### Specify metric and conditions
 
-사용할 Metric의 선택과 설정을 할 수 있습니다.
+이 화면에서는 사용할 Metric의 선택과 설정을 할 수 있습니다.
 
-##### Metric
+#### Metric
 
-Select Metric 은 방금 만든 Metric을 선택하고, Statistic와 Period를 확인해 줍니다.
+Select Metric 을 눌러서 방금 만든 Metric을 선택하고, Statistic와 Period를 확인합니다.
 
 Period의 기간내의 수집된 Metric을 Statistic에서 설정한 방법대로 통계내서 확인하게 되므로, 1분 간격의 데이터를 전부 보기 위해 Period를 1분으로 설정하였습니다.
 
-##### Conditions
+#### Conditions
 
 Threshold type는 Static, Whenever는 Lower/Equal, than은 0로 설정해서 값이 0이하이면 Alarm이 되도록 하였습니다.
 
-##### Additional configuration
+> ![Threshold](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\threshold.png)
+
+#### Additional configuration
 
 0이하로 되자마자 Alarm이 되지 않도록 Datapoints to alarm을 설정하였습니다.
 
-> ![Datapoints to alarm]()
+> ![Datapoints to alarm](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\datapoints-to-alarm.png)
 
-최근 15갯수내에서 0이하가 15개 이면 Alarm이 되도록 하였습니다. Period를 1분으로 설정헀으니, 15분 동안 계속 0이하이면 Alarm이 되는 셈이죠.
+최근 15갯수내에서 0이하가 15개 이면 Alarm이 되도록 하였습니다. Period를 1분으로 설정했으니, 15분 동안 계속 0이하이면 Alarm이 되는 셈이죠.
 
-#### Configure actions
+### Configure actions
 
-상태에 따라 취할 Action을 설정합니다.
+이 화면에서는 상태에 따라 취할 Action을 설정합니다.
 
-##### Notification
+#### Notification
 
 AWS SNS로 알림을 보낼 생각이 있으면, 설정합니다.
 
 하지 않을 생각이면, Remove를 눌러주세요.
 
-##### EC2 action
+#### EC2 action
 
 EC2에 종료 명령을 내릴 수 있게 할 수 있습니다.
 
 아래처럼 Alarm의 경우에 Stop this instance 을 하도록 설정해 주었습니다.
 
-> ![Stop this instance]()
+> ![Stop this instance](\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\stop-this-instance.png)
 
 그리고, 나머지는 적당히 입력해서 완성했습니다.
 
@@ -263,7 +240,7 @@ CloudWatch - Alarms 에서 확인이 가능합니다.
 
 - 연결이 없어도 기다리는 SSHD
 
-사용하지 않고 있더라도 SSHD가 바로 종료되는 것은 아니기에, 정확한 연결 수를 얻어내려면 추가적인 설정이 필요로 할 듯 합니다. [ClientAliveInterval이랑 ClientAliveCountMax](https://linux.die.net/man/5/sshd_config)와 같은 설정으로 말이죠.
+사용하지 않고 있더라도 SSHD가 바로 종료되는 것은 아니기에, 정확한 연결 수를 얻어내려면 추가적인 설정이 필요로 할 듯 합니다. [`ClientAliveInterval이랑 ClientAliveCountMax`](https://linux.die.net/man/5/sshd_config)와 같은 설정으로 말이죠.
 
 - 종료 직전에 SSH 연결
 
@@ -274,6 +251,8 @@ SSH 연결 수를 전송하고 Alarm에서 감지하여 종료되기 사이에 �
 Cloud9으로만 사용할 생각이면, Cloud9에서 EC2를 만드는 것이 Cloud9에 맞춰서 자동 종료가 되기에 좋습니다.
 
 다만, 자동 종료 기능은 Cloud9을 종료하고 일정 시간 뒤에 EC2가 종료 되기 때문에, Cloud9을 쓰고 있지 않을 때도 사용할 경우가 있다면 자동 종료 기능을 꺼야 하므로 직접 구축한 EC2와 큰 차이가 없게 됩니다.
+
+또는, EC2를 수동으로 구축한 경우도 생각해볼 수 있습니다.
 
 이런 경우에도 자동으로 종료 시키는 것은 가능하다는 것을 알았습니다.
 
