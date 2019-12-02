@@ -118,7 +118,7 @@ aws cliを利用してCloudWatchにMetricを送るコマンドです。
 
 データの詳細情報のような感じで設定できます。
 
-*`InstanceId=インスタンスID`でインスタンスIDを設定しましたが、これはCloudWatch Alarmで**インスタンス修了アクションは`InstanceId`が設定されているMetricだけが可能**でしたからです。*
+*`InstanceId=インスタンスID`でインスタンスIDを設定しましたが、これはCloudWatch Alarmで**インスタンス終了アクションは`InstanceId`が設定されているMetricだけが可能**でしたからです。*
 
 その理由で、自動終了のためには`InstanceId`を設定しなければなりません。
 
@@ -154,7 +154,7 @@ TIMESTAMP=$(date --utc +%FT%T.%3NZ)
 /home/ubuntu/.local/bin/aws cloudwatch put-metric-data --metric-name "SSH Connections" --dimensions InstanceId="インスタンスID" --namespace "EC2" --value $SSH_CONNECTIONS --timestamp $TIMESTAMP
 ```
 
-metric-nameは指定したい名前で、InstanceIdは修了させたいインスタンスIDを入れます。
+metric-nameは指定したい名前で、InstanceIdは終了させたいインスタンスIDを入れます。
 
 #### crontabにスクリプトを登録
 
@@ -214,7 +214,7 @@ AWS SNSに通知を送る考えでしたら、設定します。
 
 #### EC2 action
 
-EC2に修了の命令を出すことができます。
+EC2に終了の命令を出すことができます。
 
 下のようにAlarmの場合にStop this instanceをするように設定します。
 
@@ -224,13 +224,13 @@ EC2に修了の命令を出すことができます。
 
 CloudWatch - Alarmsで確認できます。
 
-修了するときはALARM、修了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。
+終了するときはALARM、終了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。
 
 ## 限界
 
 - とても短いコネクション
 
-1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて修了されるSSHDがあったら、記録されないでしょう。
+1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて終了されるSSHDがあったら、記録されないでしょう。
 
 このようなコネクションは意味があるとは思いませんので、問題にはならなさそうです。
 
@@ -238,20 +238,20 @@ SSHが繋がる時に`put-metric-data`を実行するようにすれば解決で
 
 - コネクションがなくても待機しているSSHD
 
-使用していなくてもSSHDがすぐに修了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。[`ClientAliveIntervalとClientAliveCountMax`](https://linux.die.net/man/5/sshd_config)のような設定でしょう。
+使用していなくてもSSHDがすぐに終了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。[`ClientAliveIntervalとClientAliveCountMax`](https://linux.die.net/man/5/sshd_config)のような設定でしょう。
 
-- 修了の直前にSSHが繋がれる
+- 終了の直前にSSHが繋がれる
 
-SSHの数を送信してAlarmで把握し、修了される間に新たに接続がある場合を考えられますが、接続した直後に修了になりますので、問題なさそうです。
+SSHの数を送信してAlarmで把握し、終了される間に新たに接続がある場合を考えられますが、接続した直後に終了になりますので、問題なさそうです。
 
 ## 感想
 
-Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて修了されるのでいいです。
+Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて終了されるのでいいです。
 
-しかし、自動終了の機能はCloud9を修了して一定時間の後にEC2を修了させるため、Cloud9を修了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。
+しかし、自動終了の機能はCloud9を終了して一定時間の後にEC2を終了させるため、Cloud9を終了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。
 
 または、手動で構築したEC2も考えられます。
 
-このような場合も自動で修了させることが出来るということが分かりました。
+このような場合も自動で終了させることが出来るということが分かりました。
 
 このブログの方法で*SSHのコネクションの数を求めて送信*するところを変更するば、他の状況でも使えるでしょう。
