@@ -405,7 +405,7 @@
 
 <p>データの詳細情報のような感じで設定できます。</p>
 
-<p><em><code class="highlighter-rouge">InstanceId=インスタンスID</code>でインスタンスIDを設定しましたが、これはCloudWatch Alarmで<strong>インスタンス修了アクションは<code class="highlighter-rouge">InstanceId</code>が設定されているMetricだけが可能</strong>でしたからです。</em></p>
+<p><em><code class="highlighter-rouge">InstanceId=インスタンスID</code>でインスタンスIDを設定しましたが、これはCloudWatch Alarmで<strong>インスタンス終了アクションは<code class="highlighter-rouge">InstanceId</code>が設定されているMetricだけが可能</strong>でしたからです。</em></p>
 
 <p>その理由で、自動終了のためには<code class="highlighter-rouge">InstanceId</code>を設定しなければなりません。</p>
 
@@ -440,7 +440,7 @@
 /home/ubuntu/.local/bin/aws cloudwatch put-metric-data <span class="nt">--metric-name</span> <span class="s2">"SSH Connections"</span> <span class="nt">--dimensions</span> <span class="nv">InstanceId</span><span class="o">=</span><span class="s2">"インスタンスID"</span> <span class="nt">--namespace</span> <span class="s2">"EC2"</span> <span class="nt">--value</span> <span class="nv">$SSH_CONNECTIONS</span> <span class="nt">--timestamp</span> <span class="nv">$TIMESTAMP</span>
 </code></pre></div></div>
 
-<p>metric-nameは指定したい名前で、InstanceIdは修了させたいインスタンスIDを入れます。</p>
+<p>metric-nameは指定したい名前で、InstanceIdは終了させたいインスタンスIDを入れます。</p>
 
 <h4 id="crontabにスクリプトを登録">crontabにスクリプトを登録</h4>
 
@@ -503,7 +503,7 @@
 
 <h4 id="ec2-action">EC2 action</h4>
 
-<p>EC2に修了の命令を出すことができます。</p>
+<p>EC2に終了の命令を出すことができます。</p>
 
 <p>下のようにAlarmの場合にStop this instanceをするように設定します。</p>
 
@@ -515,7 +515,7 @@
 
 <p>CloudWatch - Alarmsで確認できます。</p>
 
-<p>修了するときはALARM、修了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。</p>
+<p>終了するときはALARM、終了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。</p>
 
 <h2 id="限界">限界</h2>
 
@@ -523,7 +523,7 @@
   <li>とても短いコネクション</li>
 </ul>
 
-<p>1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて修了されるSSHDがあったら、記録されないでしょう。</p>
+<p>1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて終了されるSSHDがあったら、記録されないでしょう。</p>
 
 <p>このようなコネクションは意味があるとは思いませんので、問題にはならなさそうです。</p>
 
@@ -533,23 +533,23 @@
   <li>コネクションがなくても待機しているSSHD</li>
 </ul>
 
-<p>使用していなくてもSSHDがすぐに修了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。<a href="https://linux.die.net/man/5/sshd_config"><code class="highlighter-rouge">ClientAliveIntervalとClientAliveCountMax</code></a>のような設定でしょう。</p>
+<p>使用していなくてもSSHDがすぐに終了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。<a href="https://linux.die.net/man/5/sshd_config"><code class="highlighter-rouge">ClientAliveIntervalとClientAliveCountMax</code></a>のような設定でしょう。</p>
 
 <ul>
-  <li>修了の直前にSSHが繋がれる</li>
+  <li>終了の直前にSSHが繋がれる</li>
 </ul>
 
-<p>SSHの数を送信してAlarmで把握し、修了される間に新たに接続がある場合を考えられますが、接続した直後に修了になりますので、問題なさそうです。</p>
+<p>SSHの数を送信してAlarmで把握し、終了される間に新たに接続がある場合を考えられますが、接続した直後に終了になりますので、問題なさそうです。</p>
 
 <h2 id="感想">感想</h2>
 
-<p>Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて修了されるのでいいです。</p>
+<p>Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて終了されるのでいいです。</p>
 
-<p>しかし、自動終了の機能はCloud9を修了して一定時間の後にEC2を修了させるため、Cloud9を修了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。</p>
+<p>しかし、自動終了の機能はCloud9を終了して一定時間の後にEC2を終了させるため、Cloud9を終了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。</p>
 
 <p>または、手動で構築したEC2も考えられます。</p>
 
-<p>このような場合も自動で修了させることが出来るということが分かりました。</p>
+<p>このような場合も自動で終了させることが出来るということが分かりました。</p>
 
 <p>このブログの方法で<em>SSHのコネクションの数を求めて送信</em>するところを変更するば、他の状況でも使えるでしょう。</p>
 

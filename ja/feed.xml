@@ -5,8 +5,8 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Dec 2019 02:13:35 +0900</pubDate>
-    <lastBuildDate>Tue, 03 Dec 2019 02:13:35 +0900</lastBuildDate>
+    <pubDate>Tue, 03 Dec 2019 02:19:09 +0900</pubDate>
+    <lastBuildDate>Tue, 03 Dec 2019 02:19:09 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -127,7 +127,7 @@
 
 &lt;p&gt;データの詳細情報のような感じで設定できます。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId=インスタンスID&lt;/code&gt;でインスタンスIDを設定しましたが、これはCloudWatch Alarmで&lt;strong&gt;インスタンス修了アクションは&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;が設定されているMetricだけが可能&lt;/strong&gt;でしたからです。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId=インスタンスID&lt;/code&gt;でインスタンスIDを設定しましたが、これはCloudWatch Alarmで&lt;strong&gt;インスタンス終了アクションは&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;が設定されているMetricだけが可能&lt;/strong&gt;でしたからです。&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;その理由で、自動終了のためには&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;を設定しなければなりません。&lt;/p&gt;
 
@@ -162,7 +162,7 @@
 /home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SSH Connections&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;InstanceId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;インスタンスID&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EC2&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SSH_CONNECTIONS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--timestamp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TIMESTAMP&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;p&gt;metric-nameは指定したい名前で、InstanceIdは修了させたいインスタンスIDを入れます。&lt;/p&gt;
+&lt;p&gt;metric-nameは指定したい名前で、InstanceIdは終了させたいインスタンスIDを入れます。&lt;/p&gt;
 
 &lt;h4 id=&quot;crontabにスクリプトを登録&quot;&gt;crontabにスクリプトを登録&lt;/h4&gt;
 
@@ -225,7 +225,7 @@
 
 &lt;h4 id=&quot;ec2-action&quot;&gt;EC2 action&lt;/h4&gt;
 
-&lt;p&gt;EC2に修了の命令を出すことができます。&lt;/p&gt;
+&lt;p&gt;EC2に終了の命令を出すことができます。&lt;/p&gt;
 
 &lt;p&gt;下のようにAlarmの場合にStop this instanceをするように設定します。&lt;/p&gt;
 
@@ -237,7 +237,7 @@
 
 &lt;p&gt;CloudWatch - Alarmsで確認できます。&lt;/p&gt;
 
-&lt;p&gt;修了するときはALARM、修了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。&lt;/p&gt;
+&lt;p&gt;終了するときはALARM、終了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。&lt;/p&gt;
 
 &lt;h2 id=&quot;限界&quot;&gt;限界&lt;/h2&gt;
 
@@ -245,7 +245,7 @@
   &lt;li&gt;とても短いコネクション&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて修了されるSSHDがあったら、記録されないでしょう。&lt;/p&gt;
+&lt;p&gt;1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて終了されるSSHDがあったら、記録されないでしょう。&lt;/p&gt;
 
 &lt;p&gt;このようなコネクションは意味があるとは思いませんので、問題にはならなさそうです。&lt;/p&gt;
 
@@ -255,23 +255,23 @@
   &lt;li&gt;コネクションがなくても待機しているSSHD&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;使用していなくてもSSHDがすぐに修了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。&lt;a href=&quot;https://linux.die.net/man/5/sshd_config&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ClientAliveIntervalとClientAliveCountMax&lt;/code&gt;&lt;/a&gt;のような設定でしょう。&lt;/p&gt;
+&lt;p&gt;使用していなくてもSSHDがすぐに終了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。&lt;a href=&quot;https://linux.die.net/man/5/sshd_config&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ClientAliveIntervalとClientAliveCountMax&lt;/code&gt;&lt;/a&gt;のような設定でしょう。&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;修了の直前にSSHが繋がれる&lt;/li&gt;
+  &lt;li&gt;終了の直前にSSHが繋がれる&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;SSHの数を送信してAlarmで把握し、修了される間に新たに接続がある場合を考えられますが、接続した直後に修了になりますので、問題なさそうです。&lt;/p&gt;
+&lt;p&gt;SSHの数を送信してAlarmで把握し、終了される間に新たに接続がある場合を考えられますが、接続した直後に終了になりますので、問題なさそうです。&lt;/p&gt;
 
 &lt;h2 id=&quot;感想&quot;&gt;感想&lt;/h2&gt;
 
-&lt;p&gt;Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて修了されるのでいいです。&lt;/p&gt;
+&lt;p&gt;Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて終了されるのでいいです。&lt;/p&gt;
 
-&lt;p&gt;しかし、自動終了の機能はCloud9を修了して一定時間の後にEC2を修了させるため、Cloud9を修了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。&lt;/p&gt;
+&lt;p&gt;しかし、自動終了の機能はCloud9を終了して一定時間の後にEC2を終了させるため、Cloud9を終了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。&lt;/p&gt;
 
 &lt;p&gt;または、手動で構築したEC2も考えられます。&lt;/p&gt;
 
-&lt;p&gt;このような場合も自動で修了させることが出来るということが分かりました。&lt;/p&gt;
+&lt;p&gt;このような場合も自動で終了させることが出来るということが分かりました。&lt;/p&gt;
 
 &lt;p&gt;このブログの方法で&lt;em&gt;SSHのコネクションの数を求めて送信&lt;/em&gt;するところを変更するば、他の状況でも使えるでしょう。&lt;/p&gt;
 </description>
