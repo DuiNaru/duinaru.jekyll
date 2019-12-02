@@ -5,9 +5,297 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Nov 2019 23:21:57 +0900</pubDate>
-    <lastBuildDate>Mon, 18 Nov 2019 23:21:57 +0900</lastBuildDate>
+    <pubDate>Tue, 03 Dec 2019 02:13:33 +0900</pubDate>
+    <lastBuildDate>Tue, 03 Dec 2019 02:13:33 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>CloudWatch를 이용하여 일정 시간 동안 SSH 연결이 없을 때, EC2 자동 종료 시키기</title>
+        <description>&lt;p&gt;주로 Cloud9로 사용하는 EC2가 SSH 연결이 없을 때는 사용할 일이 없어서, 일정 시간 대기 한 뒤에 자동 종료가 되도록 만들어 보았습니다.&lt;/p&gt;
+
+&lt;p&gt;EC2에서 실행되는 스크립트 만으로도 가능할 듯 하지만, AWS에서 SSH의 연결 수도 모니터링할 수 있게 하도록 CloudWatch를 이용하였습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;iam-user-작성&quot;&gt;IAM User 작성&lt;/h2&gt;
+
+&lt;p&gt;CloudWatch로 SSH의 연결 수를 보내는 역할을 하는 User가 필요합니다.&lt;/p&gt;
+
+&lt;p&gt;aws cli에서 접속이 가능하고 권한은 CloudWatchAgentServerPolicy을 가진 User를 생성하였습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\user-permission.png&quot; alt=&quot;user-permission&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ec2에-aws-cli-설정&quot;&gt;EC2에 aws cli 설정&lt;/h2&gt;
+
+&lt;p&gt;CloudWatch로 SSH의 연결 수를 보내기 위해서 EC2에 aws cli를 설치하고, 위에서 만든 User를 설정해줍니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;설치&quot;&gt;설치&lt;/h3&gt;
+
+&lt;p&gt;aws cli를 설치해줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html&quot;&gt;Install the AWS CLI version 1 on Linux&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;user-설정&quot;&gt;User 설정&lt;/h3&gt;
+
+&lt;p&gt;방금 만든 User로 설정해줍니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html&quot;&gt;Configuring the AWS CLI&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;ssh-연결-수-알아내기&quot;&gt;SSH 연결 수 알아내기&lt;/h2&gt;
+
+&lt;p&gt;현재 연결된 SSH의 수를 알아낼 수 있어야 CloudWatch로 보낼 수 있을 것입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;연결-되어-있는-사용자를-알아내는-방법&quot;&gt;연결 되어 있는 사용자를 알아내는 방법&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;who
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;해당 명령어로 현재 접속되어 있는 사용자를 알아 낼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;SSH로 접속했을 경우, 아래와 같이 확인할 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\ssh-users.png&quot; alt=&quot;SSH-User&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;다만, Cloud9로 접속했을 경우에는 아무것도 나오지 않는 것을 확인 할 수 있습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\cloud9-users.png&quot; alt=&quot;Cloud9-User&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;cloud9의-연결은-확인-되지-않음&quot;&gt;Cloud9의 연결은 확인 되지 않음&lt;/h3&gt;
+
+&lt;p&gt;왜 일까요?&lt;/p&gt;
+
+&lt;p&gt;Cloud9의 &lt;a href=&quot;https://docs.aws.amazon.com/cloud9/latest/user-guide/ssh-settings.html#ssh-settings-requirements&quot;&gt;SSH Host Requirements&lt;/a&gt;을 보면 SSH 접속 가능이 요구되어 있어서 SSH를 이용하는 것은 알 수가 있습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;현재-실행-중인-sshd의-갯수로-알아내기&quot;&gt;현재 실행 중인 SSHD의 갯수로 알아내기&lt;/h3&gt;
+
+&lt;p&gt;SSH로 연결은 하는 것 같으니까, 실행 중인 SSHD를 알아봅시다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -A x | grep &quot;sshd&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\sshd-list.png&quot; alt=&quot;sshd list&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sshd: ubuntu [priv]&lt;/code&gt;과 &lt;code class=&quot;highlighter-rouge&quot;&gt;sshd: ubuntu@notty&lt;/code&gt;이 각각 2개씩, 총 4개가 보이네요.&lt;/p&gt;
+
+&lt;p&gt;SSH로 접속할 때 보안 강화의 방법으로 priv 로 프로세스를 만든다음, 자식 프로세스를 만들어서 처리시킨다고 하네요.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://linux.die.net/man/5/sshd_config&quot;&gt;UsePrivilegeSeparation&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;그래서 한 개의 SSH 접속에 2개의 프로세스가 만들어 지나 봅니다.&lt;/p&gt;
+
+&lt;p&gt;그럼 현재 2개의 SSH 연결이 있다는 것을 알 수 있네요.&lt;/p&gt;
+
+&lt;p&gt;다음 명령으로 SSH 연결 수를 알아냅니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -A x | grep &quot;sshd&quot; | grep &quot;\\[priv\\]&quot; | wc -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\sshd-count.png&quot; alt=&quot;sshd 수&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ssh-연결-수-전송&quot;&gt;SSH 연결 수 전송&lt;/h2&gt;
+
+&lt;p&gt;알아낸 SSH 연결 수를 CloudWatch에 전송하도록 합니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;put-metric-data
+--namespace &amp;lt;value&amp;gt;
+--dimensions &amp;lt;value&amp;gt;
+--metric-name &amp;lt;value&amp;gt;
+--value &amp;lt;value&amp;gt;
+--timestamp &amp;lt;value&amp;gt;
+...and more options
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;put-metric-data&quot;&gt;&lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-data.html&quot;&gt;put-metric-data&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;aws cli를 이용하여 CloudWatch에 Metric을 보내는 명령입니다.&lt;/p&gt;
+
+&lt;p&gt;보낸 데이터를 시간 단위로 기록하게 되고, 시간의 경과에 따른 변화를 살펴 볼 수 있게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;해당 명령어로 위에서 알아낸 SSH의 연결 수를 CloudWatch로 보낼 수 있게 됩니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;demension&quot;&gt;demension&lt;/h3&gt;
+
+&lt;p&gt;보내는 데이터의 상세 정보와 같은 느낌으로 설정할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId=인스턴스ID&lt;/code&gt;로 인스턴스 ID를 설정하였는데, 이는 CloudWatch Alarm에서 &lt;strong&gt;인스턴스 종료 명령은 &lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;가 설정되어 있는 Metric만 가능&lt;/strong&gt;하였기 때문입니다.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;그렇기 때문에, 자동 종료를 위해서는 &lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;로 설정해주어야 합니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;value&quot;&gt;value&lt;/h3&gt;
+
+&lt;p&gt;보내는 Metric의 값 입니다.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#현재-실행-중인-sshd의-갯수로-알아내기&quot;&gt;현재 실행 중인 SSHD의 갯수로 알아내기&lt;/a&gt;에서 알아낸 연결 수를 넣어주었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;timestamp&quot;&gt;timestamp&lt;/h3&gt;
+
+&lt;p&gt;Metric의 시간을 지정해 줄 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;보낼 때의 시간을 구해서 UTC 의 형태로 넣어주었습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;crontab&quot;&gt;crontab&lt;/h3&gt;
+
+&lt;p&gt;전송을 일정 주기로 반복 시키기 위해서 사용하였습니다.&lt;/p&gt;
+
+&lt;p&gt;자세한 설명은 &lt;a href=&quot;https://help.ubuntu.com/community/CronHowto&quot;&gt;이곳&lt;/a&gt;을 보면 되고, 아래와 같이 설정합니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;반복-수행할-스크립트-작성&quot;&gt;반복 수행할 스크립트 작성&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/home/ubuntu/ssh-count.sh&lt;/code&gt; 으로 다음과 같은 스크립트를 만들었습니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;SSH_CONNECTIONS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;ps &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; x | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;sshd | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;priv&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;TIMESTAMP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--utc&lt;/span&gt; +%FT%T.%3NZ&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+/home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SSH Connections&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;InstanceId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;인스턴스ID&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EC2&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SSH_CONNECTIONS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--timestamp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TIMESTAMP&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;metric-name는 지정 하고 싶은 이름으로, InstanceId는 종료 시키고 싶은 인스턴스의 ID를 넣어줍니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;crontab에-스크립트-등록&quot;&gt;crontab에 스크립트 등록&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt;에 1분 마다 스크립트를 수행하도록 설정하였습니다.&lt;/p&gt;
+
+&lt;p&gt;가장 마지막에 아래 명령을 추가하면 됩니다.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*/1 * * * * /home/ubuntu/ssh-count.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;확인&quot;&gt;확인&lt;/h3&gt;
+
+&lt;p&gt;CloudWatch - Metrics 에서 Custom Namespaces 항목의 EC2 - InstanceId 에서 확인 할 수 있습니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;ec2-자동-종료&quot;&gt;EC2 자동 종료&lt;/h2&gt;
+
+&lt;p&gt;이제 일정 시간 내에 SSH 연결 수가 0이면, EC2를 자동으로 종료되도록 만들어 볼 것입니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;cloudwatch-alarm-설정&quot;&gt;CloudWatch Alarm 설정&lt;/h3&gt;
+
+&lt;p&gt;CloudWatch - Alarms 에서 Create alarm 을 눌러서 Alarm을 만듭니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;specify-metric-and-conditions&quot;&gt;Specify metric and conditions&lt;/h3&gt;
+
+&lt;p&gt;이 화면에서는 사용할 Metric의 선택과 설정을 할 수 있습니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;metric&quot;&gt;Metric&lt;/h4&gt;
+
+&lt;p&gt;Select Metric 을 눌러서 방금 만든 Metric을 선택하고, Statistic와 Period를 확인합니다.&lt;/p&gt;
+
+&lt;p&gt;Period의 기간내의 수집된 Metric을 Statistic에서 설정한 방법대로 통계내서 확인하게 되므로, 1분 간격의 데이터를 전부 보기 위해 Period를 1분으로 설정하였습니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;conditions&quot;&gt;Conditions&lt;/h4&gt;
+
+&lt;p&gt;Threshold type는 Static, Whenever는 Lower/Equal, than은 0로 설정해서 값이 0이하이면 Alarm이 되도록 하였습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\threshold.png&quot; alt=&quot;Threshold&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;additional-configuration&quot;&gt;Additional configuration&lt;/h4&gt;
+
+&lt;p&gt;0이하로 되자마자 Alarm이 되지 않도록 Datapoints to alarm을 설정하였습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\datapoints-to-alarm.png&quot; alt=&quot;Datapoints to alarm&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;최근 15갯수내에서 0이하가 15개 이면 Alarm이 되도록 하였습니다. Period를 1분으로 설정했으니, 15분 동안 계속 0이하이면 Alarm이 되는 셈이죠.&lt;/p&gt;
+
+&lt;h3 id=&quot;configure-actions&quot;&gt;Configure actions&lt;/h3&gt;
+
+&lt;p&gt;이 화면에서는 상태에 따라 취할 Action을 설정합니다.&lt;/p&gt;
+
+&lt;h4 id=&quot;notification&quot;&gt;Notification&lt;/h4&gt;
+
+&lt;p&gt;AWS SNS로 알림을 보낼 생각이 있으면, 설정합니다.&lt;/p&gt;
+
+&lt;p&gt;하지 않을 생각이면, Remove를 눌러주세요.&lt;/p&gt;
+
+&lt;h4 id=&quot;ec2-action&quot;&gt;EC2 action&lt;/h4&gt;
+
+&lt;p&gt;EC2에 종료 명령을 내릴 수 있게 할 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;아래처럼 Alarm의 경우에 Stop this instance 을 하도록 설정해 주었습니다.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\stop-this-instance.png&quot; alt=&quot;Stop this instance&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;그리고, 나머지는 적당히 입력해서 완성했습니다.&lt;/p&gt;
+
+&lt;h3 id=&quot;확인-1&quot;&gt;확인&lt;/h3&gt;
+
+&lt;p&gt;CloudWatch - Alarms 에서 확인이 가능합니다.&lt;/p&gt;
+
+&lt;p&gt;종료 할 때에는 ALARM, 종료 후 시간이 지나면 INSUFFICIENT, 실행 중일 때에는 OK 로 변하는 것을 볼 수 있을 것입니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;한계&quot;&gt;한계&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;매우 짧은 연결&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1분 마다 현재 실행중인 SSHD를 세어서 보내기 때문어, 샘플링 주기의 사이에 실행되고 종료되는 SSHD가 있다면, 기록 되지 않을 것입니다.&lt;/p&gt;
+
+&lt;p&gt;이러한 연결이 의미가 있는 연결일 것이라고 생각 되지 않기에, 별 문제는 없어보입니다.&lt;/p&gt;
+
+&lt;p&gt;연결이 될 때 &lt;code class=&quot;highlighter-rouge&quot;&gt;put-metric-data&lt;/code&gt;를 실행하도록 하면 해결이 되기도 하죠.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;연결이 없어도 기다리는 SSHD&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;사용하지 않고 있더라도 SSHD가 바로 종료되는 것은 아니기에, 정확한 연결 수를 얻어내려면 추가적인 설정이 필요로 할 듯 합니다. &lt;a href=&quot;https://linux.die.net/man/5/sshd_config&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ClientAliveInterval이랑 ClientAliveCountMax&lt;/code&gt;&lt;/a&gt;와 같은 설정으로 말이죠.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;종료 직전에 SSH 연결&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SSH 연결 수를 전송하고 Alarm에서 감지하여 종료되기 사이에 새로운 접속이 있을 경우를 생각해 볼 수 있는데, 접속하자마자 종료가 될 듯하므로, 문제는 없을 듯 합니다.&lt;/p&gt;
+
+&lt;h2 id=&quot;소감&quot;&gt;소감&lt;/h2&gt;
+
+&lt;p&gt;Cloud9으로만 사용할 생각이면, Cloud9에서 EC2를 만드는 것이 Cloud9에 맞춰서 자동 종료가 되기에 좋습니다.&lt;/p&gt;
+
+&lt;p&gt;다만, 자동 종료 기능은 Cloud9을 종료하고 일정 시간 뒤에 EC2가 종료 되기 때문에, Cloud9을 종료후에도 사용할 경우가 있다면 자동 종료 기능을 꺼야 하므로 직접 구축한 EC2와 큰 차이가 없게 됩니다.&lt;/p&gt;
+
+&lt;p&gt;또는, EC2를 수동으로 구축한 경우도 생각해볼 수 있습니다.&lt;/p&gt;
+
+&lt;p&gt;이런 경우에도 자동으로 종료 시키는 것은 가능하다는 것을 알았습니다.&lt;/p&gt;
+
+&lt;p&gt;이 글의 방법에서 &lt;em&gt;SSH의 연결 수를 알아내어 전송&lt;/em&gt;하는 부분을 변경하면 다른 상황에서도 사용 할 수 있을듯 합니다.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 01 Dec 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while</link>
+        <guid isPermaLink="true">https://duinaru.github.io/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while</guid>
+        
+        <category>aws</category>
+        
+        <category>ec2</category>
+        
+        <category>cloudwatch</category>
+        
+        <category>alarm</category>
+        
+        <category>ssh</category>
+        
+        <category>crontab</category>
+        
+        
+        <category>aws</category>
+        
+      </item>
     
       <item>
         <title>SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기</title>

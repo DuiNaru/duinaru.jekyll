@@ -111,6 +111,10 @@
     
         
             <url>
+                <loc>https://duinaru.github.io/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while</loc>
+            </url>
+        
+            <url>
                 <loc>https://duinaru.github.io/2019/11/18/auto-start-ec2-on-sign-in</loc>
             </url>
         
@@ -245,6 +249,10 @@
 
     
     
+        
+            <url>
+                <loc>https://duinaru.github.io/ja/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while</loc>
+            </url>
         
             <url>
                 <loc>https://duinaru.github.io/ja/2019/11/18/auto-start-ec2-on-sign-in</loc>

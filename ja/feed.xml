@@ -5,9 +5,295 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/ja/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 18 Nov 2019 23:21:59 +0900</pubDate>
-    <lastBuildDate>Mon, 18 Nov 2019 23:21:59 +0900</lastBuildDate>
+    <pubDate>Tue, 03 Dec 2019 02:13:35 +0900</pubDate>
+    <lastBuildDate>Tue, 03 Dec 2019 02:13:35 +0900</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>CloudWatchを利用し、一定時間内でSSHのコネクションがない場合はEC2を自動終了させる方法</title>
+        <description>&lt;p&gt;主にCloud9で使用するEC2がSSHのコネクションがない場合は使用することがなく、一定時間を待機した後に自動終了されるように作りました。&lt;/p&gt;
+
+&lt;p&gt;EC2で実行されるスクリプトだけでも出来そうですが、AWSでSSHのモニタリングもできるようにCloudWatchを利用しました。&lt;/p&gt;
+
+&lt;h2 id=&quot;iam-user-作成&quot;&gt;IAM User 作成&lt;/h2&gt;
+
+&lt;p&gt;CloudWatchにSSHのコネクションの数を送信する役割のUserが必要です。&lt;/p&gt;
+
+&lt;p&gt;aws cliで接続が可能で、権限はCloudWatchAgentServerPolicyを持つUserを作成しました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\user-permission.png&quot; alt=&quot;user-permission&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ec2にaws-cliを設定&quot;&gt;EC2にaws cliを設定&lt;/h2&gt;
+
+&lt;p&gt;CloudWatchにSSHのコネクションの数を送るため、EC2にaws cliをインストールしてUserを設定します。&lt;/p&gt;
+
+&lt;h3 id=&quot;インストール&quot;&gt;インストール&lt;/h3&gt;
+
+&lt;p&gt;aws cliをインストールします。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/install-linux.html&quot;&gt;Install the AWS CLI version 1 on Linux&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;user設定&quot;&gt;User設定&lt;/h3&gt;
+
+&lt;p&gt;作ったUserで設定します。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html&quot;&gt;Configuring the AWS CLI&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;sshのコネクションの数を求める&quot;&gt;SSHのコネクションの数を求める&lt;/h2&gt;
+
+&lt;p&gt;繋がれているSSHを数を求めた後で、CloudWatchに送信することができるでしょう。&lt;/p&gt;
+
+&lt;h3 id=&quot;繋がっているユーザーを求める方法&quot;&gt;繋がっているユーザーを求める方法&lt;/h3&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;who
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;上記のコマンドで現在に接続されているユーザーを求められます。&lt;/p&gt;
+
+&lt;p&gt;SSHで接続した場合、次のように確認できます。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\ssh-users.png&quot; alt=&quot;SSH-User&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;しかし、Cloud9で接続した場合は何も出力されないことが確認できます。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\cloud9-users.png&quot; alt=&quot;Cloud9-User&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;cloud9のコネクションは確認できない&quot;&gt;Cloud9のコネクションは確認できない&lt;/h3&gt;
+
+&lt;p&gt;何故でしょう。&lt;/p&gt;
+
+&lt;p&gt;Cloud9の&lt;a href=&quot;https://docs.aws.amazon.com/cloud9/latest/user-guide/ssh-settings.html#ssh-settings-requirements&quot;&gt;SSH Host Requirements&lt;/a&gt;を見れば、SSHの接続が要求されていて、SSHを利用することは確かのようです。&lt;/p&gt;
+
+&lt;h3 id=&quot;現在実行されているsshdの数を求める&quot;&gt;現在、実行されているSSHDの数を求める&lt;/h3&gt;
+
+&lt;p&gt;SSHで繋がれるようですので、実行しているSSHDを求めてみます。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -A x | grep &quot;sshd&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\sshd-list.png&quot; alt=&quot;sshd list&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;sshd: ubuntu [priv]&lt;/code&gt;と&lt;code class=&quot;highlighter-rouge&quot;&gt;sshd: ubuntu@notty&lt;/code&gt;がそれぞれ2個ずつ、4個が見えます。&lt;/p&gt;
+
+&lt;p&gt;SSHで接続するときにセキュリティー強化の一環でprivでプロセスを作り、子プロセスで処理させるようです。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;https://linux.die.net/man/5/sshd_config&quot;&gt;UsePrivilegeSeparation&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;それで一つのSSHで二つのプロセスが作成されるようです。&lt;/p&gt;
+
+&lt;p&gt;では、現在は二つのSSHのコネクションがあるということが分かります。&lt;/p&gt;
+
+&lt;p&gt;次のコマンドでSSHのコネクションの数を求めます。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ps -A x | grep &quot;sshd&quot; | grep &quot;\\[priv\\]&quot; | wc -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\sshd-count.png&quot; alt=&quot;sshd数&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;ssh数を送信&quot;&gt;SSH数を送信&lt;/h2&gt;
+
+&lt;p&gt;求めたSSHの数がCloudWatchに送信されるようにします。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;put-metric-data
+--namespace &amp;lt;value&amp;gt;
+--dimensions &amp;lt;value&amp;gt;
+--metric-name &amp;lt;value&amp;gt;
+--value &amp;lt;value&amp;gt;
+--timestamp &amp;lt;value&amp;gt;
+...and more options
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;put-metric-data&quot;&gt;&lt;a href=&quot;https://docs.aws.amazon.com/cli/latest/reference/cloudwatch/put-metric-data.html&quot;&gt;put-metric-data&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;aws cliを利用してCloudWatchにMetricを送るコマンドです。&lt;/p&gt;
+
+&lt;p&gt;送信したデータを一定の時間単位で記録し、時間ごとに変化を確認することができるようになります。&lt;/p&gt;
+
+&lt;p&gt;このコマンドでSSHの数をCloudWatchに送信することができます。&lt;/p&gt;
+
+&lt;h3 id=&quot;demension&quot;&gt;demension&lt;/h3&gt;
+
+&lt;p&gt;データの詳細情報のような感じで設定できます。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId=インスタンスID&lt;/code&gt;でインスタンスIDを設定しましたが、これはCloudWatch Alarmで&lt;strong&gt;インスタンス修了アクションは&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;が設定されているMetricだけが可能&lt;/strong&gt;でしたからです。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;その理由で、自動終了のためには&lt;code class=&quot;highlighter-rouge&quot;&gt;InstanceId&lt;/code&gt;を設定しなければなりません。&lt;/p&gt;
+
+&lt;h3 id=&quot;value&quot;&gt;value&lt;/h3&gt;
+
+&lt;p&gt;送信するMetricの値です。&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;#現在実行されているsshdの数を求める&quot;&gt;現在、実行されているSSHDの数を求める&lt;/a&gt;で分かったコネクションの数を入れました。&lt;/p&gt;
+
+&lt;h3 id=&quot;timestamp&quot;&gt;timestamp&lt;/h3&gt;
+
+&lt;p&gt;Metricの時間を指定することができます。&lt;/p&gt;
+
+&lt;p&gt;送信するときの時間をUTCの形で入れました。&lt;/p&gt;
+
+&lt;h3 id=&quot;crontab&quot;&gt;crontab&lt;/h3&gt;
+
+&lt;p&gt;送信を一定周期で繰り返すため、必要です。&lt;/p&gt;
+
+&lt;p&gt;詳しくは&lt;a href=&quot;https://help.ubuntu.com/community/CronHowto&quot;&gt;こちら&lt;/a&gt;で確認でき、設定は次のようにします。&lt;/p&gt;
+
+&lt;h4 id=&quot;繰り返されるスクリプトを作成&quot;&gt;繰り返されるスクリプトを作成&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;/home/ubuntu/ssh-count.sh&lt;/code&gt;で次のようなスクリプトを作りました。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;SSH_CONNECTIONS&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;ps &lt;span class=&quot;nt&quot;&gt;-A&lt;/span&gt; x | &lt;span class=&quot;nb&quot;&gt;grep &lt;/span&gt;sshd | &lt;span class=&quot;nb&quot;&gt;grep&lt;/span&gt; &lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;priv&lt;span class=&quot;se&quot;&gt;\\&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; | &lt;span class=&quot;nb&quot;&gt;wc&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;-l&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;nv&quot;&gt;TIMESTAMP&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;$(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;date&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--utc&lt;/span&gt; +%FT%T.%3NZ&lt;span class=&quot;si&quot;&gt;)&lt;/span&gt;
+
+/home/ubuntu/.local/bin/aws cloudwatch put-metric-data &lt;span class=&quot;nt&quot;&gt;--metric-name&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;SSH Connections&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--dimensions&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;InstanceId&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;インスタンスID&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--namespace&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EC2&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--value&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$SSH_CONNECTIONS&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;--timestamp&lt;/span&gt; &lt;span class=&quot;nv&quot;&gt;$TIMESTAMP&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;metric-nameは指定したい名前で、InstanceIdは修了させたいインスタンスIDを入れます。&lt;/p&gt;
+
+&lt;h4 id=&quot;crontabにスクリプトを登録&quot;&gt;crontabにスクリプトを登録&lt;/h4&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;crontab -e&lt;/code&gt;に1分ごとに遂行されるように設定しました。&lt;/p&gt;
+
+&lt;p&gt;一番下に次のコマンドを追加すればいいです。&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;*/1 * * * * /home/ubuntu/ssh-count.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;確認&quot;&gt;確認&lt;/h3&gt;
+
+&lt;p&gt;CloudWatch - Metricsで Custom Namespacesの項目のEC2 - InstanceIdから確認できます。&lt;/p&gt;
+
+&lt;h2 id=&quot;ec2自動終了&quot;&gt;EC2自動終了&lt;/h2&gt;
+
+&lt;p&gt;これからは一定時間でSSHの数が0ならばEC2を自動終了するように作ります。&lt;/p&gt;
+
+&lt;h3 id=&quot;cloudwatch-alarm設定&quot;&gt;CloudWatch Alarm設定&lt;/h3&gt;
+
+&lt;p&gt;CloudWatch - Alarmsで Create alarmをクリックしてAlarmを作ります。&lt;/p&gt;
+
+&lt;h3 id=&quot;specify-metric-and-conditions&quot;&gt;Specify metric and conditions&lt;/h3&gt;
+
+&lt;p&gt;この画面では使用するMetricの選択と設定を行います。&lt;/p&gt;
+
+&lt;h4 id=&quot;metric&quot;&gt;Metric&lt;/h4&gt;
+
+&lt;p&gt;Select MetricをクリックしてSSHのMetricを選択し、StatisticとPeriodを確認します。&lt;/p&gt;
+
+&lt;p&gt;Periodは期間内で集められたMetricをStatisticで設定した方法で統計して確認することになりますので、1分ごとの間でデータを全部見るためにPeriodを1分に設定しました。&lt;/p&gt;
+
+&lt;h4 id=&quot;conditions&quot;&gt;Conditions&lt;/h4&gt;
+
+&lt;p&gt;Threshold typeはStatic、WheneverはLower/Equal、thanは0で設定し、値が0以下でしたらAlarmになるようにしました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\threshold.png&quot; alt=&quot;Threshold&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;additional-configuration&quot;&gt;Additional configuration&lt;/h4&gt;
+
+&lt;p&gt;0以下になるとたんにAlarmにならないようにDatapoints to alarmを設定しました。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\datapoints-to-alarm.png&quot; alt=&quot;Datapoints to alarm&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;最近の15個内で0以下が15個でしたらAlarmになるようにしました。Periodを1分で設定したので、15分の間にずっと0以下でしたらAlarmになることです。&lt;/p&gt;
+
+&lt;h3 id=&quot;configure-actions&quot;&gt;Configure actions&lt;/h3&gt;
+
+&lt;p&gt;この画面ではAlarmの状態に対し、取るActionを設定します。&lt;/p&gt;
+
+&lt;h4 id=&quot;notification&quot;&gt;Notification&lt;/h4&gt;
+
+&lt;p&gt;AWS SNSに通知を送る考えでしたら、設定します。&lt;/p&gt;
+
+&lt;p&gt;ないなら、Removeをクリックします。&lt;/p&gt;
+
+&lt;h4 id=&quot;ec2-action&quot;&gt;EC2 action&lt;/h4&gt;
+
+&lt;p&gt;EC2に修了の命令を出すことができます。&lt;/p&gt;
+
+&lt;p&gt;下のようにAlarmの場合にStop this instanceをするように設定します。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;img src=&quot;\assets\images\2019-12-01-stop-ec2-when-no-ssh-connection-for-a-while\stop-this-instance.png&quot; alt=&quot;Stop this instance&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;確認-1&quot;&gt;確認&lt;/h3&gt;
+
+&lt;p&gt;CloudWatch - Alarmsで確認できます。&lt;/p&gt;
+
+&lt;p&gt;修了するときはALARM、修了されて時間が経つとINSUFFICIENT、実行されているときはOKに変わることが見れます。&lt;/p&gt;
+
+&lt;h2 id=&quot;限界&quot;&gt;限界&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;とても短いコネクション&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;1分ごとに実行中のSSHDを数えて送信することで、サンプリングの間に実行されて修了されるSSHDがあったら、記録されないでしょう。&lt;/p&gt;
+
+&lt;p&gt;このようなコネクションは意味があるとは思いませんので、問題にはならなさそうです。&lt;/p&gt;
+
+&lt;p&gt;SSHが繋がる時に&lt;code class=&quot;highlighter-rouge&quot;&gt;put-metric-data&lt;/code&gt;を実行するようにすれば解決できることもあるでしょう。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;コネクションがなくても待機しているSSHD&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;使用していなくてもSSHDがすぐに修了されることではありませんので、正確なコネクションの数を求めるためには追加の設定が必要になります。&lt;a href=&quot;https://linux.die.net/man/5/sshd_config&quot;&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;ClientAliveIntervalとClientAliveCountMax&lt;/code&gt;&lt;/a&gt;のような設定でしょう。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;修了の直前にSSHが繋がれる&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;SSHの数を送信してAlarmで把握し、修了される間に新たに接続がある場合を考えられますが、接続した直後に修了になりますので、問題なさそうです。&lt;/p&gt;
+
+&lt;h2 id=&quot;感想&quot;&gt;感想&lt;/h2&gt;
+
+&lt;p&gt;Cloud9のみで利用する考えなら、Cloud9でEC2を構築する方がCloud9に合わせて修了されるのでいいです。&lt;/p&gt;
+
+&lt;p&gt;しかし、自動終了の機能はCloud9を修了して一定時間の後にEC2を修了させるため、Cloud9を修了しても利用する場合があったら、自動終了の機能をOFFにしなければならなりませんので、直接に構築したEC2とさほど違わないです。&lt;/p&gt;
+
+&lt;p&gt;または、手動で構築したEC2も考えられます。&lt;/p&gt;
+
+&lt;p&gt;このような場合も自動で修了させることが出来るということが分かりました。&lt;/p&gt;
+
+&lt;p&gt;このブログの方法で&lt;em&gt;SSHのコネクションの数を求めて送信&lt;/em&gt;するところを変更するば、他の状況でも使えるでしょう。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 01 Dec 2019 00:00:00 +0900</pubDate><link>https://duinaru.github.io/ja/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while</link>
+        <guid isPermaLink="true">https://duinaru.github.io/ja/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while</guid>
+        
+        <category>aws</category>
+        
+        <category>ec2</category>
+        
+        <category>cloudwatch</category>
+        
+        <category>alarm</category>
+        
+        <category>ssh</category>
+        
+        <category>crontab</category>
+        
+        
+        <category>aws</category>
+        
+      </item>
     
       <item>
         <title>SSMとCloudWatchでログインする時、EC2が自動起動されるように設定</title>
