@@ -82,11 +82,19 @@
         
             
             
+                <url>
+                    <loc>https://duinaru.github.io/assets/js/lunr/lunr-en.js</loc>
+                </url>
+            
         
     
         
         
             
+            
+                <url>
+                    <loc>https://duinaru.github.io/assets/js/lunr/lunr-gr.js</loc>
+                </url>
             
         
     
@@ -222,11 +230,19 @@
         
             
             
+                <url>
+                    <loc>https://duinaru.github.io/ja/assets/js/lunr/lunr-en.js</loc>
+                </url>
+            
         
     
         
         
             
+            
+                <url>
+                    <loc>https://duinaru.github.io/ja/assets/js/lunr/lunr-gr.js</loc>
+                </url>
             
         
     

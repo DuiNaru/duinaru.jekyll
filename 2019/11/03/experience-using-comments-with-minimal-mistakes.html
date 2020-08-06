@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.17.1 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
   Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
@@ -77,6 +77,7 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
 <!--[if IE]>
   <style>
@@ -129,9 +130,9 @@
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/categories/" >Categories</a>
+              <a href="/categories/">Categories</a>
             </li><li class="masthead__menu-item">
-              <a href="/tags/" >Tags</a>
+              <a href="/tags/">Tags</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -195,7 +196,7 @@
           
         
           
-            <li><a href="https://github.com/DuiNaru/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            <li><a href="https://github.com/DuiNaru/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -208,7 +209,7 @@
         <li>
           <a href="mailto:duinaru@gmail.com">
             <meta itemprop="email" content="duinaru@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
           </a>
         </li>
       
@@ -272,10 +273,11 @@
   </div>
 
 
+
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="Blog에 댓글 기능을 추가하였습니다">
     <meta itemprop="description" content="사용하고 있는 Minimal Mistakes 테마는 여러 댓글 서비스를 사용할 수 있게 설정 할 수 있어서, 사용해보았습니다.">
-    <meta itemprop="datePublished" content="November 03, 2019">
+    <meta itemprop="datePublished" content="2019-11-03T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
@@ -284,6 +286,8 @@
           <h1 id="page-title" class="page__title" itemprop="headline">Blog에 댓글 기능을 추가하였습니다
 </h1>
           
+
+
         </header>
       
 
@@ -432,8 +436,9 @@
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-03T00:00:00+09:00">November 03, 2019</time></p>
-        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-11-03T00:00:00+09:00">November 3, 2019</time></p>
+
+
       </footer>
 
       <section class="page__share">
@@ -486,13 +491,15 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while" rel="permalink">CloudWatch를 이용하여 일정 시간 동안 SSH 연결이 없을 때, EC2 자동 종료 시키기
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">주로 Cloud9로 사용하는 EC2가 SSH 연결이 없을 때는 사용할 일이 없어서, 일정 시간 대기 한 뒤에 자동 종료가 되도록 만들어 보았습니다.
 
 </p>
@@ -507,13 +514,15 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2019/11/18/auto-start-ec2-on-sign-in" rel="permalink">SSM와 CloudWatch로 로그인할 때, EC2가 자동 시작되게 하기
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">Cloud9를 수동으로 만든 EC2로 사용하다보니, 자동으로 만들 때 사용할 수 있는 EC2의 자동 시작-종료 기능을 사용할 수 없어서, 만들어 보기로 했습니다.
 
 </p>
@@ -528,13 +537,15 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2019/11/16/develop-using-cloud9" rel="permalink">Rails 화면 띄우기 및 Cloud9 사용
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">샘플 화면 하나를 띄우고, 본격적인 개발에 앞서 IDE를 사용하기로 하였습니다.
 
 </p>
@@ -549,13 +560,15 @@
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on rails를 ec2에 구축해보았습니다
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">ruby를 알게 되었으니 ruby를 이용한 웹 사이트 한번 만들어보고싶어서  ruby on rails로 개발을 시작하였습니다.
 
 </p>
@@ -620,14 +633,13 @@
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2019 DuiNaru. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 DuiNaru. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/assets/js/main.min.js"></script>
-  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
 
 
 

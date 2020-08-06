@@ -1,6 +1,6 @@
 <!doctype html>
 <!--
-  Minimal Mistakes Jekyll Theme 4.17.1 by Michael Rose
+  Minimal Mistakes Jekyll Theme 4.20.1 by Michael Rose
   Copyright 2013-2019 Michael Rose - mademistakes.com | @mmistakes
   Free for personal and commercial use under the MIT license
   https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
@@ -77,6 +77,7 @@
 
 <!-- For all browsers -->
 <link rel="stylesheet" href="/ja/assets/css/main.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5/css/all.min.css">
 
 <!--[if IE]>
   <style>
@@ -129,9 +130,9 @@
           
         </a>
         <ul class="visible-links"><li class="masthead__menu-item">
-              <a href="/ja/categories/" >Categories</a>
+              <a href="/ja/categories/">Categories</a>
             </li><li class="masthead__menu-item">
-              <a href="/ja/tags/" >Tags</a>
+              <a href="/ja/tags/">Tags</a>
             </li></ul>
         
         <button class="search__toggle" type="button">
@@ -195,7 +196,7 @@
           
         
           
-            <li><a href="https://github.com/DuiNaru/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
+            <li><a href="https://github.com/DuiNaru/" rel="nofollow noopener noreferrer"><i class="fab fa-fw fa-github" aria-hidden="true"></i><span class="label">GitHub</span></a></li>
           
         
           
@@ -208,7 +209,7 @@
         <li>
           <a href="mailto:duinaru@gmail.com">
             <meta itemprop="email" content="duinaru@gmail.com" />
-            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+            <i class="fas fa-fw fa-envelope-square" aria-hidden="true"></i><span class="label">Email</span>
           </a>
         </li>
       
@@ -272,10 +273,11 @@
   </div>
 
 
+
   <article class="page" itemscope itemtype="https://schema.org/CreativeWork">
     <meta itemprop="headline" content="GitHub PagesでサポートされないPluginを使う方法">
     <meta itemprop="description" content="jekyllを公式的にサポートするGitHub Pagesですが、全てのjekyllのpluginまでサポートすることではありません。">
-    <meta itemprop="datePublished" content="October 26, 2019">
+    <meta itemprop="datePublished" content="2019-10-26T00:00:00+09:00">
     
 
     <div class="page__inner-wrap">
@@ -284,6 +286,8 @@
           <h1 id="page-title" class="page__title" itemprop="headline">GitHub PagesでサポートされないPluginを使う方法
 </h1>
           
+
+
         </header>
       
 
@@ -415,8 +419,9 @@ git push
 
 
         
-          <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-26T00:00:00+09:00">October 26, 2019</time></p>
-        
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> Updated:</strong> <time datetime="2019-10-26T00:00:00+09:00">October 26, 2019</time></p>
+
+
       </footer>
 
       <section class="page__share">
@@ -469,13 +474,15 @@ git push
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/ja/2019/12/01/stop-ec2-when-no-ssh-connection-for-a-while" rel="permalink">CloudWatchを利用し、一定時間内でSSHのコネクションがない場合はEC2を自動終了させる方法
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">主にCloud9で使用するEC2がSSHのコネクションがない場合は使用することがなく、一定時間を待機した後に自動終了されるように作りました。
 
 </p>
@@ -490,13 +497,15 @@ git push
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/ja/2019/11/18/auto-start-ec2-on-sign-in" rel="permalink">SSMとCloudWatchでログインする時、EC2が自動起動されるように設定
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">Cloud9を手動で作ったEC2で使用していまして、自動で作る時に使用できるEC2の自動起動のようにしたいと思いました。
 
 </p>
@@ -511,13 +520,15 @@ git push
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/ja/2019/11/16/develop-using-cloud9" rel="permalink">Rails画面確認とCloud9設定
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">サンプル画面を確認し、本格的な開発にあたってIDEをCloud9で使用する設定をしました。
 
 </p>
@@ -532,13 +543,15 @@ git push
 <div class="grid__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork">
     
-    <h2 class="archive__item-title" itemprop="headline">
+    <h2 class="archive__item-title no_toc" itemprop="headline">
       
         <a href="/ja/2019/11/14/set-up-ruby-on-rails-ec2" rel="permalink">ruby on railsをec2に実装してみました。
 </a>
       
     </h2>
     
+
+
     <p class="archive__item-excerpt" itemprop="description">rubyを知りましたので、rubyでウェブサイトを開発したくてruby on railsを始めました。
 
 </p>
@@ -603,14 +616,13 @@ git push
   </ul>
 </div>
 
-<div class="page__footer-copyright">&copy; 2019 DuiNaru. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+<div class="page__footer-copyright">&copy; 2020 DuiNaru. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
 
       </footer>
     </div>
 
     
   <script src="/assets/js/main.min.js"></script>
-  <script src="https://kit.fontawesome.com/4eee35f757.js"></script>
 
 
 

@@ -5,9 +5,9 @@
     <description>Blog with development and experience</description>
     <link>https://duinaru.github.io/</link>
     <atom:link href="https://duinaru.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 03 Dec 2019 02:19:07 +0900</pubDate>
-    <lastBuildDate>Tue, 03 Dec 2019 02:19:07 +0900</lastBuildDate>
-    <generator>Jekyll v3.8.6</generator>
+    <pubDate>Thu, 06 Aug 2020 22:26:27 +0900</pubDate>
+    <lastBuildDate>Thu, 06 Aug 2020 22:26:27 +0900</lastBuildDate>
+    <generator>Jekyll v3.8.7</generator>
     
       <item>
         <title>CloudWatch를 이용하여 일정 시간 동안 SSH 연결이 없을 때, EC2 자동 종료 시키기</title>
