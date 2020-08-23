@@ -1,4 +1,4 @@
-# duinaru.github.io
+# duinaru.jekyll
 [![html](https://img.shields.io/badge/lang-html-lightgrey)](https://en.wikipedia.org/wiki/HTML)
 [![ruby](https://img.shields.io/badge/lang-ruby-red)](https://www.ruby-lang.org)
 [![Jekyll](https://img.shields.io/badge/jekyll-3.8.6-blue)](https://jekyllrb.com/)
